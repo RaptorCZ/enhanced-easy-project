@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.0.0
+// @version      1.0.1
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -19,6 +19,14 @@
 // ==/UserScript==
 /*
 Changelog:
+
+1.0.1
+- Možnost zapsat příchod/odchod rovnou proklikem s headeru stránky
+- Barevné úpravy v sekci "Přehled aktualit"
+-----------------------
+1.0.0
+- První veřejná verze
+-----------------------
 */
 
 var css = `
@@ -454,12 +462,16 @@ function getHoursAndMinutesFromSeconds(delta) {
  * Příprava html elementu, kam se bude zapisovat docházka a vykázaný čas
  */
 function prepareTodayAttendance() {
+    // https://creasoft.easyproject.cz/easy_attendances/arrival?arrival_at=2019-03-16&back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
 
     // Připravíme html element pro data
     $(".easy-calendar-upcoming").after(
         '<div class="easy-calendar-upcoming">' +
         '  <div class="easy-calendar-upcoming__texts">' +
-        '    <span class="icon icon-calendar todays-attendance"></span>' +
+        '    <span style="display: flex;">' +
+        '      <span class="icon icon-calendar todays-attendance"></span>' +
+        '      <a class="todays-attendance-link" style="margin-left: 1rem;" href="#"></a>' +
+        '    </span>' +
         '    <span class="block"></span>' +
         '    <span class="icon icon-timer todays-time"></span>' +
         '  </div>' +
@@ -473,6 +485,8 @@ function prepareTodayAttendance() {
 /**
  * Volání API EP a získání informací o docházce
  * easy_attendances > easy_attendance > arrival, departure
+ * /easy_attendances/arrival?arrival_at=2019-03-17&back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
+ * /easy_attendances/4962/departure?back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
  */
 function getTodaysAttendance() {
 
@@ -480,12 +494,20 @@ function getTodaysAttendance() {
         arrival: "today"
     }
 
+    const $todaysAttendanceLink = $(".todays-attendance-link");
+    const returnUrl = encodeURIComponent(window.location.href);
+
+    // Link na zápis
+    $todaysAttendanceLink.attr("href", "/easy_attendances/arrival?&back_url=" + returnUrl);
+    $todaysAttendanceLink.attr("data-remote", true);
+    $todaysAttendanceLink.html("[Zapiš příchod]");
+
     // Stáhneme data
     $.getJSON("/easy_attendances.json", params, function(data) {
 
         // Žádný záznam - konec
         if (data.easy_attendances.length === 0) {
-            const noAttendance = "zapiš si příchod... ";
+            const noAttendance = "zapiš si příchod...";
             $(".todays-attendance").html(noAttendance);
 
             // Za minutu opakujeme
@@ -495,6 +517,7 @@ function getTodaysAttendance() {
         }
 
         var totalSeconds = 0;
+        var displayDepartureLink = false;
 
         // Enumerate easy_attendances
         $.each(data.easy_attendances, function(index, easyAttendance) {
@@ -504,10 +527,21 @@ function getTodaysAttendance() {
             const departure = easyAttendance.departure;
 
             totalSeconds += getSecondsFromDateInterval(arrival, departure);
+
+            // Pokud není hodnota "departure" nastavena, znamená to, že je tato plložka "in progress"
+            // a tedy si vezmeme její "id" a to použijeme do linku na konec
+            if (!easyAttendance.departure && !displayDepartureLink) {
+                const departureLink = "/easy_attendances/" + easyAttendance.id + "/departure?back_url=" + returnUrl
+                $todaysAttendanceLink.attr("href", departureLink);
+                $todaysAttendanceLink.removeAttr("data-remote");
+                $todaysAttendanceLink.html("[Zapiš odchod]");
+
+                displayDepartureLink = true;
+            }
         });
 
         // Výsledek převedeme na hh:mm formát a zobrazíme
-        const result = "Docházka: " + getHoursAndMinutesFromSeconds(totalSeconds);
+        var result = "Docházka: " + getHoursAndMinutesFromSeconds(totalSeconds);
         $(".todays-attendance").html(result);
 
         // Za minutu opakujeme

@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.0.0
+// @version      1.0.1
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -19,6 +19,14 @@
 // ==/UserScript==
 /*
 Changelog:
+
+1.0.1
+- Možnost zapsat příchod/odchod rovnou proklikem s headeru stránky
+- Barevné úpravy v sekci "Přehled aktualit"
+-----------------------
+1.0.0
+- První veřejná verze
+-----------------------
 */
 
 var css = `
@@ -361,6 +369,9 @@ table.list .group > td.inline_expander {
   background: #1c2938;
   border-color: #38444d;
 }
+#easy_servicebar_component_body {
+  color: #8899a6;
+}
 #easy_grid_sidebar_inner > .primary-actions .button-positive.button-outlined,
 #sidebar_inner > .primary-actions .button-positive.button-outlined {
   background-color: transparent !important;
@@ -383,6 +394,47 @@ table.list .group > td.inline_expander {
   background-color: #10171e;
 }
 #easy_servicebar_component_body .timer-time {
+  color: #fff;
+}
+/**
+ * Přehled aktivit (pravá strana)
+ */
+.easy-activity-feed-activity-event,
+.easy-activity-feed__activity-event {
+  background: #10171e;
+}
+.easy-activity-feed__activity-event .issue-closed {
+  background-color: #10171e;
+}
+.easy-activity-feed__activity-event .issue-closed:after {
+  border-right-color: #38444d;
+  border-left-color: #38444d;
+}
+.easy-activity-feed-activity-event dt:not(:first-child) {
+  border-top: 1px solid #38444d;
+}
+.easy-activity-feed-activity-event dt .project {
+  font-weight: 700;
+  color: #fff;
+}
+/**
+  * Journal
+  */
+#easy_sequence_designer .entity_container,
+.easy-instant-message-list-item-message,
+.journal-details-container .wiki,
+.message-body .wiki {
+  background: #10171e;
+}
+.journal,
+.message {
+  background: #15202b;
+}
+.help-block,
+.info,
+.nodata {
+  background: #15202b;
+  border: 1px solid #38444d;
   color: #fff;
 }
 /**
@@ -453,7 +505,7 @@ table.list tr.group span.count {
   color: #fff;
   border-color: #fff;
 }
-table.list tr.group td.group-name > span > span:nth-child(3) {
+table.list tr.group td.group-name > pan:nth-child(3) {
   display: none;
 }
 /**
@@ -511,35 +563,6 @@ hr {
 .attribute > div.label,
 .attribute > div.value {
   color: #fff !important;
-}
-/**
- * Journal
- */
-#easy_sequence_designer .entity_container,
-.easy-activity-feed-activity-event,
-.easy-activity-feed__activity-event,
-.easy-instant-message-list-item-message,
-.journal-details-container .wiki,
-.message-body .wiki {
-  background: #10171e;
-}
-.easy-activity-feed__activity-event .issue-closed {
-  background-color: #10171e;
-}
-.easy-activity-feed__activity-event .issue-closed:after {
-  border-right-color: #38444d;
-  border-left-color: #38444d;
-}
-.journal,
-.message {
-  background: #15202b;
-}
-.help-block,
-.info,
-.nodata {
-  background: #15202b;
-  border: 1px solid #38444d;
-  color: #fff;
 }
 /**
  * Profil uživatele
@@ -604,7 +627,7 @@ hr {
 .input-append > button,
 .input-append__addon,
 .menu-user-profile > li > a,
-input[type=submit] {
+input[type="submit"] {
   background: #1c2938;
   border-color: #38444d;
   color: #8899a6;
@@ -630,7 +653,7 @@ input[type=submit] {
 .input-append > button:hover,
 .input-append__addon:hover,
 .menu-user-profile > li > a:hover,
-input[type=submit]:hover {
+input[type="submit"]:hover {
   color: #fff;
   background: #15202b;
   border-color: #38444d;
@@ -665,12 +688,6 @@ input[type=submit]:hover {
 .other-formats a,
 div.easy-calendar-export a {
   color: #8899a6;
-}
-/**
- * Oprava chybějící třídy .issue v sidebaru "Přehled aktivit"
- */
-.easy-activity-feed-activity-event dt:not(:first-child) {
-  border-top: 1px solid #38444d;
 }
 /**
  * Agile (Kanban)
@@ -759,7 +776,7 @@ div.easy-calendar-export a {
 .tooltip-content,
 .tooltip-left > .tooltip,
 .tooltip-parent > .tooltip,
-[aria-describedby='invited_colleague_onboard_modal'] .tooltip,
+[aria-describedby="invited_colleague_onboard_modal"] .tooltip,
 div > .fc-grid .fc-day-number > .tooltip,
 div.easy-calendar table td .day-num > .tooltip,
 legend a.icon > .tooltip,
@@ -824,7 +841,7 @@ table.list th.author .avatar-container + span {
 .tooltip-content a,
 .tooltip-left > .tooltip a,
 .tooltip-parent > .tooltip a,
-[aria-describedby='invited_colleague_onboard_modal'] .tooltip a,
+[aria-describedby="invited_colleague_onboard_modal"] .tooltip a,
 div > .fc-grid .fc-day-number > .tooltip a,
 div.easy-calendar table td .day-num > .tooltip a,
 legend a.icon > .tooltip a,
@@ -1164,12 +1181,16 @@ function getHoursAndMinutesFromSeconds(delta) {
  * Příprava html elementu, kam se bude zapisovat docházka a vykázaný čas
  */
 function prepareTodayAttendance() {
+    // https://creasoft.easyproject.cz/easy_attendances/arrival?arrival_at=2019-03-16&back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
 
     // Připravíme html element pro data
     $(".easy-calendar-upcoming").after(
         '<div class="easy-calendar-upcoming">' +
         '  <div class="easy-calendar-upcoming__texts">' +
-        '    <span class="icon icon-calendar todays-attendance"></span>' +
+        '    <span style="display: flex;">' +
+        '      <span class="icon icon-calendar todays-attendance"></span>' +
+        '      <a class="todays-attendance-link" style="margin-left: 1rem;" href="#"></a>' +
+        '    </span>' +
         '    <span class="block"></span>' +
         '    <span class="icon icon-timer todays-time"></span>' +
         '  </div>' +
@@ -1183,6 +1204,8 @@ function prepareTodayAttendance() {
 /**
  * Volání API EP a získání informací o docházce
  * easy_attendances > easy_attendance > arrival, departure
+ * /easy_attendances/arrival?arrival_at=2019-03-17&back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
+ * /easy_attendances/4962/departure?back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
  */
 function getTodaysAttendance() {
 
@@ -1190,12 +1213,20 @@ function getTodaysAttendance() {
         arrival: "today"
     }
 
+    const $todaysAttendanceLink = $(".todays-attendance-link");
+    const returnUrl = encodeURIComponent(window.location.href);
+
+    // Link na zápis
+    $todaysAttendanceLink.attr("href", "/easy_attendances/arrival?&back_url=" + returnUrl);
+    $todaysAttendanceLink.attr("data-remote", true);
+    $todaysAttendanceLink.html("[Zapiš příchod]");
+
     // Stáhneme data
     $.getJSON("/easy_attendances.json", params, function(data) {
 
         // Žádný záznam - konec
         if (data.easy_attendances.length === 0) {
-            const noAttendance = "zapiš si příchod... ";
+            const noAttendance = "zapiš si příchod...";
             $(".todays-attendance").html(noAttendance);
 
             // Za minutu opakujeme
@@ -1205,6 +1236,7 @@ function getTodaysAttendance() {
         }
 
         var totalSeconds = 0;
+        var displayDepartureLink = false;
 
         // Enumerate easy_attendances
         $.each(data.easy_attendances, function(index, easyAttendance) {
@@ -1214,10 +1246,21 @@ function getTodaysAttendance() {
             const departure = easyAttendance.departure;
 
             totalSeconds += getSecondsFromDateInterval(arrival, departure);
+
+            // Pokud není hodnota "departure" nastavena, znamená to, že je tato plložka "in progress"
+            // a tedy si vezmeme její "id" a to použijeme do linku na konec
+            if (!easyAttendance.departure && !displayDepartureLink) {
+                const departureLink = "/easy_attendances/" + easyAttendance.id + "/departure?back_url=" + returnUrl
+                $todaysAttendanceLink.attr("href", departureLink);
+                $todaysAttendanceLink.removeAttr("data-remote");
+                $todaysAttendanceLink.html("[Zapiš odchod]");
+
+                displayDepartureLink = true;
+            }
         });
 
         // Výsledek převedeme na hh:mm formát a zobrazíme
-        const result = "Docházka: " + getHoursAndMinutesFromSeconds(totalSeconds);
+        var result = "Docházka: " + getHoursAndMinutesFromSeconds(totalSeconds);
         $(".todays-attendance").html(result);
 
         // Za minutu opakujeme

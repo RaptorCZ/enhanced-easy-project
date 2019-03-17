@@ -5,22 +5,22 @@
 #header,
 .box,
 body {
-  background-color: @primary-dark-bg;
+    background-color: @primary-dark-bg;
 }
 
 html {
-  color: @body-color;
+    color: @body-color;
 }
 
 #top-menu, #top-menu-container-wrapper > ul > li .easy-top-menu-more-toggler, #top-menu-container-wrapper > ul > li .easy-top-menu-more-toggler:hover,
 //
 #top-menu-container-wrapper > ul > li > a,
 #top-menu-container-wrapper > ul > li > a:hover {
-  background-color: @primary-light-bg;
+    background-color: @primary-light-bg;
 }
 
 #top-menu-container-wrapper > ul > li {
-  border-color: @primary-light-bg !important;
+    border-color: @primary-light-bg !important;
 }
 
 /**
@@ -50,19 +50,19 @@ h4,
 h5,
 h6,
 table.list .group > td.inline_expander {
-  color: @header-color;
+    color: @header-color;
 }
 
 /**
  * Breadcrumb s projekty na detailu
  */
 #header h1 {
-  color: @header-color;
-  background-color: @primary-bg;
+    color: @header-color;
+    background-color: @primary-bg;
 }
 
 #header h1 > .self a {
-  color: @link-color;
+    color: @link-color;
 }
 
 /**
@@ -71,17 +71,17 @@ table.list .group > td.inline_expander {
 .ui-dialog .ui-dialog-titlebar,
 .ui-dialog-titlebar,
 .ui-widget-content {
-  color: @text-tw;
-  background: @primary-light-bg;
+    color: @text-tw;
+    background: @primary-light-bg;
 }
 
 .ui-widget.ui-widget-content {
-  border-color: @border-color;
+    border-color: @border-color;
 }
 
 // Vnitřní obsah widgetu
 .form-box {
-  background-color: @primary-dark-bg;
+    background-color: @primary-dark-bg;
 }
 
 /**
@@ -90,63 +90,67 @@ table.list .group > td.inline_expander {
 
 // Horní čádek ()
 .ui-autocomplete-category {
-  background: @primary-dark-bg;
-  border-color: @border-color;
+    background: @primary-dark-bg;
+    border-color: @border-color;
 }
 
 .ui-autocomplete-category.ui-state-focus,
 .ui-autocomplete-category:hover {
-  background: @primary-dark-bg !important;
-  border-color: @border-color !important;
+    background: @primary-dark-bg !important;
+    border-color: @border-color !important;
 }
 
 .ui-autocomplete-category + .ui-menu-item {
-  border-top-color: @border-color;
+    border-top-color: @border-color;
 }
 
 .ui-autocomplete-category.ui-state-focus + .ui-menu-item,
 .ui-autocomplete-category:hover + .ui-menu-item {
-  border-top-color: @border-color !important;
+    border-top-color: @border-color !important;
 }
 
 // Položky
 .ui-menu .ui-menu-item a {
-  color: @text-tw;
+    color: @text-tw;
 }
 
 .ui-menu .ui-menu-item:hover {
-  background-color: @primary-dark-bg;
+    background-color: @primary-dark-bg;
 }
 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-  background-color: @primary-dark-bg;
+    background-color: @primary-dark-bg;
 }
 
 /**
  * Pravý sidebar (Aktivity, Kontakty, ToDo)
  */
 #easy_servicebar_component {
-  background: @primary-light-bg;
-  border-color: @border-color;
+    background: @primary-light-bg;
+    border-color: @border-color;
+}
+
+#easy_servicebar_component_body {
+    color: @text-tw-dark;
 }
 
 // Tlačítka po update mají vlastní barvu, původně transparent
 #easy_grid_sidebar_inner > .primary-actions .button-positive.button-outlined,
 #sidebar_inner > .primary-actions .button-positive.button-outlined {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 // Spodní část, obsahuje buttony
 #easy_servicebar_component_body .servicebar-actions {
-  background: @primary-bg;
+    background: @primary-bg;
 }
 
 /**
  * Infinite scroll
  */
 .infinite-scroll-load-next-page-trigger-container {
-  background: @primary-bg;
-  border-top-color: @border-color;
+    background: @primary-bg;
+    border-top-color: @border-color;
 }
 
 /**
@@ -154,11 +158,66 @@ table.list .group > td.inline_expander {
  */
 #easy_servicebar_component_body .list-item,
 #easy_servicebar_component_body .ui-state-default {
-  background-color: @primary-dark-bg;
+    background-color: @primary-dark-bg;
 }
 
 #easy_servicebar_component_body .timer-time {
-  color: @header-color;
+    color: @header-color;
+}
+
+/**
+ * Přehled aktivit (pravá strana)
+ */
+.easy-activity-feed-activity-event,
+.easy-activity-feed__activity-event {
+    background: @primary-dark-bg;
+}
+
+.easy-activity-feed__activity-event .issue-closed {
+    background-color: @primary-dark-bg;
+}
+
+.easy-activity-feed__activity-event .issue-closed:after {
+    border-right-color: @border-color;
+    border-left-color: @border-color;
+}
+
+// Oprava chybějící třídy .issue v sidebaru "Přehled aktivit"
+.easy-activity-feed-activity-event {
+    dt {
+        &:not(:first-child) {
+            border-top: 1px solid @border-color;
+        }
+    }
+}
+
+// Projekt tučně a světle
+.easy-activity-feed-activity-event dt .project {
+    font-weight: 700;
+    color: @text-tw;
+}
+
+/**
+  * Journal
+  */
+#easy_sequence_designer .entity_container,
+.easy-instant-message-list-item-message,
+.journal-details-container .wiki,
+.message-body .wiki {
+    background: @primary-dark-bg;
+}
+
+.journal,
+.message {
+    background: @primary-bg;
+}
+
+.help-block,
+.info,
+.nodata {
+    background: @primary-bg;
+    border: 1px solid @border-color;
+    color: @text-tw;
 }
 
 /**
@@ -168,7 +227,7 @@ table.list .group > td.inline_expander {
 #main-menu > ul > li > a:hover,
 .tabs > ul > li > a.selected,
 .tabs > ul > li > a:hover {
-  color: @link-color;
+    color: @link-color;
 }
 
 /**
@@ -176,30 +235,30 @@ table.list .group > td.inline_expander {
  */
 
 .box {
-  // Hlavní obálka
-  &.easy-page-module {
-    background-color: @primary-bg !important;
-    border: 1px solid @border-color;
-  }
+    // Hlavní obálka
+    &.easy-page-module {
+        background-color: @primary-bg !important;
+        border: 1px solid @border-color;
+    }
 }
 
 // Hlavička modulu jako takového
 .easy-page-module .module-heading {
-  background-color: @primary-dark-bg !important;
-  color: @header-color; // ikonka
+    background-color: @primary-dark-bg !important;
+    color: @header-color; // ikonka
 
-  a {
-    color: @header-color;
-  }
+    a {
+        color: @header-color;
+    }
 
-  //h3& {
-  //  color: @header-color;
-  //}
+    //h3& {
+    //  color: @header-color;
+    //}
 }
 
 // Další panely v rámci modulu (Emaily, soubory, ...)
 .easy-content-page .box .module-heading h3 {
-  color: @header-color;
+    color: @header-color;
 }
 
 /**
@@ -209,68 +268,68 @@ table.list .group > td.inline_expander {
 // Header řádek tabulky, obsahuje názvy sloupců
 table thead td,
 table thead th {
-  color: @header-color;
+    color: @header-color;
 }
 
 // Header řádek tabulky se barví na úrovni "obsahu"
 table.list > thead > tr .affix-cell-wrap {
-  background-color: @primary-bg;
+    background-color: @primary-bg;
 }
 
 // Default barva pro linky v gridu - nechceme standardní link color
 table.list td a,
 table.list th a {
-  color: @table-color;
+    color: @table-color;
 }
 
 // Šipečka nahoru pro sort na gridu
 table.list > thead > tr > th.checkbox ~ th a::before {
-  // stejná barva jako linky v headeru
-  border-bottom-color: @table-color;
-  opacity: 1;
+    // stejná barva jako linky v headeru
+    border-bottom-color: @table-color;
+    opacity: 1;
 }
 
 // Šipečka dolů pro sort na gridu
 table.list > thead > tr > th.checkbox ~ th a::after {
-  // stejná barva jako linky v headeru
-  border-top-color: @table-color;
-  opacity: 1;
+    // stejná barva jako linky v headeru
+    border-top-color: @table-color;
+    opacity: 1;
 }
 
 // Header tabulky, obecný (např. Odpracovaný čas)
 table.list > thead > tr > td,
 table.list > thead > tr > th {
-  background: @primary-bg;
+    background: @primary-bg;
 }
 
 // Výchozí pozadí a text pro grid - přebije ji jen theme
 table.list > tbody {
-  color: @table-color;
-  background: @primary-dark-bg;
+    color: @table-color;
+    background: @primary-dark-bg;
 }
 
 // Hover nad obecným řádkem
 // Hover na řádek, checkboxem zvolený řádek (jinak překryje scheme)
 table.list > tbody > tr:hover,
 tr.context-menu-selection {
-  background: @primary-light-bg !important;
+    background: @primary-light-bg !important;
 }
 
 // Zgrupovaný řádek tabulky + hover
 table.list > tbody > tr.group:hover,
 table.list tr.group {
-  background-color: @primary-bg !important;
+    background-color: @primary-bg !important;
 }
 
 // Badge na zgrupovaném řádku. Jsou 2 za sebou, první obsahuje počet položek, druhý procenta
 table.list tr.group span.count {
-  color: @table-color;
-  border-color: @table-color; // Orámování badge stejně jako text
+    color: @table-color;
+    border-color: @table-color; // Orámování badge stejně jako text
 }
 
-// Schováme ty procenta
-table.list tr.group td.group-name > span > span:nth-child(3) {
-  display: none;
+// Schováme ty procenta (nově už nejsou pod spanem, ale je zde a/span/span)
+table.list tr.group td.group-name > pan:nth-child(3) {
+    display: none;
 }
 
 /**
@@ -278,9 +337,13 @@ table.list tr.group td.group-name > span > span:nth-child(3) {
  */
 .fc-state-highlight,
 div.easy-calendar table td.today {
-  background: -o-repeating-linear-gradient(45deg, #d7f2fa, #d7f2fa 1px, #fff 1px, #fff 2px);
-  background: -moz-repeating-linear-gradient(45deg, #d7f2fa, #d7f2fa 1px, #fff 1px, #fff 2px);
-  background: repeating-linear-gradient(45deg, #d7f2fa, #d7f2fa 1px, #fff 1px, #fff 2px);
+    background: repeating-linear-gradient(
+        45deg,
+        #d7f2fa,
+        #d7f2fa 1px,
+        #fff 1px,
+        #fff 2px
+    );
 }
 
 /**
@@ -289,103 +352,69 @@ div.easy-calendar table td.today {
 
 // Řádek s datem (group)
 .time-entries .odd {
-  background: @bg-tw-light;
+    background: @bg-tw-light;
 }
 
 .time-entries .odd:hover {
-  background: @bg-tw-light !important;
+    background: @bg-tw-light !important;
 }
 
 /**
  * Detail tasku
  */
 .easy-content-page {
-  background: @primary-dark-bg;
-  border: 1px solid @border-color;
+    background: @primary-dark-bg;
+    border: 1px solid @border-color;
 }
 
 .easy-content-page .box.module {
-  border: 1px solid @border-color;
-  background: @primary-bg;
+    border: 1px solid @border-color;
+    background: @primary-bg;
 }
 
 hr {
-  border-bottom: 1px solid @border-color;
+    border-bottom: 1px solid @border-color;
 }
 
 .issue-detail-header {
-  color: @body-color;
+    color: @body-color;
 }
 
 .easy-entity-details-header {
-  color: @header-color;
+    color: @header-color;
 }
 
 .easy-entity-details-header-attributes {
-  border: 1px solid @border-color;
-  background-color: @primary-dark-bg;
+    border: 1px solid @border-color;
+    background-color: @primary-dark-bg;
 }
 
 .easy-entity-details-header-attributes::after {
-  border-bottom: 0;
-  background-image: none;
+    border-bottom: 0;
+    background-image: none;
 }
 
 .easy-entity-details .easy-contextual {
-  background: @primary-dark-bg;
-  border: 1px solid @border-color;
-  border-bottom: none;
+    background: @primary-dark-bg;
+    border: 1px solid @border-color;
+    border-bottom: none;
 }
 
 .easy-entity-details-description {
-  background: @primary-dark-bg;
+    background: @primary-dark-bg;
 }
 
 .attribute > div.label,
 .attribute > div.value {
-  color: @text-tw !important;
-}
-
-/**
- * Journal
- */
-#easy_sequence_designer .entity_container,
-.easy-activity-feed-activity-event,
-.easy-activity-feed__activity-event,
-.easy-instant-message-list-item-message,
-.journal-details-container .wiki,
-.message-body .wiki {
-  background: @primary-dark-bg;
-}
-
-.easy-activity-feed__activity-event .issue-closed {
-  background-color: @primary-dark-bg;
-}
-
-.easy-activity-feed__activity-event .issue-closed:after {
-  border-right-color: @border-color;
-  border-left-color: @border-color;
-}
-
-.journal,
-.message {
-  background: @primary-bg;
-}
-
-.help-block,
-.info,
-.nodata {
-  background: @primary-bg;
-  border: 1px solid @border-color;
-  color: @text-tw;
+    color: @text-tw !important;
 }
 
 /**
  * Profil uživatele
  */
 #user_detail_header {
-  background: none;
-  background-color: @primary-light-bg;
+    background: none;
+    background-color: @primary-light-bg;
 }
 
 /**
@@ -395,7 +424,7 @@ hr {
 .easy-query-filter-settings + #filter_buttons,
 .form-actions,
 .ui-dialog .ui-dialog-buttonpane {
-  background: @primary-bg;
+    background: @primary-bg;
 }
 
 /**
@@ -411,7 +440,7 @@ hr {
 .saved-queries a,
 .tags a,
 .version-list a {
-  color: @text-tw;
+    color: @text-tw;
 }
 
 // filry vpravo
@@ -423,9 +452,9 @@ hr {
 .saved-queries a,
 .tags a,
 .version-list a {
-  background: @primary-light-bg;
-  border-color: @border-color;
-  color: @text-tw-dark;
+    background: @primary-light-bg;
+    border-color: @border-color;
+    color: @text-tw-dark;
 }
 
 /**
@@ -450,10 +479,10 @@ hr {
 .input-append > button,
 .input-append__addon,
 .menu-user-profile > li > a,
-input[type=submit] {
-  background: @primary-light-bg;
-  border-color: @border-color;
-  color: @text-tw-dark;
+input[type="submit"] {
+    background: @primary-light-bg;
+    border-color: @border-color;
+    color: @text-tw-dark;
 }
 
 /**
@@ -477,16 +506,16 @@ input[type=submit] {
 .input-append > button:hover,
 .input-append__addon:hover,
 .menu-user-profile > li > a:hover,
-input[type=submit]:hover {
-  color: @text-tw;
-  background: @primary-bg;
-  border-color: @border-color;
+input[type="submit"]:hover {
+    color: @text-tw;
+    background: @primary-bg;
+    border-color: @border-color;
 }
 
 // Ikonky v headeru (např. spolupracovat, přidat, ...)
 #easy_grid_sidebar .box .module-heading-links,
 #sidebar .box .module-heading-links {
-  background: @primary-dark-bg;
+    background: @primary-dark-bg;
 }
 
 /**
@@ -495,13 +524,13 @@ input[type=submit]:hover {
 
 // Base
 .easy-entity-details-sidebar-attributes {
-  border: 1px solid @border-color;
-  background: @primary-dark-bg;
+    border: 1px solid @border-color;
+    background: @primary-dark-bg;
 }
 
 // Oddělovač řádků
 .easy-entity-details-sidebar-attributes table.highlight tr + tr {
-  border-top: 1px solid @border-color;
+    border-top: 1px solid @border-color;
 }
 
 /**
@@ -513,81 +542,70 @@ input[type=submit]:hover {
 #easy_grid_sidebar_footer::after,
 #sidebar_content::after,
 #sidebar_footer::after {
-  background-image: none !important;
+    background-image: none !important;
 }
 
 // Pozadí
 #easy_grid_sidebar_footer,
 #sidebar_footer {
-  background: @primary-bg;
+    background: @primary-bg;
 }
 
 // Linky
 .other-formats a,
 div.easy-calendar-export a {
-  color: @text-tw-dark;
-}
-
-/**
- * Oprava chybějící třídy .issue v sidebaru "Přehled aktivit"
- */
-.easy-activity-feed-activity-event {
-  dt {
-    &:not(:first-child) {
-      border-top: 1px solid @border-color;
-    }
-  }
+    color: @text-tw-dark;
 }
 
 /**
  * Agile (Kanban)
  */
 .agile__item {
-  background: @primary-dark-bg;
-  border: 1px solid @border-color;
-  height: 8rem;
+    background: @primary-dark-bg;
+    border: 1px solid @border-color;
+    height: 8rem;
 }
 
 .agile__list {
-  border: 1px dashed @border-color;
-  border-top: 3px solid @border-color;
-  background: @primary-light-bg;
+    border: 1px dashed @border-color;
+    border-top: 3px solid @border-color;
+    background: @primary-light-bg;
 }
 
 .agile__list:hover,
 .droppable-hover.agile__list {
-  background: @primary-bg;
+    background: @primary-bg;
 }
 
 .agile__col__title {
-  background: @primary-bg;
+    background: @primary-bg;
 }
 
 .agile__col__title__details {
-  color: @text-tw-dark;
+    color: @text-tw-dark;
 }
 
 .agile__card__subtitle {
-  color: @text-tw-dark;
+    color: @text-tw-dark;
 }
 
 // Změna swimlane - spodní panel
 .agile__sticky-lane {
-  background: @primary-bg;
-  border: 1px solid @border-color;
+    background: @primary-bg;
+    border: 1px solid @border-color;
 }
 
 .agile__sticky-selector {
-  background: @primary-bg;
-  border: 1px solid @border-color;
+    background: @primary-bg;
+    border: 1px solid @border-color;
 }
 
 /**
  * Obecný tooltip
  */
 .easy-tooltip {
-  background: @primary-dark-bg;
-  border: 1px solid @border-color;
+    background: @primary-dark-bg;
+    border: 1px solid @border-color;
 }
 
 /**
@@ -638,7 +656,7 @@ div.easy-calendar-export a {
 .tooltip-content,
 .tooltip-left > .tooltip,
 .tooltip-parent > .tooltip,
-[aria-describedby='invited_colleague_onboard_modal'] .tooltip,
+[aria-describedby="invited_colleague_onboard_modal"] .tooltip,
 div > .fc-grid .fc-day-number > .tooltip,
 div.easy-calendar table td .day-num > .tooltip,
 legend a.icon > .tooltip,
@@ -650,7 +668,7 @@ table.list td.assigned_to .avatar-container + span,
 table.list td.author .avatar-container + span,
 table.list th.assigned_to .avatar-container + span,
 table.list th.author .avatar-container + span {
-  background-color: @primary-dark-bg;
+    background-color: @primary-dark-bg;
 }
 
 // Hover na položce
@@ -666,8 +684,8 @@ table.list th.author .avatar-container + span {
 .menu--tooltip ul li:hover,
 .menu-user-profile > li ul li:hover,
 .message-tools .menu-more ul li:hover {
-  border-color: @primary-bg !important;
-  background: @primary-bg !important;
+    border-color: @primary-bg !important;
+    background: @primary-bg !important;
 }
 
 // Link v menu
@@ -707,7 +725,7 @@ table.list th.author .avatar-container + span {
 .tooltip-content a,
 .tooltip-left > .tooltip a,
 .tooltip-parent > .tooltip a,
-[aria-describedby='invited_colleague_onboard_modal'] .tooltip a,
+[aria-describedby="invited_colleague_onboard_modal"] .tooltip a,
 div > .fc-grid .fc-day-number > .tooltip a,
 div.easy-calendar table td .day-num > .tooltip a,
 legend a.icon > .tooltip a,
@@ -719,7 +737,7 @@ table.list td.assigned_to .avatar-container + span a,
 table.list td.author .avatar-container + span a,
 table.list th.assigned_to .avatar-container + span a,
 table.list th.author .avatar-container + span a {
-  color: @text-tw-dark;
+    color: @text-tw-dark;
 }
 
 // Ikonka na položce
@@ -735,13 +753,13 @@ table.list th.author .avatar-container + span a {
 .menu--tooltip ul li a::before,
 .menu-user-profile > li ul li a::before,
 .message-tools .menu-more ul li a::before {
-  color: @text-tw-dark;
+    color: @text-tw-dark;
 }
 
 // Položka v menu - autocomplete
 #context-menu .easy-autocomplete-tag,
 #context-menu input {
-  color: @text-tw-dark;
+    color: @text-tw-dark;
 }
 
 // Border vpravo od ikony
@@ -757,5 +775,5 @@ table.list th.author .avatar-container + span a {
 .menu--tooltip ul::after,
 .menu-user-profile > li ul::after,
 .message-tools .menu-more ul::after {
-  border-left: 1px solid @border-color;
+    border-left: 1px solid @border-color;
 }

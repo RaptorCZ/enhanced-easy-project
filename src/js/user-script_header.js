@@ -19,4 +19,12 @@
 // ==/UserScript==
 /*
 Changelog:
+
+1.0.1
+- Možnost zapsat příchod/odchod rovnou proklikem s headeru stránky
+- Barevné úpravy v sekci "Přehled aktualit"
+-----------------------
+1.0.0
+- První veřejná verze
+-----------------------
 */
