@@ -328,7 +328,7 @@ table.list tr.group span.count {
 }
 
 // Schováme ty procenta (nově už nejsou pod spanem, ale je zde a/span/span)
-table.list tr.group td.group-name > pan:nth-child(3) {
+table.list tr.group td.group-name > :nth-child(3) {
     display: none;
 }
 
@@ -776,4 +776,11 @@ table.list th.author .avatar-container + span a {
 .menu-user-profile > li ul::after,
 .message-tools .menu-more ul::after {
     border-left: 1px solid @border-color;
+}
+
+/**
+ * Úkolové stopky
+ */
+.easy-issue-timers-item {
+    border: 1px solid @border-color !important;
 }

@@ -12,7 +12,7 @@ const concat = require("gulp-concat");
 const fs = require("fs");
 
 // Verze scriptů
-const VERSION = "1.0.1";
+const VERSION = "1.0.2";
 
 // Final soubory
 const FILE_LIGHT = "enhanced-easy-project_light-theme.user.js";

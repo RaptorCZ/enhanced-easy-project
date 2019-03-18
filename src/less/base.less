@@ -13,70 +13,73 @@
 /**
  * Odstranění znaku stromového zobrazení v gridech a samotných odsazení
  */
-#custom_menu_settings .nested-fields ~ .nested-fields:first-of-type.splitcontentleft label::before,
+#custom_menu_settings
+    .nested-fields
+    ~ .nested-fields:first-of-type.splitcontentleft
+    label::before,
 .idnt .name::before,
 .idnt .subject::before {
-  content: none;
+    content: none;
 }
 
 // odstraňujeme všude, kromě výjimek
 // #projects_table = table na stránce projektů
 // TODO: table.my_projects = table s přehledem podprojektů na projektu
-table:not(#projects_table) [class*='idnt-'] td.name,
-table:not(#projects_table) [class*='idnt-'] td.subject,
-table:not(#projects_table) [class*='idnt-'] th.name,
-table:not(#projects_table) [class*='idnt-'] th.subject {
-  padding-left: 0 !important;
+table:not(#projects_table) [class*="idnt-"] td.name,
+table:not(#projects_table) [class*="idnt-"] td.subject,
+table:not(#projects_table) [class*="idnt-"] th.name,
+table:not(#projects_table) [class*="idnt-"] th.subject {
+    padding-left: 0 !important;
 }
 
 /**
  * Modul (jednotlivé panely) - orámování + headery
  */
 .box .module-heading {
-  padding: .5rem .4rem;
+    padding: 0.5rem 0.4rem;
 }
 
 .box .module-toggle-button .expander {
-  top: .6rem;
-  right: .6rem;
+    top: 0.6rem;
+    right: 0.6rem;
 }
 
 .box .expander.module-toggler {
-  top: .6rem;
+    top: 0.6rem;
 }
 
 // Ikonky v headeru (např. spolupracovat, přidat, ...) - odsazení, aby neničily border
 .box .module-heading-links {
-  padding: 0;
+    padding: 0;
 }
 
 /**
  * Gridy jako takové
  */
 table thead tr:first-child th {
-  padding-top: 1rem;
+    padding-top: 1rem;
 }
 
 table.list td,
 table.list th {
-  padding-left: 0 !important;
+    padding-left: 0 !important;
 }
 
 table.list > tbody > tr > td,
 table.list > tbody > tr > th {
-  padding-top: 0;
-  padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 // Odstranění mezery mezi ikonkou obálky a prvním sloupcem
 table.list td.easy-query-additional-beginning-buttons,
 table.list th.easy-query-additional-beginning-buttons {
-  padding-right: .5rem !important;
+    padding-right: 0.5rem !important;
 }
 
 // Konsolidace výšky řádku (pokud není ikonka, je menší)
 table.list > tbody > tr.issue {
-  height: 34px;
+    height: 34px;
 }
 
 // Header - Odstraníme hardcoded paddingy, abychom mohli pozicovat
@@ -93,8 +96,8 @@ table.list th.subject .affix-cell-wrap,
 table.list th.tracker .affix-cell-wrap,
 table.list th.updated_on .affix-cell-wrap,
 table.list th.user .affix-cell-wrap {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 // Header - Text nastřed
@@ -102,28 +105,28 @@ table.list th.assigned_to .affix-cell-wrap,
 table.list th.author .affix-cell-wrap,
 table.list th.due_date .affix-cell-wrap,
 table.list th.start_date .affix-cell-wrap {
-  text-align: center;
+    text-align: center;
 }
 
 // Header - Text doprava
 table.list th.updated_on .affix-cell-wrap {
-  text-align: right;
+    text-align: right;
 }
 
 // Content - Vycentrujeme ikonku v gridu
 table.list td.assigned_to,
 table.list td.author {
-  text-align: center;
+    text-align: center;
 }
 
 // Content - Text doprava
 table.list td.updated_on {
-  text-align: right;
+    text-align: right;
 }
 
 // Disablujeme drag-drop UI šoupátko na začátku řádku
 table.list tr:hover .easy-panel-handler {
-  opacity: 0 !important;
+    opacity: 0 !important;
 }
 
 /**
@@ -132,7 +135,7 @@ table.list tr:hover .easy-panel-handler {
 
 // Nechceme reponsivní obrázek zde, rozbije se při dlouhém popisu
 #modal_watchers_user_select .avatar-container img {
-  max-width: none;
+    max-width: none;
 }
 
 /**
@@ -141,31 +144,31 @@ table.list tr:hover .easy-panel-handler {
 
 // Ikona je 32*32
 .gravatar {
-  // zmenšíme to bílé ohraničení
-  padding: 0;
+    // zmenšíme to bílé ohraničení
+    padding: 0;
 }
 
 /**
  * Odpracovaný čas
  */
 .time-entry .subject {
-  display: flex;
+    display: flex;
 }
 
 // Šířka sloupce "subject" tak, aby se tam vlezl i delší název projektu
 .time-entry .subject > span {
-  width: 300px;
+    width: 300px;
 }
 
 .time-entry .subject > a {
-  flex: 1 0 0;
+    flex: 1 0 0;
 }
 
 /**
  * Detail tasku
  */
 .easy-content-page .box.module {
-  margin: .5rem -1.2rem;
+    margin: 0.5rem -1.2rem;
 }
 
 /**
@@ -174,16 +177,16 @@ table.list tr:hover .easy-panel-handler {
 
 // Fixace různě vysokých řádků
 .project-tree .project {
-  height: 34px;
+    height: 34px;
 }
 
 // Kvůli centrování
 .project-tree .project .name {
-  line-height: 2.2em;
+    line-height: 2.2em;
 }
 
 .project-tree .row-control + a {
-  line-height: 2.2em;
+    line-height: 2.2em;
 }
 
 /**
@@ -192,8 +195,8 @@ table.list tr:hover .easy-panel-handler {
 
 // Přepozicujeme titulek, aby počty byly pod titulkem
 .agile__col__title {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 /**
@@ -202,27 +205,27 @@ table.list tr:hover .easy-panel-handler {
 
 // Zrušení 2-sloupcového layoutu
 #easy_project_com-ajax_modal-time_entries-new {
-  .splitcontent {
-    margin-left: 0;
-    margin-right: 0;
+    .splitcontent {
+        margin-left: 0;
+        margin-right: 0;
 
-    .splitcontentleft {
-      float: none;
-      width: auto;
+        .splitcontentleft {
+            float: none;
+            width: auto;
+        }
     }
-  }
 }
 
 // Konsolidace šířek inputů/selectů i pro jQueryUI
 #easy_project_com-ajax_modal-time_entries-new {
-  #main .select2-container,
-  .easy-autocomplete-tag,
-  .easy-lookup-values-wrapper,
-  .uneditable-input,
-  select {
-    width: 100%;
-    max-width: 100%;
-  }
+    #main .select2-container,
+    .easy-autocomplete-tag,
+    .easy-lookup-values-wrapper,
+    .uneditable-input,
+    select {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 /**
@@ -231,8 +234,8 @@ table.list tr:hover .easy-panel-handler {
 
 // Zarovnáme čas a místo na nový řádek a full width
 div.easy-attendance-calendar-item > a {
-  display: block;
-  width: 100%;
+    display: block;
+    width: 100%;
 }
 
 /**
@@ -242,57 +245,88 @@ div.easy-attendance-calendar-item > a {
 // Vycentrujeme vertikálne text a ikonku
 .easy-calendar-upcoming .todays-attendance,
 .easy-calendar-upcoming .todays-time {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 // Odsadíme ikonku
 .easy-calendar-upcoming .todays-attendance::before,
 .easy-calendar-upcoming .todays-time::before {
-  margin-right: .4rem;
+    margin-right: 0.4rem;
 }
 
 /**
  * Oprava chybějící třídy .issue v sidebaru "Přehled aktivit"
  */
 .easy-activity-feed-activity-event {
-  dt {
-    //background-color: #e0eefc
-    font-size: .89em;
+    dt {
+        //background-color: #e0eefc
+        font-size: 0.89em;
 
-    .time {
-      float: right;
+        .time {
+            float: right;
+        }
+
+        .author {
+            .avatar-container {
+                margin-right: 0.8rem;
+                float: none;
+            }
+
+            .name {
+                display: inline-block;
+                margin-top: 0.2rem;
+            }
+        }
+
+        .project {
+            clear: both;
+            display: block;
+            margin-top: 0.8rem;
+        }
+
+        .issue-link {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        &:not(:first-child) {
+            //border-top: 1px solid white;
+            margin-top: 1em;
+            padding-top: 1em;
+        }
     }
+}
 
-    .author {
-      .avatar-container {
-        margin-right: .8rem;
-        float: none;
-      }
+/**
+ * Úkolové stopky
+ */
+#easy_issue_timer_notify_container .issue {
+    font-weight: normal;
+}
 
-      .name {
-        display: inline-block;
-        margin-top: .2rem;
-      }
-    }
+.easy-issue-timers-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+}
 
-    .project {
-      clear: both;
-      display: block;
-      margin-top: .8rem;
-    }
+.easy-issue-timers-item-breadcrumb > a:last-child {
+    padding: 0.4rem;
+    margin: 1rem 0 0;
+}
 
-    .issue-link {
-      display: block;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+.easy-issue-timers-item-buttons {
+    flex-grow: 1;
+    padding-left: 0px;
+    margin-top: 1rem;
+    width: 100%;
+}
 
-    &:not(:first-child) {
-      //border-top: 1px solid white;
-      margin-top: 1em;
-      padding-top: 1em;
-    }
-  }
+.easy-issue-timers-item-buttons span {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0.8rem;
 }

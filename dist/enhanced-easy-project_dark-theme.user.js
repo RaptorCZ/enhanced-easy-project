@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.0.1
+// @version      1.0.2
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -19,7 +19,10 @@
 // ==/UserScript==
 /*
 Changelog:
-
+1.0.2
+- Odstranění procent ze zgrupovaného řádku (oprava po update EP)
+- Opravy layoutu v sekci "Úkolové stopky"
+-----------------------
 1.0.1
 - Možnost zapsat příchod/odchod rovnou proklikem s headeru stránky
 - Barevné úpravy v sekci "Přehled aktualit"
@@ -38,10 +41,10 @@ var css = `
 .idnt .subject::before {
   content: none;
 }
-table:not(#projects_table) [class*='idnt-'] td.name,
-table:not(#projects_table) [class*='idnt-'] td.subject,
-table:not(#projects_table) [class*='idnt-'] th.name,
-table:not(#projects_table) [class*='idnt-'] th.subject {
+table:not(#projects_table) [class*="idnt-"] td.name,
+table:not(#projects_table) [class*="idnt-"] td.subject,
+table:not(#projects_table) [class*="idnt-"] th.name,
+table:not(#projects_table) [class*="idnt-"] th.subject {
   padding-left: 0 !important;
 }
 /**
@@ -235,6 +238,32 @@ div.easy-attendance-calendar-item > a {
 .easy-activity-feed-activity-event dt:not(:first-child) {
   margin-top: 1em;
   padding-top: 1em;
+}
+/**
+ * Úkolové stopky
+ */
+#easy_issue_timer_notify_container .issue {
+  font-weight: normal;
+}
+.easy-issue-timers-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important;
+}
+.easy-issue-timers-item-breadcrumb > a:last-child {
+  padding: 0.4rem;
+  margin: 1rem 0 0;
+}
+.easy-issue-timers-item-buttons {
+  flex-grow: 1;
+  padding-left: 0px;
+  margin-top: 1rem;
+  width: 100%;
+}
+.easy-issue-timers-item-buttons span {
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0.8rem;
 }
 /**
  * Fixy na rozbité levé menu
@@ -505,7 +534,7 @@ table.list tr.group span.count {
   color: #fff;
   border-color: #fff;
 }
-table.list tr.group td.group-name > pan:nth-child(3) {
+table.list tr.group td.group-name > :nth-child(3) {
   display: none;
 }
 /**
@@ -886,6 +915,12 @@ table.list th.author .avatar-container + span a {
 .menu-user-profile > li ul::after,
 .message-tools .menu-more ul::after {
   border-left: 1px solid #38444d;
+}
+/**
+ * Úkolové stopky
+ */
+.easy-issue-timers-item {
+  border: 1px solid #38444d !important;
 }
 /**
  * Danger theme

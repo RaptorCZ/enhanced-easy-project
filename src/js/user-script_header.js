@@ -19,7 +19,10 @@
 // ==/UserScript==
 /*
 Changelog:
-
+1.0.2
+- Odstranění procent ze zgrupovaného řádku (oprava po update EP)
+- Opravy layoutu v sekci "Úkolové stopky"
+-----------------------
 1.0.1
 - Možnost zapsat příchod/odchod rovnou proklikem s headeru stránky
 - Barevné úpravy v sekci "Přehled aktualit"
