@@ -80,7 +80,7 @@ gulp.task("js-build-dark", function() {
 /**
  * Generování DEBUG verze Dark Theme UserScriptu
  */
-gulp.task("js-build-dark", function() {
+gulp.task("js-build-dark-dev", function() {
     return gulp
         .src(["./src/js/user-script_header.js", "./src/js/user-script_body.js"])
         .pipe(replace("##TITLE##", TITLE_DARK))
@@ -102,7 +102,7 @@ gulp.task("js",
 );
 
 gulp.task("dev",
-    gulp.series(["css-build-dark", "js-build-dark"])
+    gulp.series(["css-build-dark", "js-build-dark-dev"])
 );
 
 gulp.task("default",
