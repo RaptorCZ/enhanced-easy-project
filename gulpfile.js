@@ -46,7 +46,7 @@ gulp.task("css-build-dark", function () {
 });
 
 /**
- * Genrování Light Theme UserScriptu
+ * Generování Light Theme UserScriptu
  */
 gulp.task("js-build-light", function() {
     return gulp
@@ -62,7 +62,7 @@ gulp.task("js-build-light", function() {
 });
 
 /**
- * Genrování Dark Theme UserScriptu
+ * Generování Dark Theme UserScriptu
  */
 gulp.task("js-build-dark", function() {
     return gulp
@@ -77,12 +77,32 @@ gulp.task("js-build-dark", function() {
         .pipe(gulp.dest("./dist"));
 });
 
+/**
+ * Generování DEBUG verze Dark Theme UserScriptu
+ */
+gulp.task("js-build-dark", function() {
+    return gulp
+        .src(["./src/js/user-script_header.js", "./src/js/user-script_body.js"])
+        .pipe(replace("##TITLE##", TITLE_DARK))
+        .pipe(replace("##VERSION##", VERSION))
+        .pipe(replace("##FILENAME##", FILE_DARK))
+        .pipe(replace("##CSS##", function(match) {
+            return fs.readFileSync('./temp/css/main-dark.css');
+          }))
+        .pipe(concat(FILE_DARK))
+        .pipe(gulp.dest("./temp/build"));
+});
+
 gulp.task("css",
     gulp.parallel(["css-build-light", "css-build-dark"])
 );
 
 gulp.task("js",
     gulp.parallel(["js-build-light", "js-build-dark"])
+);
+
+gulp.task("dev",
+    gulp.series(["css-build-dark", "js-build-dark"])
 );
 
 gulp.task("default",
