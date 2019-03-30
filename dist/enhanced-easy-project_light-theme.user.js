@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.1.0
+// @version      1.1.1
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
