@@ -12,7 +12,7 @@ const concat = require("gulp-concat");
 const fs = require("fs");
 
 // Verze scriptů
-const pkg = require('./package.json');
+const pkg = require("./package.json");
 const VERSION = pkg.version;
 
 // Final soubory
@@ -26,7 +26,7 @@ const TITLE_DARK = "Enhanced Easy Project - Dark Theme";
 /**
  * CSS - Light Theme version
  */
-gulp.task("css-build-light", function () {
+gulp.task("css-build-light", function() {
     return gulp
         .src(["./src/less/main-light.less"])
         .pipe(less())
@@ -37,7 +37,7 @@ gulp.task("css-build-light", function () {
 /**
  * CSS - Dark Theme version
  */
-gulp.task("css-build-dark", function () {
+gulp.task("css-build-dark", function() {
     return gulp
         .src(["./src/less/main-dark.less"])
         .pipe(less())
@@ -54,9 +54,11 @@ gulp.task("js-build-light", function() {
         .pipe(replace("##TITLE##", TITLE_LIGHT))
         .pipe(replace("##VERSION##", VERSION))
         .pipe(replace("##FILENAME##", FILE_LIGHT))
-        .pipe(replace("##CSS##", function(match) {
-            return fs.readFileSync('./temp/css/main-light.css');
-          }))
+        .pipe(
+            replace("##CSS##", function(match) {
+                return fs.readFileSync("./temp/css/main-light.css");
+            })
+        )
         .pipe(concat(FILE_LIGHT))
         .pipe(gulp.dest("./dist"));
 });
@@ -70,9 +72,11 @@ gulp.task("js-build-dark", function() {
         .pipe(replace("##TITLE##", TITLE_DARK))
         .pipe(replace("##VERSION##", VERSION))
         .pipe(replace("##FILENAME##", FILE_DARK))
-        .pipe(replace("##CSS##", function(match) {
-            return fs.readFileSync('./temp/css/main-dark.css');
-          }))
+        .pipe(
+            replace("##CSS##", function(match) {
+                return fs.readFileSync("./temp/css/main-dark.css");
+            })
+        )
         .pipe(concat(FILE_DARK))
         .pipe(gulp.dest("./dist"));
 });
@@ -86,26 +90,23 @@ gulp.task("js-build-dark-dev", function() {
         .pipe(replace("##TITLE##", TITLE_DARK))
         .pipe(replace("##VERSION##", VERSION))
         .pipe(replace("##FILENAME##", FILE_DARK))
-        .pipe(replace("##CSS##", function(match) {
-            return fs.readFileSync('./temp/css/main-dark.css');
-          }))
+        .pipe(
+            replace("##CSS##", function(match) {
+                return fs.readFileSync("./temp/css/main-dark.css");
+            })
+        )
         .pipe(concat(FILE_DARK))
         .pipe(gulp.dest("./temp/build"));
 });
 
-gulp.task("css",
-    gulp.parallel(["css-build-light", "css-build-dark"])
-);
+gulp.task("css", gulp.parallel(["css-build-light", "css-build-dark"]));
 
-gulp.task("js",
-    gulp.parallel(["js-build-light", "js-build-dark"])
-);
+gulp.task("js", gulp.parallel(["js-build-light", "js-build-dark"]));
 
-gulp.task("dev",
-    gulp.series(["css-build-dark", "js-build-dark-dev"])
-);
+gulp.task("dev", gulp.series(["css-build-dark", "js-build-dark-dev"]));
 
-gulp.task("default",
+gulp.task(
+    "default",
     gulp.parallel(
         gulp.series(["css-build-light", "js-build-light"]),
         gulp.series(["css-build-dark", "js-build-dark"])
