@@ -20,3 +20,7 @@ Vše je postavené na [UserScriptech](https://en.wikipedia.org/wiki/Userscript) 
 `Dark Theme` obsahuje vše co `Light Theme`, ale navíc se jedná o kompletně nové téma vyvedené do tmavých tónů - tzv. `Dark Theme`.
 
 [enhanced-easy-project_dark-theme.user.js](https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js)
+
+## License
+
+[MIT license](https://github.com/RaptorCZ/enhanced-easy-project/blob/master/LICENSE)
