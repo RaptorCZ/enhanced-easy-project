@@ -12,14 +12,25 @@ html {
     color: @body-color;
 }
 
-#top-menu, #top-menu-container-wrapper > ul > li .easy-top-menu-more-toggler, #top-menu-container-wrapper > ul > li .easy-top-menu-more-toggler:hover,
-//
-#top-menu-container-wrapper > ul > li > a,
-#top-menu-container-wrapper > ul > li > a:hover {
+/**
+ * Page header
+ */
+#top-menu {
     background-color: @primary-light-bg;
 }
 
-#top-menu-container-wrapper > ul > li {
+/**
+ * Sidebar menu
+ */
+#top-menu-container > ul > li .easy-top-menu-more-toggler,
+#top-menu-container > ul > li .easy-top-menu-more-toggler:hover,
+#top-menu-container > ul > li > a,
+#top-menu-container > ul > li > a:hover {
+    background-color: @primary-light-bg;
+    color: @text-tw-dark;
+}
+
+#top-menu-container > ul > li {
     border-color: @primary-light-bg !important;
 }
 
@@ -616,8 +627,8 @@ div.easy-calendar-export a {
 #context-menu ul,
 #context-menu ul li > .menu-children,
 #invited_colleague_change_user_type_modal .icon-help-bubble > .tooltip,
-#top-menu-container-wrapper > ul > li ul,
-#top-menu-container-wrapper > ul > li ul li > .menu-children,
+#top-menu-container > ul > li ul,
+#top-menu-container > ul > li ul li > .menu-children,
 #top-menu-rich-more .top-menu-rich-more-item > li > ul.menu-children,
 #top-menu-rich-more .top-menu-rich-more-item > li.open ul,
 #top-menu-rich-more .top-menu-rich-more-item > li.open ul li > .menu-children,
@@ -673,7 +684,7 @@ table.list th.author .avatar-container + span {
 
 // Hover na položce
 #context-menu ul li:hover,
-#top-menu-container-wrapper > ul > li ul li:hover,
+#top-menu-container > ul > li ul li:hover,
 #top-menu-rich-more .top-menu-rich-more-item > li.open ul li:hover,
 #top-menu-rich-more .top-menu-rich-more-item > li:hover ul li:hover,
 .button-group .menu-more ul li:hover,
@@ -691,7 +702,7 @@ table.list th.author .avatar-container + span {
 // Link v menu
 #context-menu ul a,
 #invited_colleague_change_user_type_modal .icon-help-bubble > .tooltip a,
-#top-menu-container-wrapper > ul > li ul a,
+#top-menu-container > ul > li ul a,
 #top-menu-rich-more .top-menu-rich-more-item > li > ul.menu-children a,
 #top-menu-rich-more .top-menu-rich-more-item > li.open ul a,
 #top-menu-rich-more .top-menu-rich-more-item > li:hover ul a,
@@ -742,7 +753,7 @@ table.list th.author .avatar-container + span a {
 
 // Ikonka na položce
 #context-menu ul li a::before,
-#top-menu-container-wrapper > ul > li ul li a::before,
+#top-menu-container > ul > li ul li a::before,
 #top-menu-rich-more .top-menu-rich-more-item > li.open ul li a::before,
 #top-menu-rich-more .top-menu-rich-more-item > li:hover ul li a::before,
 .button-group .menu-more ul li a::before,
@@ -764,7 +775,7 @@ table.list th.author .avatar-container + span a {
 
 // Border vpravo od ikony
 #context-menu ul::after,
-#top-menu-container-wrapper > ul > li ul::after,
+#top-menu-container > ul > li ul::after,
 #top-menu-rich-more .top-menu-rich-more-item > li.open ul::after,
 #top-menu-rich-more .top-menu-rich-more-item > li:hover ul::after,
 .button-group .menu-more ul::after,
