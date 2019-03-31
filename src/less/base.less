@@ -72,8 +72,19 @@ table.list > tbody > tr > th {
 }
 
 // Checkbox není vystředěn při menší výšce
-table.list td.checkbox input[type='checkbox'] {
+table.list td.checkbox input[type="checkbox"] {
     transform: translateY(-2px);
+}
+
+// Fix pozicování "obálky" v gridu (primárně pro Edge)
+table.list td.easy-query-additional-beginning-buttons .beginning-buttons-wrapper {
+    transform: none;
+    position: static;
+}
+
+// Oprava pozicování "stack" ikon (nechceme brát pozici 50%  z parenta)
+.icon__stack>[class*=icon]:nth-child(n+2) {
+    left: 0.75em;
 }
 
 // Odstranění mezery mezi ikonkou obálky a prvním sloupcem
