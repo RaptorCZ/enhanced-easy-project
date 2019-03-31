@@ -71,6 +71,11 @@ table.list > tbody > tr > th {
     padding-bottom: 0;
 }
 
+// Checkbox není vystředěn při menší výšce
+table.list td.checkbox input[type='checkbox'] {
+    transform: translateY(-2px);
+}
+
 // Odstranění mezery mezi ikonkou obálky a prvním sloupcem
 table.list td.easy-query-additional-beginning-buttons,
 table.list th.easy-query-additional-beginning-buttons {
