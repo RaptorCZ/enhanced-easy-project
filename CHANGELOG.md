@@ -1,3 +1,13 @@
+# [1.2.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.1.1...v1.2.0) (2019-03-31)
+
+
+### Features
+
+* pozicování "obálky" a stack ikon v gridu ([5d2455c](https://github.com/RaptorCZ/enhanced-easy-project/commit/5d2455c))
+* vystředění checkboxu v gridech (1. sloupec) ([eb1b1a9](https://github.com/RaptorCZ/enhanced-easy-project/commit/eb1b1a9))
+
+
+
 ## [1.1.1](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.1.0...v1.1.1) (2019-03-31)
 
 

@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.1.1
+// @version      1.2.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -19,17 +19,9 @@
 // ==/UserScript==
 /*
 Changelog:
-1.0.2
-- Odstranění procent ze zgrupovaného řádku (oprava po update EP)
-- Opravy layoutu v sekci "Úkolové stopky"
------------------------
-1.0.1
-- Možnost zapsat příchod/odchod rovnou proklikem s headeru stránky
-- Barevné úpravy v sekci "Přehled aktualit"
------------------------
-1.0.0
-- První veřejná verze
------------------------
+
+    https://github.com/RaptorCZ/enhanced-easy-project/blob/master/CHANGELOG.md
+
 */
 
 var css = `
@@ -77,6 +69,18 @@ table.list > tbody > tr > td,
 table.list > tbody > tr > th {
   padding-top: 0;
   padding-bottom: 0;
+}
+table.list td.checkbox input[type="checkbox"] {
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+}
+table.list td.easy-query-additional-beginning-buttons .beginning-buttons-wrapper {
+  -webkit-transform: none;
+          transform: none;
+  position: static;
+}
+.icon__stack > [class*=icon]:nth-child(n+2) {
+  left: 0.75em;
 }
 table.list td.easy-query-additional-beginning-buttons,
 table.list th.easy-query-additional-beginning-buttons {
