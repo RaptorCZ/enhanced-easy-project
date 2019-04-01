@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.2.0
+// @version      1.3.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -25,6 +25,21 @@ Changelog:
 */
 
 var css = `
+/**
+ * Page header
+ */
+#top-menu {
+  position: fixed !important;
+}
+#easy_page_tabs {
+  margin-top: 5rem !important;
+}
+#header {
+  padding-top: 5.5rem !important;
+}
+.easy-content-page {
+  margin-top: 4rem !important;
+}
 /**
  * Odstranění znaku stromového zobrazení v gridech a samotných odsazení
  */
@@ -79,7 +94,7 @@ table.list td.easy-query-additional-beginning-buttons .beginning-buttons-wrapper
           transform: none;
   position: static;
 }
-.icon__stack > [class*=icon]:nth-child(n+2) {
+.icon__stack > [class*="icon"]:nth-child(n + 2) {
   left: 0.75em;
 }
 table.list td.easy-query-additional-beginning-buttons,
@@ -467,11 +482,11 @@ table.list .group > td.inline_expander {
  * Modul (jednotlivé panely) - orámování + headery
  */
 .box.easy-page-module {
-  background-color: #15202b !important;
+  background-color: #1c2938 !important;
   border: 1px solid #38444d;
 }
 .easy-page-module .module-heading {
-  background-color: #10171e !important;
+  background-color: #15202b !important;
   color: #fff;
 }
 .easy-page-module .module-heading a {
@@ -488,7 +503,7 @@ table thead th {
   color: #fff;
 }
 table.list > thead > tr .affix-cell-wrap {
-  background-color: #15202b;
+  background-color: #1c2938;
 }
 table.list td a,
 table.list th a {
@@ -508,7 +523,7 @@ table.list > thead > tr > th {
 }
 table.list > tbody {
   color: #fff;
-  background: #10171e;
+  background: #1c2938;
 }
 table.list > tbody > tr:hover,
 tr.context-menu-selection {
@@ -516,7 +531,7 @@ tr.context-menu-selection {
 }
 table.list > tbody > tr.group:hover,
 table.list tr.group {
-  background-color: #15202b !important;
+  background-color: #10171e !important;
 }
 table.list tr.group span.count {
   color: #fff;
@@ -535,11 +550,9 @@ div.easy-calendar table td.today {
 /**
  * Odpracovaný čas
  */
-.time-entries .odd {
-  background: #1c2938;
-}
+.time-entries .odd,
 .time-entries .odd:hover {
-  background: #1c2938 !important;
+  background: #10171e !important;
 }
 /**
  * Detail tasku
@@ -1084,7 +1097,7 @@ function setActivityPage() {
     // 69 - Delivery manažer
 
     // Předvyplníme automaticky zvolenou roli do radio buttonu
-    const $roleRadio = document.getElementById("radio-timeentry-time_entry-60");
+    const $roleRadio = document.getElementById("radio-timeentry-time_entry-63");
     if ($roleRadio) {
         $roleRadio.checked = true;
     }

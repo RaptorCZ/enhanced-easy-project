@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.2.0
+// @version      1.3.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -25,6 +25,21 @@ Changelog:
 */
 
 var css = `
+/**
+ * Page header
+ */
+#top-menu {
+  position: fixed !important;
+}
+#easy_page_tabs {
+  margin-top: 5rem !important;
+}
+#header {
+  padding-top: 5.5rem !important;
+}
+.easy-content-page {
+  margin-top: 4rem !important;
+}
 /**
  * Odstranění znaku stromového zobrazení v gridech a samotných odsazení
  */
@@ -79,7 +94,7 @@ table.list td.easy-query-additional-beginning-buttons .beginning-buttons-wrapper
           transform: none;
   position: static;
 }
-.icon__stack > [class*=icon]:nth-child(n+2) {
+.icon__stack > [class*="icon"]:nth-child(n + 2) {
   left: 0.75em;
 }
 table.list td.easy-query-additional-beginning-buttons,
@@ -350,7 +365,7 @@ function setActivityPage() {
     // 69 - Delivery manažer
 
     // Předvyplníme automaticky zvolenou roli do radio buttonu
-    const $roleRadio = document.getElementById("radio-timeentry-time_entry-60");
+    const $roleRadio = document.getElementById("radio-timeentry-time_entry-63");
     if ($roleRadio) {
         $roleRadio.checked = true;
     }

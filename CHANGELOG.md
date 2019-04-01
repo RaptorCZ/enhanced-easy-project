@@ -1,3 +1,19 @@
+# [1.3.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.2.0...v1.3.0) (2019-04-01)
+
+
+### Bug Fixes
+
+* aktivita - předvolen "Programátor" ([485d0f2](https://github.com/RaptorCZ/enhanced-easy-project/commit/485d0f2))
+
+
+### Features
+
+* repozicování obsahu pod fixním menu ([4046075](https://github.com/RaptorCZ/enhanced-easy-project/commit/4046075))
+* změna pozicování top-menu na fixed ([3cd6d66](https://github.com/RaptorCZ/enhanced-easy-project/commit/3cd6d66))
+* změny barevného schématu nad hlavními bloky ([a1aee31](https://github.com/RaptorCZ/enhanced-easy-project/commit/a1aee31))
+
+
+
 # [1.2.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.1.1...v1.2.0) (2019-03-31)
 
 
