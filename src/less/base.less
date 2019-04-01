@@ -11,6 +11,20 @@
 // }
 
 /**
+ * Page header
+ */
+
+// původní sticky moc nefunguje, skáče a je zde zbytečné
+#top-menu {
+    position: fixed !important;
+}
+
+// kvůli fixed na #top-menu
+#easy_page_tabs {
+    margin: 5rem 2.4rem 0;
+}
+
+/**
  * Odstranění znaku stromového zobrazení v gridech a samotných odsazení
  */
 #custom_menu_settings
@@ -77,13 +91,15 @@ table.list td.checkbox input[type="checkbox"] {
 }
 
 // Fix pozicování "obálky" v gridu (primárně pro Edge)
-table.list td.easy-query-additional-beginning-buttons .beginning-buttons-wrapper {
+table.list
+    td.easy-query-additional-beginning-buttons
+    .beginning-buttons-wrapper {
     transform: none;
     position: static;
 }
 
 // Oprava pozicování "stack" ikon (nechceme brát pozici 50%  z parenta)
-.icon__stack>[class*=icon]:nth-child(n+2) {
+.icon__stack > [class*="icon"]:nth-child(n + 2) {
     left: 0.75em;
 }
 
