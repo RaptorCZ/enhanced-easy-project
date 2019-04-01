@@ -248,14 +248,14 @@ table.list .group > td.inline_expander {
 .box {
     // Hlavní obálka
     &.easy-page-module {
-        background-color: @primary-bg !important;
+        background-color: @primary-light-bg !important;
         border: 1px solid @border-color;
     }
 }
 
 // Hlavička modulu jako takového
 .easy-page-module .module-heading {
-    background-color: @primary-dark-bg !important;
+    background-color: @primary-bg !important;
     color: @header-color; // ikonka
 
     a {
@@ -284,7 +284,7 @@ table thead th {
 
 // Header řádek tabulky se barví na úrovni "obsahu"
 table.list > thead > tr .affix-cell-wrap {
-    background-color: @primary-bg;
+    background-color: @primary-light-bg;
 }
 
 // Default barva pro linky v gridu - nechceme standardní link color
@@ -316,7 +316,7 @@ table.list > thead > tr > th {
 // Výchozí pozadí a text pro grid - přebije ji jen theme
 table.list > tbody {
     color: @table-color;
-    background: @primary-dark-bg;
+    background: @primary-light-bg;
 }
 
 // Hover nad obecným řádkem
@@ -329,7 +329,7 @@ tr.context-menu-selection {
 // Zgrupovaný řádek tabulky + hover
 table.list > tbody > tr.group:hover,
 table.list tr.group {
-    background-color: @primary-bg !important;
+    background-color: @primary-dark-bg !important;
 }
 
 // Badge na zgrupovaném řádku. Jsou 2 za sebou, první obsahuje počet položek, druhý procenta
@@ -362,12 +362,9 @@ div.easy-calendar table td.today {
  */
 
 // Řádek s datem (group)
-.time-entries .odd {
-    background: @bg-tw-light;
-}
-
+.time-entries .odd,
 .time-entries .odd:hover {
-    background: @bg-tw-light !important;
+    background: @primary-dark-bg !important;
 }
 
 /**
