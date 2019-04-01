@@ -80,7 +80,7 @@ function setActivityPage() {
     // 69 - Delivery manažer
 
     // Předvyplníme automaticky zvolenou roli do radio buttonu
-    const $roleRadio = document.getElementById("radio-timeentry-time_entry-60");
+    const $roleRadio = document.getElementById("radio-timeentry-time_entry-63");
     if ($roleRadio) {
         $roleRadio.checked = true;
     }
