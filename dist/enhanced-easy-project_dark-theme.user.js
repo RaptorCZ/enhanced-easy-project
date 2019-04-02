@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.3.0
+// @version      1.4.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -1039,7 +1039,9 @@ GM_addStyle(css);
     // Předepsaná doba
     fixEmptyEstimatedHours();
 
-    setActivityPage();
+    // Nastavení role a aktivity na výkazu času
+    const userId = getUserInfo();
+    setDefaultRoleAndActivity(userId);
 
     // TODO
     //setAttendancePage();
@@ -1070,7 +1072,12 @@ function modGantt() {
 function fixEmptyEstimatedHours() {
     // Zpozdíme, počkáme na načtení dat
     setTimeout(function() {
-        $("[data-name='issue[estimated_hours]'] > span").each(function(
+        const $elements = $("[data-name='issue[estimated_hours]'] > span");
+        if (!$elements) {
+            return;
+        }
+
+        $elements.each(function(
             index,
             value
         ) {
@@ -1083,11 +1090,73 @@ function fixEmptyEstimatedHours() {
 }
 
 /**
- * Nastavení stránky s výkazem času.
- * Tlačítka pro rychlý výběr aktivity a předvybrané hodnoty.
+ * Funkce pro načtení informací o uživateli
  */
-function setActivityPage() {
+function getUserInfo() {
+    // EP ukládá do global scope vlastní nastavení
+    return EASY.currentUser.id;
+}
+
+/**
+ * Nastavení stránky s výkazem času - Předvolení role
+  * @param {number} userId Id uživatele, pro kterého chceme nastavit výchozí roli
+ */
+function setDefaultRoleAndActivity(userId) {
+
+    if (!userId) {
+        return;
+    }
+
+    // Zjistíme výchozí roli pro uživatele
+    const roleToSelect = getDefaultRoleForUser(userId);
+    if (!roleToSelect) {
+        return;
+    }
+
+    // Předvyplníme automaticky zvolenou roli do radio buttonu
+    const $roleRadio = document.getElementById("radio-timeentry-time_entry-" + roleToSelect);
+    if ($roleRadio) {
+        $roleRadio.checked = true;
+    }
+
+    // Nastavení aktivity
+    setDefaultActivity(roleToSelect);
+}
+
+/**
+ * Nastavení stránky s výkazem času - Předvolení aktivity + Tlačítka pro rychlý výběr
+ * @param {number} roleId Id role, pro kterou budeme vracet výchozí aktivitu
+ */
+function setDefaultActivity(roleId) {
+
+    if (!roleId) {
+        return;
+    }
+
+    const $activityCombo = $("#time_entry_custom_field_values_90_");
+    // Doplníme buttony na předvolení aktivit vedle komba
+    if ($activityCombo) {
+        generateQuickActivities();
+    }
+
+    // Zjistíme výchozí aktivitu pro uživatele
+    const activityToSelect = getDefaultActivity(roleId);
+    if (activityToSelect) {
+
+        // Předvyplníme automaticky zvolenou aktivitu
+        if ($activityCombo) {
+            $activityCombo.val(activityToSelect);
+        }
+    }
+}
+
+/**
+ * Funkce na základě uživatele vrátí jeho default roli
+ * @param {number} userId Id uživatele, pro kterého chceme nastavit výchozí roli
+ */
+function getDefaultRoleForUser(userId) {
     // Dostupné role:
+    // -----------------------
     // 60 - Administrátor
     // 61 - Byznys analytik
     // 63 - Programátor
@@ -1096,10 +1165,84 @@ function setActivityPage() {
     // 66 - Tester
     // 69 - Delivery manažer
 
-    // Předvyplníme automaticky zvolenou roli do radio buttonu
-    const $roleRadio = document.getElementById("radio-timeentry-time_entry-63");
-    if ($roleRadio) {
-        $roleRadio.checked = true;
+    // 103 - René
+    if (userId === 103) {
+        return 63;
+    }
+
+    // 105 - Martin
+    if (userId === 105) {
+        return 66;
+    }
+
+    return null;
+}
+
+/**
+ * Funkce na základě uživatele a role vrátí default aktivitu
+ * @param {number} roleId Id role, pro kterou budeme vracet výchozí aktivitu
+ */
+function getDefaultActivity(roleId) {
+    // Dostupné aktivity:
+    // ------------------
+    // Analýza
+    // Administrace
+    // Dokumentace
+    // Meeting
+    // Nacenění
+    // Nasazení
+    // Projektové řízení
+    // Řešení chyby
+    // Testování
+    // Vývoj
+    // Vzdělávání
+    // Dovolená
+
+    // 60 - Administrátor
+    if (roleId === 60) {
+        return "Administrace"
+    }
+
+    // 61 - Byznys analytik
+    if (roleId === 61) {
+        return "Analýza"
+    }
+
+    // 63 - Programátor
+    if (roleId === 63) {
+        return "Vývoj"
+    }
+
+    // 64 - Analytik
+    if (roleId === 64) {
+        return "Analýza"
+    }
+
+    // 65 - Produktový manažer
+    if (roleId === 65) {
+        return "Projektové řízení"
+    }
+
+    // 66 - Tester
+    if (roleId === 66) {
+        return "Testování"
+    }
+
+    // 69 - Delivery manažer
+    if (roleId === 69) {
+        return "Nasazení"
+    }
+
+    return null;
+}
+
+/**
+ * Vygenerování rychlých buttonků k nastavení aktivit
+ */
+function generateQuickActivities() {
+    const $activityCombo = $("#time_entry_custom_field_values_90_");
+    if (!$activityCombo) {
+        return;
     }
 
     // <select name="time_entry[custom_field_values][90]" class="list_cf" id="time_entry_custom_field_values_90_" >
@@ -1118,36 +1261,29 @@ function setActivityPage() {
     //     <option value="Dovolená">Dovolená</option>
     // </select>;
 
-    // Doplníme buttony na předvolení aktivit vedle komba
-    const $activityCombo = $("#time_entry_custom_field_values_90_");
-    if ($activityCombo) {
-        // 3 - Řešení chyby
-        $activityCombo.after(
-            '<button type="button" class="cf_90-set-reseni-chyby button-positive">Řešení chyby</button>'
-        );
-        $(document).on("click", ".cf_90-set-reseni-chyby", function() {
-            $activityCombo.val("Řešení chyby");
-        });
+    // 3 - Řešení chyby
+    $activityCombo.after(
+        '<button type="button" class="cf_90-set-reseni-chyby button-positive">Řešení chyby</button>'
+    );
+    $(document).on("click", ".cf_90-set-reseni-chyby", function() {
+        $activityCombo.val("Řešení chyby");
+    });
 
-        // 2 - Vývoj
-        $activityCombo.after(
-            '<button type="button" class="cf_90-set-vyvoj button-positive">Vývoj</button>'
-        );
-        $(document).on("click", ".cf_90-set-vyvoj", function() {
-            $activityCombo.val("Vývoj");
-        });
-
-        // 1 - Analýza
-        $activityCombo.after(
-            '<button type="button" class="cf_90-set-analyza button-positive">Analýza</button>'
-        );
-        $(document).on("click", ".cf_90-set-analyza", function() {
-            $activityCombo.val("Analýza");
-        });
-
-        // Předvyplníme automaticky zvolenou aktibitu
+    // 2 - Vývoj
+    $activityCombo.after(
+        '<button type="button" class="cf_90-set-vyvoj button-positive">Vývoj</button>'
+    );
+    $(document).on("click", ".cf_90-set-vyvoj", function() {
         $activityCombo.val("Vývoj");
-    }
+    });
+
+    // 1 - Analýza
+    $activityCombo.after(
+        '<button type="button" class="cf_90-set-analyza button-positive">Analýza</button>'
+    );
+    $(document).on("click", ".cf_90-set-analyza", function() {
+        $activityCombo.val("Analýza");
+    });
 }
 
 /**

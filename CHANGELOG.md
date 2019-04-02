@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.3.0...v1.4.0) (2019-04-02)
+
+
+### Bug Fixes
+
+* null reference u zobrazení "předepsané doby" ([4cf2ea9](https://github.com/RaptorCZ/enhanced-easy-project/commit/4cf2ea9))
+
+
+### Features
+
+* nastavení role a aktivity dle uživatele ([a995afd](https://github.com/RaptorCZ/enhanced-easy-project/commit/a995afd))
+
+
+
 # [1.3.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.2.0...v1.3.0) (2019-04-01)
 
 
