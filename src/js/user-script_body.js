@@ -55,7 +55,12 @@ function modGantt() {
 function fixEmptyEstimatedHours() {
     // Zpozdíme, počkáme na načtení dat
     setTimeout(function() {
-        $("[data-name='issue[estimated_hours]'] > span").each(function(
+        const $elements = $("[data-name='issue[estimated_hours]'] > span");
+        if (!$elements) {
+            return;
+        }
+
+        $elements.each(function(
             index,
             value
         ) {
