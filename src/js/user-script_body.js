@@ -492,7 +492,7 @@ function showTimeline() {
     // Vygenerujeme DIV, kam se vloží Timeline, pokud ještě neexistuje
     var container = document.getElementById("visualization-timeline");
     if (container == null) {
-        $("#tab5-list-top-middle").before(
+        $("#tab6-list-top-middle").before(
             '<div id="visualization-timeline"></div>'
         );
         container = document.getElementById("visualization-timeline");
