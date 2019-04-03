@@ -482,7 +482,7 @@ function getTodaysTimeEntries() {
  */
 function showTimeline() {
     // Budeme zobrazovat jen na stránce "Moje výkazy"
-    var testUrl = window.location.href.search("[?&]t=5") != -1;
+    var testUrl = window.location.href.search("[?&]t=6") != -1;
 
     //if(window.location != "https://creasoft.easyproject.cz/?t=5") {
     if (!testUrl) {
