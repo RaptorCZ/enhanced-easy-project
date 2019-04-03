@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.4.0
+// @version      1.5.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -767,7 +767,7 @@ function getTodaysTimeEntries() {
  */
 function showTimeline() {
     // Budeme zobrazovat jen na stránce "Moje výkazy"
-    var testUrl = window.location.href.search("[?&]t=5") != -1;
+    var testUrl = window.location.href.search("[?&]t=6") != -1;
 
     //if(window.location != "https://creasoft.easyproject.cz/?t=5") {
     if (!testUrl) {
@@ -777,7 +777,7 @@ function showTimeline() {
     // Vygenerujeme DIV, kam se vloží Timeline, pokud ještě neexistuje
     var container = document.getElementById("visualization-timeline");
     if (container == null) {
-        $("#tab5-list-top-middle").before(
+        $("#tab6-list-top-middle").before(
             '<div id="visualization-timeline"></div>'
         );
         container = document.getElementById("visualization-timeline");

@@ -1,3 +1,18 @@
+# [1.5.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.4.0...v1.5.0) (2019-04-03)
+
+
+### Bug Fixes
+
+* přesun timeline na stranu 6 (Moje výkazy) ([e107e44](https://github.com/RaptorCZ/enhanced-easy-project/commit/e107e44))
+* timeline container ([d1d16b5](https://github.com/RaptorCZ/enhanced-easy-project/commit/d1d16b5))
+
+
+### Features
+
+* calendar dark theme ([790e161](https://github.com/RaptorCZ/enhanced-easy-project/commit/790e161))
+
+
+
 # [1.4.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.3.0...v1.4.0) (2019-04-02)
 
 

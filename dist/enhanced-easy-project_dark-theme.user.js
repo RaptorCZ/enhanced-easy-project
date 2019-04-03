@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.4.0
+// @version      1.5.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -541,11 +541,37 @@ table.list tr.group td.group-name > :nth-child(3) {
   display: none;
 }
 /**
- * Kalendáře a 'today'
+ * Kalendáře
  */
-.fc-state-highlight,
+div.easy-attendance {
+  border: 1px solid #38444d;
+}
+div.easy-attendance-calendar-item > a {
+  text-align: left;
+  color: #fff !important;
+}
+div.easy-calendar table td {
+  background: #1c2938;
+}
+div.easy-calendar table td.odd,
+div.easy-calendar table td.weekend {
+  background: #10171e;
+}
+div.easy-calendar table td.week-number,
+div.easy-calendar table td.day-number,
+div.easy-calendar table td.month-number,
+div.easy-calendar table td.week-total {
+  background: #10171e;
+  border-right: 1px solid #38444d !important;
+}
+div.easy-calendar table {
+  border-bottom: 1px solid #38444d;
+}
+div.easy-calendar table tbody td + td {
+  border-left: 1px solid #38444d;
+}
 div.easy-calendar table td.today {
-  background: repeating-linear-gradient(45deg, #d7f2fa, #d7f2fa 1px, #fff 1px, #fff 2px);
+  background: #15202b;
 }
 /**
  * Odpracovaný čas
@@ -1499,7 +1525,7 @@ function getTodaysTimeEntries() {
  */
 function showTimeline() {
     // Budeme zobrazovat jen na stránce "Moje výkazy"
-    var testUrl = window.location.href.search("[?&]t=5") != -1;
+    var testUrl = window.location.href.search("[?&]t=6") != -1;
 
     //if(window.location != "https://creasoft.easyproject.cz/?t=5") {
     if (!testUrl) {
@@ -1509,7 +1535,7 @@ function showTimeline() {
     // Vygenerujeme DIV, kam se vloží Timeline, pokud ještě neexistuje
     var container = document.getElementById("visualization-timeline");
     if (container == null) {
-        $("#tab5-list-top-middle").before(
+        $("#tab6-list-top-middle").before(
             '<div id="visualization-timeline"></div>'
         );
         container = document.getElementById("visualization-timeline");
