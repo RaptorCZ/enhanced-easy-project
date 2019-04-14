@@ -371,3 +371,33 @@ div.easy-attendance-calendar-item > a {
     margin-left: 0;
     margin-right: 0.8rem;
 }
+
+/**
+ * Zrušení 2 sloupců na modalu "Zápis času"
+ */
+
+// Konkrétní modal
+#bulk-time-entry-form {
+    .splitcontent {
+        display: block !important; // flex
+    }
+
+    .splitcontent > div {
+        float: none !important; // left
+        width: auto !important; // 50%
+    }
+
+    .splitcontentright > div {
+        float: none !important; // right
+        width: auto !important; // 50%
+    }
+
+    // Srovnáme šířky inputů (pro sichr jen zde na modalu zatím)
+    select,
+    input[type="text"],
+    .easy-autocomplete-tag,
+    .easy-autocomplete-tag > input,
+    .input-append {
+        max-width: 100% !important; // 23.33333rem
+    }
+}
