@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.5.0
+// @version      1.6.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -284,6 +284,27 @@ div.easy-attendance-calendar-item > a {
   margin-left: 0;
   margin-right: 0.8rem;
 }
+/**
+ * Zrušení 2 sloupců na modalu "Zápis času"
+ */
+#bulk-time-entry-form .splitcontent {
+  display: block !important;
+}
+#bulk-time-entry-form .splitcontent > div {
+  float: none !important;
+  width: auto !important;
+}
+#bulk-time-entry-form .splitcontentright > div {
+  float: none !important;
+  width: auto !important;
+}
+#bulk-time-entry-form select,
+#bulk-time-entry-form input[type="text"],
+#bulk-time-entry-form .easy-autocomplete-tag,
+#bulk-time-entry-form .easy-autocomplete-tag > input,
+#bulk-time-entry-form .input-append {
+  max-width: 100% !important;
+}
 
 `;
 
@@ -310,9 +331,6 @@ GM_addStyle(css);
     // Nastavení role a aktivity na výkazu času
     const userId = getUserInfo();
     setDefaultRoleAndActivity(userId);
-
-    // TODO
-    //setAttendancePage();
 
     // Docházka a výkazy
     prepareTodayAttendance();
@@ -555,10 +573,10 @@ function generateQuickActivities() {
 }
 
 /**
- * Nastavení popup okna s doch8zkou.
- * Předvybraná hodnota.
+ * Vytvoří nový záznam docházky ve stavu "Kancelář" a refreshne stránku
+ * Je to rychlá volba linku v headeru "Zapiš příchod"
  */
-function setAttendancePage() {
+function setAttendance() {
     // <option value="1">Kancelář</option>
     // <option value="6">Práce mimo kancelář</option>
     // <option value="2">Home office</option>
@@ -566,13 +584,18 @@ function setAttendancePage() {
     // <option value="4">Nemoc</option>
     // <option value="5">Lékař</option>
 
-    $("#easy_attendance_easy_attendance_activity_id").after(
-        '<button type="button" class="attendance-set-kancelar button-positive">Kancelář</button>'
-    );
+    var params = $.param({
+        "easy_attendance[easy_attendance_activity_id]" : 1,
+        "easy_attendance[arrival]": new moment().toString()
+    })
 
-    $(document).on("click", ".attendance-set-kancelar", function() {
-        $("#easy_attendance_easy_attendance_activity_id").val("1");
-    });
+    $.ajax({
+        type: "POST",
+        url: "/easy_attendances",
+        data: params,
+        contentType: "application/x-www-form-urlencoded",
+        success: window.location = window.location
+      });
 }
 
 /**
@@ -662,12 +685,11 @@ function getTodaysAttendance() {
     const returnUrl = encodeURIComponent(window.location.href);
 
     // Link na zápis
-    $todaysAttendanceLink.attr(
-        "href",
-        "/easy_attendances/arrival?&back_url=" + returnUrl
-    );
-    $todaysAttendanceLink.attr("data-remote", true);
-    $todaysAttendanceLink.html("[Zapiš příchod]");
+    $todaysAttendanceLink.click(function() {
+        setAttendance();
+    });
+
+    $todaysAttendanceLink.html("[Zapiš příchod do kanceláře]");
 
     // Stáhneme data
     $.getJSON("/easy_attendances.json", params, function(data) {

@@ -1,3 +1,13 @@
+# [1.6.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.5.0...v1.6.0) (2019-04-14)
+
+
+### Features
+
+* rychlý příchod do kanceláře (kliknutím) ([392c3b0](https://github.com/RaptorCZ/enhanced-easy-project/commit/392c3b0))
+* úprava layoutu na modalu "Zápis času" ([fbf4cd5](https://github.com/RaptorCZ/enhanced-easy-project/commit/fbf4cd5))
+
+
+
 # [1.5.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.4.0...v1.5.0) (2019-04-03)
 
 
