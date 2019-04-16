@@ -1,3 +1,12 @@
+## [1.6.1](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.0...v1.6.1) (2019-04-16)
+
+
+### Bug Fixes
+
+* oprava multikliku na zápis času ([2224f83](https://github.com/RaptorCZ/enhanced-easy-project/commit/2224f83))
+
+
+
 # [1.6.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.5.0...v1.6.0) (2019-04-14)
 
 

@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.6.0
+// @version      1.6.1
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -1442,6 +1442,9 @@ function getTodaysAttendance() {
     const $todaysAttendanceLink = $(".todays-attendance-link");
     const returnUrl = encodeURIComponent(window.location.href);
 
+    // Pro jistotu
+    $todaysAttendanceLink.off('click');
+
     // Link na zápis
     $todaysAttendanceLink.click(function() {
         setAttendance();
@@ -1476,11 +1479,16 @@ function getTodaysAttendance() {
             // Pokud není hodnota "departure" nastavena, znamená to, že je tato plložka "in progress"
             // a tedy si vezmeme její "id" a to použijeme do linku na konec
             if (!easyAttendance.departure && !displayDepartureLink) {
+
+                // Pro jistotu
+                $todaysAttendanceLink.off('click');
+
                 const departureLink =
                     "/easy_attendances/" +
                     easyAttendance.id +
                     "/departure?back_url=" +
                     returnUrl;
+
                 $todaysAttendanceLink.attr("href", departureLink);
                 $todaysAttendanceLink.removeAttr("data-remote");
                 $todaysAttendanceLink.html("[Zapiš odchod]");
