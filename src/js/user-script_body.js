@@ -378,6 +378,9 @@ function getTodaysAttendance() {
     const $todaysAttendanceLink = $(".todays-attendance-link");
     const returnUrl = encodeURIComponent(window.location.href);
 
+    // Pro jistotu
+    $todaysAttendanceLink.off('click');
+
     // Link na zápis
     $todaysAttendanceLink.click(function() {
         setAttendance();
@@ -412,11 +415,16 @@ function getTodaysAttendance() {
             // Pokud není hodnota "departure" nastavena, znamená to, že je tato plložka "in progress"
             // a tedy si vezmeme její "id" a to použijeme do linku na konec
             if (!easyAttendance.departure && !displayDepartureLink) {
+
+                // Pro jistotu
+                $todaysAttendanceLink.off('click');
+
                 const departureLink =
                     "/easy_attendances/" +
                     easyAttendance.id +
                     "/departure?back_url=" +
                     returnUrl;
+
                 $todaysAttendanceLink.attr("href", departureLink);
                 $todaysAttendanceLink.removeAttr("data-remote");
                 $todaysAttendanceLink.html("[Zapiš odchod]");
