@@ -1,3 +1,13 @@
+## [1.6.2](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.1...v1.6.2) (2019-04-17)
+
+
+### Bug Fixes
+
+* nepřepisovat již zvolené role a aktivity ([156bd3b](https://github.com/RaptorCZ/enhanced-easy-project/commit/156bd3b))
+* oprava layoutu "Editace času" ([206450d](https://github.com/RaptorCZ/enhanced-easy-project/commit/206450d))
+
+
+
 ## [1.6.1](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.0...v1.6.1) (2019-04-16)
 
 

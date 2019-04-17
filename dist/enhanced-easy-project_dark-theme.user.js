@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.6.1
+// @version      1.6.2
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -287,22 +287,22 @@ div.easy-attendance-calendar-item > a {
 /**
  * Zrušení 2 sloupců na modalu "Zápis času"
  */
-#bulk-time-entry-form .splitcontent {
+.ui-dialog #bulk-time-entry-form .splitcontent {
   display: block !important;
 }
-#bulk-time-entry-form .splitcontent > div {
+.ui-dialog #bulk-time-entry-form .splitcontent > div {
   float: none !important;
   width: auto !important;
 }
-#bulk-time-entry-form .splitcontentright > div {
+.ui-dialog #bulk-time-entry-form .splitcontentright > div {
   float: none !important;
   width: auto !important;
 }
-#bulk-time-entry-form select,
-#bulk-time-entry-form input[type="text"],
-#bulk-time-entry-form .easy-autocomplete-tag,
-#bulk-time-entry-form .easy-autocomplete-tag > input,
-#bulk-time-entry-form .input-append {
+.ui-dialog #bulk-time-entry-form select,
+.ui-dialog #bulk-time-entry-form input[type="text"],
+.ui-dialog #bulk-time-entry-form .easy-autocomplete-tag,
+.ui-dialog #bulk-time-entry-form .easy-autocomplete-tag > input,
+.ui-dialog #bulk-time-entry-form .input-append {
   max-width: 100% !important;
 }
 #easy_servicebar,
@@ -1157,9 +1157,12 @@ function setDefaultRoleAndActivity(userId) {
         return;
     }
 
+    // Radios root
+    const isAnyRadioSelected = $(".timeentry-activities:input:checked").val() !== "";
+
     // Předvyplníme automaticky zvolenou roli do radio buttonu
     const $roleRadio = document.getElementById("radio-timeentry-time_entry-" + roleToSelect);
-    if ($roleRadio) {
+    if ($roleRadio && !isAnyRadioSelected) {
         $roleRadio.checked = true;
     }
 
@@ -1187,8 +1190,10 @@ function setDefaultActivity(roleId) {
     const activityToSelect = getDefaultActivity(roleId);
     if (activityToSelect) {
 
-        // Předvyplníme automaticky zvolenou aktivitu
-        if ($activityCombo) {
+        const hasValue = activityToSelect.val() !== "";
+
+        // Předvyplníme automaticky zvolenou aktivitu, pokud není kombo naplněno
+        if ($activityCombo && !hasValue) {
             $activityCombo.val(activityToSelect);
         }
     }
