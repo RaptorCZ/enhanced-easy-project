@@ -1,3 +1,12 @@
+## [1.6.3](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.2...v1.6.3) (2019-04-17)
+
+
+### Bug Fixes
+
+* oprava fixu na nepřepisování role a aktivity ([10d1b8a](https://github.com/RaptorCZ/enhanced-easy-project/commit/10d1b8a))
+
+
+
 ## [1.6.2](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.1...v1.6.2) (2019-04-17)
 
 

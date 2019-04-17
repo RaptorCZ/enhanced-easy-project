@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.6.2
+// @version      1.6.3
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -1160,12 +1160,14 @@ function setDefaultRoleAndActivity(userId) {
     // Radios root
     const isAnyRadioSelected = $(".timeentry-activities:input:checked").val() !== "";
 
-    // Předvyplníme automaticky zvolenou roli do radio buttonu
-    const $roleRadio = document.getElementById("radio-timeentry-time_entry-" + roleToSelect);
-    if ($roleRadio && !isAnyRadioSelected) {
-        $roleRadio.checked = true;
-    }
+    if (!isAnyRadioSelected) {
 
+        // Předvyplníme automaticky zvolenou roli do radio buttonu
+        const $roleRadio = document.getElementById("radio-timeentry-time_entry-" + roleToSelect);
+        if ($roleRadio) {
+            $roleRadio.checked = true;
+        }
+    }
     // Nastavení aktivity
     setDefaultActivity(roleToSelect);
 }
@@ -1190,11 +1192,13 @@ function setDefaultActivity(roleId) {
     const activityToSelect = getDefaultActivity(roleId);
     if (activityToSelect) {
 
-        const hasValue = activityToSelect.val() !== "";
-
         // Předvyplníme automaticky zvolenou aktivitu, pokud není kombo naplněno
-        if ($activityCombo && !hasValue) {
-            $activityCombo.val(activityToSelect);
+        if ($activityCombo) {
+            const hasValue = $activityCombo.val() !== "";
+
+            if (!hasValue) {
+                $activityCombo.val(activityToSelect);
+            }
         }
     }
 }
