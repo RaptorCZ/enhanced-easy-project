@@ -93,9 +93,12 @@ function setDefaultRoleAndActivity(userId) {
         return;
     }
 
+    // Radios root
+    const isAnyRadioSelected = $(".timeentry-activities:input:checked").val() !== "";
+
     // Předvyplníme automaticky zvolenou roli do radio buttonu
     const $roleRadio = document.getElementById("radio-timeentry-time_entry-" + roleToSelect);
-    if ($roleRadio) {
+    if ($roleRadio && !isAnyRadioSelected) {
         $roleRadio.checked = true;
     }
 
@@ -123,8 +126,10 @@ function setDefaultActivity(roleId) {
     const activityToSelect = getDefaultActivity(roleId);
     if (activityToSelect) {
 
-        // Předvyplníme automaticky zvolenou aktivitu
-        if ($activityCombo) {
+        const hasValue = activityToSelect.val() !== "";
+
+        // Předvyplníme automaticky zvolenou aktivitu, pokud není kombo naplněno
+        if ($activityCombo && !hasValue) {
             $activityCombo.val(activityToSelect);
         }
     }
