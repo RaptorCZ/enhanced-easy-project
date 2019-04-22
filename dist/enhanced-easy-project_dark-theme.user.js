@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.6.3
+// @version      1.6.4
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -427,7 +427,7 @@ table.list .group > td.inline_expander {
 }
 #easy_grid_sidebar_inner > .primary-actions .button-positive.button-outlined,
 #sidebar_inner > .primary-actions .button-positive.button-outlined {
-  background-color: transparent !important;
+  background-color: #10171e !important;
 }
 #easy_servicebar_component_body .servicebar-actions {
   background: #15202b;
@@ -1158,8 +1158,7 @@ function setDefaultRoleAndActivity(userId) {
     }
 
     // Radios root
-    const isAnyRadioSelected = $(".timeentry-activities:input:checked").val() !== "";
-
+    const isAnyRadioSelected = $(".timeentry-activities:input:checked").length !== 0;
     if (!isAnyRadioSelected) {
 
         // Předvyplníme automaticky zvolenou roli do radio buttonu

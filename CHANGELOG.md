@@ -1,3 +1,13 @@
+## [1.6.4](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.3...v1.6.4) (2019-04-22)
+
+
+### Bug Fixes
+
+* pozadí sidebar tlačítek ([7728a1f](https://github.com/RaptorCZ/enhanced-easy-project/commit/7728a1f))
+* test, zda je již zvolena role, aby se nepřepsala ([2390237](https://github.com/RaptorCZ/enhanced-easy-project/commit/2390237))
+
+
+
 ## [1.6.3](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.2...v1.6.3) (2019-04-17)
 
 

@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.6.3
+// @version      1.6.4
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -400,8 +400,7 @@ function setDefaultRoleAndActivity(userId) {
     }
 
     // Radios root
-    const isAnyRadioSelected = $(".timeentry-activities:input:checked").val() !== "";
-
+    const isAnyRadioSelected = $(".timeentry-activities:input:checked").length !== 0;
     if (!isAnyRadioSelected) {
 
         // Předvyplníme automaticky zvolenou roli do radio buttonu
