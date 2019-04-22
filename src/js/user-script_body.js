@@ -94,8 +94,7 @@ function setDefaultRoleAndActivity(userId) {
     }
 
     // Radios root
-    const isAnyRadioSelected = $(".timeentry-activities:input:checked").val() !== "";
-
+    const isAnyRadioSelected = $(".timeentry-activities:input:checked").length !== 0;
     if (!isAnyRadioSelected) {
 
         // Předvyplníme automaticky zvolenou roli do radio buttonu
