@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.6.4
+// @version      1.7.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -595,6 +595,27 @@ div.easy-calendar table td.today {
   background: #15202b;
 }
 /**
+ * Kalendář (popup dialog)
+ */
+.ui-datepicker .ui-widget-header {
+  background: #1c2938;
+  border-color: #38444d;
+}
+.ui-datepicker .ui-datepicker-week-col {
+  background: #1c2938;
+}
+.ui-datepicker .ui-state-default,
+.ui-datepicker .ui-widget-content .ui-state-default,
+.ui-datepicker .ui-widget-header .ui-state-default {
+  color: #8899a6;
+}
+.ui-datepicker tbody .ui-datepicker-week-col {
+  border-right: 1px solid #38444d !important;
+}
+.ui-datepicker .ui-datepicker-calendar thead tr {
+  border-bottom: 1px solid #38444d !important;
+}
+/**
  * Odpracovaný čas
  */
 .time-entries .odd,
@@ -969,6 +990,90 @@ table.list th.author .avatar-container + span a {
  */
 .easy-issue-timers-item {
   border: 1px solid #38444d !important;
+}
+/**
+ * Tooltipy
+ */
+.journal-tools .menu-more ul li > .menu-children,
+.message-tools .menu-more ul li > .menu-children,
+.menu--tooltip ul li > .menu-children,
+.button-group .menu-more ul li > .menu-children,
+#context-menu ul li > .menu-children,
+.main_menu__settings ul li > .menu-children,
+.main_menu__more ul li > .menu-children,
+#top-menu-container > ul > li ul li > .menu-children,
+#top-menu-rich-more .top-menu-rich-more-item > li:hover ul li > .menu-children,
+#top-menu-rich-more .top-menu-rich-more-item > li.open ul li > .menu-children,
+.menu-user-profile > li ul li > .menu-children,
+.easy-gantt__menu-group--tooltiped ul li > .menu-children,
+#top-menu-rich-more .top-menu-rich-more-item > li > ul.menu-children,
+.journal-tools > a > .tooltip,
+.message-tools > a > .tooltip,
+.list-item-actions a > .tooltip,
+table.list .easy-query-additional-ending-buttons a > .tooltip,
+table.list .easy-query-additional-ending-buttons > span > .tooltip,
+table.list .easy-additional-ending-buttons a > .tooltip,
+table.list .easy-additional-ending-buttons > span > .tooltip,
+legend a.icon > .tooltip,
+.input-append > a > .tooltip,
+.box .module-heading-links a > .tooltip,
+.easy-query-heading-controls a > .tooltip,
+.tooltip-left > .tooltip,
+.easy-entity-details .easy-contextual a > .tooltip,
+.easy-entity-card-actions a > .tooltip,
+.row-control > .expander > .tooltip,
+.row-control > .expander-root > .tooltip,
+.row-control > .expander-descendant > .tooltip,
+div.easy-calendar table td .day-num > .tooltip,
+div > .fc-grid .fc-day-number > .tooltip,
+.easy-query-heading-wrapper > .tooltip,
+.tooltip-bottom > .tooltip,
+.tooltip-parent > .tooltip,
+.agile__col-sort > .tooltip,
+#invited_colleague_change_user_type_modal .icon-help-bubble > .tooltip,
+.journal-tools .menu-more ul,
+.message-tools .menu-more ul,
+.menu--tooltip ul,
+.button-group .menu-more ul,
+#context-menu ul,
+.main_menu__settings ul,
+.main_menu__more ul,
+#top-menu-container > ul > li ul,
+#top-menu-rich-more .top-menu-rich-more-item > li:hover ul,
+#top-menu-rich-more .top-menu-rich-more-item > li.open ul,
+.menu-user-profile > li ul,
+.easy-gantt__menu-group--tooltiped ul,
+table.list td.assigned_to .avatar-container + span,
+table.list td.author .avatar-container + span,
+table.list th.assigned_to .avatar-container + span,
+table.list th.author .avatar-container + span,
+.tooltip-content,
+[aria-describedby="invited_colleague_onboard_modal"] .tooltip {
+  color: #8899a6;
+}
+/**
+ * Buttony na konci řádku v gridu
+ */
+table.list td.easy-query-additional-ending-buttons .ending-buttons-fixed,
+table.list td.easy-additional-ending-buttons .ending-buttons-fixed,
+table.list th.easy-query-additional-ending-buttons .ending-buttons-fixed,
+table.list th.easy-additional-ending-buttons .ending-buttons-fixed {
+  background: #1c2938;
+  padding: 0 0.4rem;
+}
+table.list td.easy-query-additional-ending-buttons .ending-buttons-fixed .toggle-favorite:hover:before,
+table.list td.easy-additional-ending-buttons .ending-buttons-fixed .toggle-favorite:hover:before,
+table.list th.easy-query-additional-ending-buttons .ending-buttons-fixed .toggle-favorite:hover:before,
+table.list th.easy-additional-ending-buttons .ending-buttons-fixed .toggle-favorite:hover:before {
+  background: #10171e !important;
+}
+/**
+ * Filtry (z menu nad moduly)
+ */
+#filters,
+#filters_settings {
+  background-color: #1c2938;
+  margin: 0;
 }
 /**
  * Danger theme

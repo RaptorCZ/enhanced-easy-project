@@ -1,3 +1,16 @@
+# [1.7.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.4...v1.7.0) (2019-04-23)
+
+
+### Features
+
+* filtry ([eaed316](https://github.com/RaptorCZ/enhanced-easy-project/commit/eaed316))
+* filtry/nastavení ([4c1916c](https://github.com/RaptorCZ/enhanced-easy-project/commit/4c1916c))
+* grid a ending buttons ([39a1683](https://github.com/RaptorCZ/enhanced-easy-project/commit/39a1683))
+* nastylování popup kalendáře ([d23a316](https://github.com/RaptorCZ/enhanced-easy-project/commit/d23a316))
+* tooltipy ([755f8a0](https://github.com/RaptorCZ/enhanced-easy-project/commit/755f8a0))
+
+
+
 ## [1.6.4](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.3...v1.6.4) (2019-04-22)
 
 
