@@ -916,3 +916,21 @@ table.list th.author .avatar-container + span,
 [aria-describedby="invited_colleague_onboard_modal"] .tooltip {
     color: @text-tw-dark;
 }
+
+/**
+ * Buttony na konci řádku v gridu
+ */
+table.list td.easy-query-additional-ending-buttons .ending-buttons-fixed,
+table.list td.easy-additional-ending-buttons .ending-buttons-fixed,
+table.list th.easy-query-additional-ending-buttons .ending-buttons-fixed,
+table.list th.easy-additional-ending-buttons .ending-buttons-fixed {
+    background: @primary-light-bg;
+    padding: 0 0.4rem;
+}
+
+table.list td.easy-query-additional-ending-buttons .ending-buttons-fixed .toggle-favorite:hover:before,
+table.list td.easy-additional-ending-buttons .ending-buttons-fixed .toggle-favorite:hover:before,
+table.list th.easy-query-additional-ending-buttons .ending-buttons-fixed .toggle-favorite:hover:before,
+table.list th.easy-additional-ending-buttons .ending-buttons-fixed .toggle-favorite:hover:before {
+    background: @primary-dark-bg !important;
+}
