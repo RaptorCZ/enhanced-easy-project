@@ -356,7 +356,6 @@ div.easy-attendance-calendar-item > a {
     color: @text-tw !important;
 }
 
-
 div.easy-calendar table td {
     background: @primary-light-bg;
 }
@@ -390,6 +389,35 @@ div.easy-calendar table tbody td + td {
 // today
 div.easy-calendar table td.today {
     background: @primary-bg;
+}
+
+/**
+ * Kalendář (popup dialog)
+ */
+.ui-datepicker {
+    .ui-widget-header {
+        background: @primary-light-bg;
+        border-color: @border-color;
+    }
+
+    // První sloupec s čísly týdnů
+    .ui-datepicker-week-col {
+        background: @primary-light-bg;
+    }
+
+    .ui-state-default,
+    .ui-widget-content .ui-state-default,
+    .ui-widget-header .ui-state-default {
+        color: @text-tw-dark;
+    }
+
+    tbody .ui-datepicker-week-col {
+        border-right: 1px solid @border-color !important;
+    }
+
+    .ui-datepicker-calendar thead tr {
+        border-bottom: 1px solid @border-color !important;
+    }
 }
 
 /**
