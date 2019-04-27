@@ -401,3 +401,19 @@ div.easy-attendance-calendar-item > a {
         max-width: 100% !important; // 23.33333rem
     }
 }
+
+/**
+ * Buttonky "filtrů" nahoře nad gridy
+ */
+
+// Oprava paddingu, když tam není ikonka
+.entity-array > a[class*="icon"],
+.entity-array > span[class*="icon"] {
+    // default bude 0.3
+    padding-left: 0.3rem !important;
+}
+.entity-array > a[class*="icon-"],
+.entity-array > span[class*="icon-"] {
+    // aplikujeme jen na položky s ikonama
+    padding-left: 1.6rem !important;
+}
