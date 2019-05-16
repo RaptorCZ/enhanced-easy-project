@@ -1,3 +1,20 @@
+# [1.8.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.7.0...v1.8.0) (2019-05-16)
+
+
+### Bug Fixes
+
+* zrušení gradientu pravého sidebaru ([fc3af94](https://github.com/RaptorCZ/enhanced-easy-project/commit/fc3af94))
+
+
+### Features
+
+* odstranění úpravy pro původní sticky header ([e42843c](https://github.com/RaptorCZ/enhanced-easy-project/commit/e42843c))
+* redesign filtrů a tlačítek na pravém sidebaru ([55c7865](https://github.com/RaptorCZ/enhanced-easy-project/commit/55c7865))
+* schování toolbaru s tlačítkem "zobrazit vše" pod moduly ([5be43d7](https://github.com/RaptorCZ/enhanced-easy-project/commit/5be43d7))
+* tlačítka filtrů - barva, odsazení textu ([e0da5d8](https://github.com/RaptorCZ/enhanced-easy-project/commit/e0da5d8))
+
+
+
 # [1.7.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.6.4...v1.7.0) (2019-04-23)
 
 

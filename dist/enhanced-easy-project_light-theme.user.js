@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.7.0
+// @version      1.8.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -25,21 +25,6 @@ Changelog:
 */
 
 var css = `
-/**
- * Page header
- */
-#top-menu {
-  position: fixed !important;
-}
-#easy_page_tabs {
-  margin-top: 5rem !important;
-}
-#header {
-  padding-top: 5.5rem !important;
-}
-.easy-content-page {
-  margin-top: 4rem !important;
-}
 /**
  * Odstranění znaku stromového zobrazení v gridech a samotných odsazení
  */
@@ -69,6 +54,12 @@ table:not(#projects_table) [class*="idnt-"] th.subject {
 }
 .box .module-heading-links {
   padding: 0;
+}
+/**
+ * Toolbar pod modulem
+ */
+.module-content .toolbar {
+  display: none;
 }
 /**
  * Gridy jako takové
@@ -304,6 +295,34 @@ div.easy-attendance-calendar-item > a {
 .ui-dialog #bulk-time-entry-form .easy-autocomplete-tag > input,
 .ui-dialog #bulk-time-entry-form .input-append {
   max-width: 100% !important;
+}
+/**
+ * Buttonky "filtrů" nahoře nad gridy
+ */
+.entity-array > a[class*="icon"],
+.entity-array > span[class*="icon"] {
+  padding-left: 0.3rem !important;
+}
+.entity-array > a[class*="icon-"],
+.entity-array > span[class*="icon-"] {
+  padding-left: 1.6rem !important;
+}
+/**
+ * Sidebar a filtry + uživatelé
+ */
+#sidebar .box .module-heading {
+  padding-right: 1.5rem;
+}
+#sidebar .box .expander.module-toggler {
+  right: 0.5rem;
+}
+#sidebar_content .module-content {
+  padding-right: 1.6rem;
+}
+#sidebar_content #user-query-automatic-filter a,
+#sidebar_content .saved-queries a {
+  float: none;
+  width: 100%;
 }
 
 `;
