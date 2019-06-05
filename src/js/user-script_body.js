@@ -57,10 +57,7 @@ function fixEmptyEstimatedHours() {
             return;
         }
 
-        $elements.each(function(
-            index,
-            value
-        ) {
+        $elements.each(function(index, value) {
             var $value = $(value);
             if ($value.text() === "0 hodin") {
                 $value.text("---");
@@ -79,10 +76,9 @@ function getUserInfo() {
 
 /**
  * Nastavení stránky s výkazem času - Předvolení role
-  * @param {number} userId Id uživatele, pro kterého chceme nastavit výchozí roli
+ * @param {number} userId Id uživatele, pro kterého chceme nastavit výchozí roli
  */
 function setDefaultRoleAndActivity(userId) {
-
     if (!userId) {
         return;
     }
@@ -94,11 +90,13 @@ function setDefaultRoleAndActivity(userId) {
     }
 
     // Radios root
-    const isAnyRadioSelected = $(".timeentry-activities:input:checked").length !== 0;
+    const isAnyRadioSelected =
+        $(".timeentry-activities:input:checked").length !== 0;
     if (!isAnyRadioSelected) {
-
         // Předvyplníme automaticky zvolenou roli do radio buttonu
-        const $roleRadio = document.getElementById("radio-timeentry-time_entry-" + roleToSelect);
+        const $roleRadio = document.getElementById(
+            "radio-timeentry-time_entry-" + roleToSelect
+        );
         if ($roleRadio) {
             $roleRadio.checked = true;
         }
@@ -112,7 +110,6 @@ function setDefaultRoleAndActivity(userId) {
  * @param {number} roleId Id role, pro kterou budeme vracet výchozí aktivitu
  */
 function setDefaultActivity(roleId) {
-
     if (!roleId) {
         return;
     }
@@ -126,7 +123,6 @@ function setDefaultActivity(roleId) {
     // Zjistíme výchozí aktivitu pro uživatele
     const activityToSelect = getDefaultActivity(roleId);
     if (activityToSelect) {
-
         // Předvyplníme automaticky zvolenou aktivitu, pokud není kombo naplněno
         if ($activityCombo) {
             const hasValue = $activityCombo.val() !== "";
@@ -188,37 +184,37 @@ function getDefaultActivity(roleId) {
 
     // 60 - Administrátor
     if (roleId === 60) {
-        return "Administrace"
+        return "Administrace";
     }
 
     // 61 - Byznys analytik
     if (roleId === 61) {
-        return "Analýza"
+        return "Analýza";
     }
 
     // 63 - Programátor
     if (roleId === 63) {
-        return "Vývoj"
+        return "Vývoj";
     }
 
     // 64 - Analytik
     if (roleId === 64) {
-        return "Analýza"
+        return "Analýza";
     }
 
     // 65 - Produktový manažer
     if (roleId === 65) {
-        return "Projektové řízení"
+        return "Projektové řízení";
     }
 
     // 66 - Tester
     if (roleId === 66) {
-        return "Testování"
+        return "Testování";
     }
 
     // 69 - Delivery manažer
     if (roleId === 69) {
-        return "Nasazení"
+        return "Nasazení";
     }
 
     return null;
@@ -287,17 +283,17 @@ function setAttendance() {
     // <option value="5">Lékař</option>
 
     var params = $.param({
-        "easy_attendance[easy_attendance_activity_id]" : 1,
+        "easy_attendance[easy_attendance_activity_id]": 1,
         "easy_attendance[arrival]": new moment().toString()
-    })
+    });
 
     $.ajax({
         type: "POST",
         url: "/easy_attendances",
         data: params,
         contentType: "application/x-www-form-urlencoded",
-        success: window.location = window.location
-      });
+        success: (window.location = window.location)
+    });
 }
 
 /**
@@ -387,7 +383,7 @@ function getTodaysAttendance() {
     const returnUrl = encodeURIComponent(window.location.href);
 
     // Pro jistotu
-    $todaysAttendanceLink.off('click');
+    $todaysAttendanceLink.off("click");
 
     // Link na zápis
     $todaysAttendanceLink.click(function() {
@@ -423,9 +419,8 @@ function getTodaysAttendance() {
             // Pokud není hodnota "departure" nastavena, znamená to, že je tato plložka "in progress"
             // a tedy si vezmeme její "id" a to použijeme do linku na konec
             if (!easyAttendance.departure && !displayDepartureLink) {
-
                 // Pro jistotu
-                $todaysAttendanceLink.off('click');
+                $todaysAttendanceLink.off("click");
 
                 const departureLink =
                     "/easy_attendances/" +
@@ -515,82 +510,31 @@ function showTimeline() {
         container = document.getElementById("visualization-timeline");
     }
 
-    // -------------------------------------------------------
-    // Todays Attendance
-    // -------------------------------------------------------
-
-    // -------------------------------------------------------
-    // Time Entries
-    // -------------------------------------------------------
-
-    // Natáhneme data
-    const params = {
+    // Parametry pro queries
+    const timeEntriesParams = {
         spent_on: "today"
     };
 
-    $.getJSON("/time_entries.json", params, function(data) {
-        // Žádný záznam - konec
-        if (data.time_entries.length === 0) {
-            return;
+    const todaysAttendanceParams = {
+        arrival: "today"
+    };
+
+    // Natáhneme data
+    $.when(
+        $.getJSON("/easy_attendances.json", todaysAttendanceParams),
+        $.getJSON("/time_entries.json", timeEntriesParams)
+    ).done(function(todaysAttendance, timeEntries) {
+        var todaysAttendanceData = generateTodaysAttendanceVisData(todaysAttendance);
+        var timeEntriesData = generateTimeEntriesVisData(timeEntries);
+
+        var visData = [];
+        if (timeEntriesData.length > 0) {
+            visData = visData.concat(timeEntriesData);
         }
 
-        //  {id: 4, content: 'item 4', start: '2013-04-16', end: '2013-04-19'},
-        var visData = $.map(data.time_entries, function(timeEntry, index) {
-            var item = {};
-
-            // V datech jsou hodiny jako desetinné číslo
-            var hours = timeEntry.hours;
-
-            // Převedeme je na minuty
-            var minutes = 60 * Number(hours);
-
-            // Pro tooltip p5evedeme na formát hh:mm
-            var timeString = getHoursAndMinutesFromSeconds(minutes * 60);
-
-            // Datum vytvoření odpovídá konci času
-            var end = new Date(timeEntry.created_on);
-            var start = moment(end)
-                .subtract(minutes, "m")
-                .toDate();
-
-            // texty k zobrazení
-            // TODO: Issue text, bug/issue icon, project link
-
-            // text do buňky (rozhodujeme zda link je na projekt, nebo na issue)
-            var text = timeEntry.custom_fields[0].value;
-            if (timeEntry.issue) {
-                text =
-                    "<a href='/issues/" +
-                    timeEntry.issue.id +
-                    "' >" +
-                    timeEntry.custom_fields[0].value +
-                    "</a>";
-            }
-
-            // tooltip
-            var tooltip =
-                "<span><strong>Projekt: </strong>" +
-                timeEntry.project.name +
-                "</span><br />" +
-                "<span><strong>Od-do: </strong>" +
-                moment(start).format("HH:mm:ss") +
-                " - " +
-                moment(end).format("HH:mm:ss") +
-                " [" +
-                timeString +
-                "]</span><br />" +
-                "<span><strong>Aktivita: </strong>" +
-                timeEntry.custom_fields[0].value +
-                "</span>";
-
-            item.id = timeEntry.id;
-            item.content = text;
-            item.title = tooltip;
-            item.start = start;
-            item.end = end;
-
-            return item;
-        });
+        if (todaysAttendanceData.length > 0) {
+            visData = visData.concat(todaysAttendanceData);
+        }
 
         // Create a DataSet (allows two way data-binding)
         var items = new vis.DataSet(visData);
@@ -598,18 +542,107 @@ function showTimeline() {
         // Configuration for the Timeline
         var options = {
             locale: "cs",
-            start: moment()
-                .startOf("day")
-                .toDate()
-                .setHours(6),
-            end: moment()
-                .startOf("day")
-                .toDate()
-                .setHours(18),
             zoomable: false
         };
 
+        var groups = new vis.DataSet([
+            {id: 1, content: 'Docházka'},
+            {id: 2, content: 'Výkazy'}
+          ]);
+
         // Create a Timeline
-        var timeline = new vis.Timeline(container, items, options);
-    }); // getJSON
+        var timeline = new vis.Timeline(container, items, groups, options);
+    });
+}
+
+/**
+ * Transformuje Today Attendance na data pro zobrazení v grafu
+ */
+function generateTodaysAttendanceVisData(data) {
+    var visData = $.map(data[0].easy_attendances, function(todayAttendance, index) {
+        var item = {};
+
+        // Pro každý interval spočteme sekundy
+        const start = todayAttendance.arrival;
+        const end = todayAttendance.departure || new moment();
+
+        item.id = todayAttendance.id;
+        item.content = todayAttendance.easy_attendance_activity.name;
+        //item.title = tooltip;
+        item.type = "background";
+        //item.className = "negative";
+        item.start = start;
+        item.end = end;
+        item.group = 1;
+
+        return item;
+    });
+
+    return visData;
+}
+
+/**
+ * Transformuje Time Entries na data pro zobrazení v grafu
+ */
+function generateTimeEntriesVisData(data) {
+    //  {id: 4, content: 'item 4', start: '2013-04-16', end: '2013-04-19'},
+    var visData = $.map(data[0].time_entries, function(timeEntry, index) {
+        var item = {};
+
+        // V datech jsou hodiny jako desetinné číslo
+        var hours = timeEntry.hours;
+
+        // Převedeme je na minuty
+        var minutes = 60 * Number(hours);
+
+        // Pro tooltip převedeme na formát hh:mm
+        var timeString = getHoursAndMinutesFromSeconds(minutes * 60);
+
+        // Datum vytvoření odpovídá konci času
+        var end = new Date(timeEntry.created_on);
+        var start = moment(end)
+            .subtract(minutes, "m")
+            .toDate();
+
+        // texty k zobrazení
+        // TODO: Issue text, bug/issue icon, project link
+
+        // text do buňky (rozhodujeme zda link je na projekt, nebo na issue)
+        var text = timeEntry.custom_fields[0].value;
+        if (timeEntry.issue) {
+            text =
+                "<a href='/issues/" +
+                timeEntry.issue.id +
+                "' >" +
+                timeEntry.custom_fields[0].value +
+                "</a>";
+        }
+
+        // tooltip
+        var tooltip =
+            "<span><strong>Projekt: </strong>" +
+            timeEntry.project.name +
+            "</span><br />" +
+            "<span><strong>Od-do: </strong>" +
+            moment(start).format("HH:mm:ss") +
+            " - " +
+            moment(end).format("HH:mm:ss") +
+            " [" +
+            timeString +
+            "]</span><br />" +
+            "<span><strong>Aktivita: </strong>" +
+            timeEntry.custom_fields[0].value +
+            "</span>";
+
+        item.id = timeEntry.id;
+        item.content = text;
+        item.title = tooltip;
+        item.start = start;
+        item.end = end;
+        item.group = 2;
+
+        return item;
+    });
+
+    return visData;
 }
