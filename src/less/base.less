@@ -431,3 +431,45 @@ div.easy-attendance-calendar-item > a {
         width: 100%;
     }
 }
+
+/**
+ * Kanban/Scrum board (Agile)
+ */
+
+ // Sloupce nastavíme širší - content má 2*side col a prostředek
+.agile__col--side,
+.agile__swimline .agile__col {
+    min-width: 300px !important;
+}
+
+.agile__main-col {
+    min-width: auto;
+}
+
+// Trošku větší hack - připraveno pro 9 sloupců
+.agile {
+    overflow-x: scroll;
+}
+
+// Prostřední col nechceme scrollovat
+.agile__col:not(.agile__col--side) .agile__col:not(.agile__sticky-lane) {
+    overflow-x: unset !important;
+}
+
+// Neumím předělat tento plugin, aby sticky columns fungovaly v overflow
+.stickyClones {
+    display: none;
+}
+
+/**
+ * EasyTooltip
+ */
+ .easy-tooltip {
+    .issue-card {
+        max-width: 400px; // původně 300px
+    }
+
+    .issue-card__label {
+        min-width: 130px;
+    }
+ }
