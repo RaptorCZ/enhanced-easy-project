@@ -1,3 +1,13 @@
+# [1.9.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.8.0...v1.9.0) (2019-07-07)
+
+
+### Features
+
+* redesign kanban/scrum boardu a tooltipu ([db8f61e](https://github.com/RaptorCZ/enhanced-easy-project/commit/db8f61e))
+* zobrazování docházky v timeline ([f73323d](https://github.com/RaptorCZ/enhanced-easy-project/commit/f73323d))
+
+
+
 # [1.8.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.7.0...v1.8.0) (2019-05-16)
 
 
