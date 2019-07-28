@@ -30,6 +30,7 @@
         "gulp-concat": "^2.6.1",
         "gulp-less": "^4.0.1",
         "gulp-postcss": "^8.0.0",
-        "gulp-replace": "^1.0.0"
+        "gulp-replace": "^1.0.0",
+        "jshint": "^2.10.2"
     }
 }
