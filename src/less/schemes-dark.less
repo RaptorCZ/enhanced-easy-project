@@ -122,3 +122,126 @@ table.list > tbody .scheme-7 > td:first-child::before {
 .agile__card.scheme-7 .agile__card__summable {
   color: @warning-accent-color;
 }
+
+/**
+ * COMMON scheme 2 (docházka: kancelář)
+ */
+
+.scheme-2 {
+  background: @common-2-bg;
+  border-color: @common-2-bg !important;
+  color: @common-2-color !important;
+}
+
+.scheme-2 a {
+  color: @common-2-color !important;
+  // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
+  background: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.scheme-2 td {
+  color: @common-2-color !important;
+}
+
+// Hover na řádek, checkboxem zvolený řádek
+table.list > tbody > tr.scheme-2.context-menu-selection,
+table.list > tbody > tr.scheme-2:hover {
+  background: @common-2-dark-bg !important;
+}
+
+table.list > tbody .scheme-2 > td:first-child::before {
+  background: @common-2-line-bg !important;
+}
+
+.agile__card.scheme-2 {
+  background-color: @common-2-bg !important;
+}
+
+.agile__card.scheme-2 .agile__card__context-menu,
+.agile__card.scheme-2 .agile__card__icons,
+.agile__card.scheme-2 .agile__card__summable {
+  color: @common-2-accent-color;
+}
+
+/**
+ * COMMON scheme 4 (docházka: dovolená)
+ */
+
+ .scheme-4 {
+    background: @common-4-bg;
+    border-color: @common-4-bg !important;
+    color: @common-4-color !important;
+  }
+
+  .scheme-4 a {
+    color: @common-4-color !important;
+    // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
+    background: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0) !important;
+  }
+
+  .scheme-4 td {
+    color: @common-4-color !important;
+  }
+
+  // Hover na řádek, checkboxem zvolený řádek
+  table.list > tbody > tr.scheme-4.context-menu-selection,
+  table.list > tbody > tr.scheme-4:hover {
+    background: @common-4-dark-bg !important;
+  }
+
+  table.list > tbody .scheme-4 > td:first-child::before {
+    background: @common-4-line-bg !important;
+  }
+
+  .agile__card.scheme-4 {
+    background-color: @common-6-bg !important;
+  }
+
+  .agile__card.scheme-4 .agile__card__context-menu,
+  .agile__card.scheme-4 .agile__card__icons,
+  .agile__card.scheme-4 .agile__card__summable {
+    color: @common-4-accent-color;
+  }
+
+/**
+ * COMMON scheme 6 (docházka: home office)
+ */
+
+ .scheme-6 {
+    background: @common-6-bg;
+    border-color: @common-6-bg !important;
+    color: @common-6-color !important;
+  }
+
+  .scheme-6 a {
+    color: @common-6-color !important;
+    // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
+    background: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0) !important;
+  }
+
+  .scheme-6 td {
+    color: @common-6-color !important;
+  }
+
+  // Hover na řádek, checkboxem zvolený řádek
+  table.list > tbody > tr.scheme-6.context-menu-selection,
+  table.list > tbody > tr.scheme-6:hover {
+    background: @common-6-dark-bg !important;
+  }
+
+  table.list > tbody .scheme-6 > td:first-child::before {
+    background: @common-6-line-bg !important;
+  }
+
+  .agile__card.scheme-6 {
+    background-color: @common-6-bg !important;
+  }
+
+  .agile__card.scheme-6 .agile__card__context-menu,
+  .agile__card.scheme-6 .agile__card__icons,
+  .agile__card.scheme-6 .agile__card__summable {
+    color: @common-6-accent-color;
+  }
