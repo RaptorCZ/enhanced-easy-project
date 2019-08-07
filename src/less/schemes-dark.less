@@ -2,246 +2,257 @@
 @import (reference) "_variables.less";
 
 /**
- * Danger theme
+ * Danger theme 1
+ * scheme-0 - červené bez pozadí
+ */
+.scheme-0 {
+    //background: @danger-bg;
+    //border-color: @danger-bg !important;
+    color: @danger-color !important;
+}
+
+.scheme-0 a {
+    color: @danger-color !important;
+    // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
+    background: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.scheme-0 td {
+    color: @danger-color;
+}
+
+// Hover na řádek, checkboxem zvolený řádek
+table.list > tbody > tr.scheme-0.context-menu-selection,
+table.list > tbody > tr.scheme-0:hover {
+    background: @primary-dark-bg !important;
+}
+
+table.list > tbody .scheme-0 > td:first-child::before {
+    background: @danger-line-bg !important;
+}
+
+.agile__card.scheme-0 {
+    background-color: @danger-bg !important;
+}
+
+.agile__card.scheme-0 .agile__card__context-menu,
+.agile__card.scheme-0 .agile__card__icons,
+.agile__card.scheme-0 .agile__card__summable {
+    color: @danger-accent-color;
+}
+
+/**
+ * Danger theme 2
+ * scheme-1 - červené s pozadím
  */
 .scheme-1 {
-  background: @danger-bg;
-  border-color: @danger-bg !important;
-  color: @danger-color !important;
+    background: @danger-bg;
+    border-color: @danger-bg !important;
+    color: @danger-color !important;
 }
 
 .scheme-1 a {
-  color: @danger-color !important;
-  // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
-  background: rgba(0, 0, 0, 0);
-  border-color: rgba(0, 0, 0, 0) !important;
+    color: @danger-color !important;
+    // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
+    background: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0) !important;
 }
 
 .scheme-1 td {
-  color: @danger-color;
+    color: @danger-color;
 }
 
 // Hover na řádek, checkboxem zvolený řádek
 table.list > tbody > tr.scheme-1.context-menu-selection,
 table.list > tbody > tr.scheme-1:hover {
-  background: @danger-dark-bg !important;
+    background: @danger-dark-bg !important;
 }
 
 table.list > tbody .scheme-1 > td:first-child::before {
-  background: @danger-line-bg !important;
+    background: @danger-line-bg !important;
 }
 
 .agile__card.scheme-1 {
-  background-color: @danger-bg !important;
+    background-color: @danger-bg !important;
 }
 
 .agile__card.scheme-1 .agile__card__context-menu,
 .agile__card.scheme-1 .agile__card__icons,
 .agile__card.scheme-1 .agile__card__summable {
-  color: @danger-accent-color;
+    color: @danger-accent-color;
 }
 
 /**
- * Success theme
+ * Success theme 1
+ * scheme-2 - zelené bez pozadí
  */
-
-.scheme-3 {
-  background: @success-bg;
-  border-color: @success-bg !important;
-  color: @success-color !important;
-}
-
-.scheme-3 a {
-  color: @success-color !important;
-  // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
-  background: rgba(0, 0, 0, 0);
-  border-color: rgba(0, 0, 0, 0) !important;
-}
-
-.scheme-3 td {
-  color: @success-color;
-}
-
-// Hover na řádek, checkboxem zvolený řádek
-table.list > tbody > tr.scheme-3.context-menu-selection,
-table.list > tbody > tr.scheme-3:hover {
-  background: @success-dark-bg !important;
-}
-
-table.list > tbody .scheme-3 > td:first-child::before {
-  background: @success-line-bg !important;
-}
-
-.agile__card.scheme-3 {
-  background-color: @success-bg !important;
-}
-
-.agile__card.scheme-3 .agile__card__context-menu,
-.agile__card.scheme-3 .agile__card__icons,
-.agile__card.scheme-3 .agile__card__summable {
-  color: @success-accent-color;
-}
-
-/**
- * Warning theme
- */
-
-.scheme-7 {
-  background: @warning-bg;
-  border-color: @warning-bg !important;
-  color: @warning-color !important;
-}
-
-.scheme-7 a {
-  color: @warning-color !important;
-  // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
-  background: rgba(0, 0, 0, 0);
-  border-color: rgba(0, 0, 0, 0) !important;
-}
-
-.scheme-7 td {
-  color: @warning-color;
-}
-
-// Hover na řádek, checkboxem zvolený řádek
-table.list > tbody > tr.scheme-7.context-menu-selection,
-table.list > tbody > tr.scheme-7:hover {
-  background: @warning-dark-bg !important;
-}
-
-table.list > tbody .scheme-7 > td:first-child::before {
-  background: @warning-line-bg !important;
-}
-
-.agile__card.scheme-7 {
-  background-color: @warning-bg !important;
-}
-
-.agile__card.scheme-7 .agile__card__context-menu,
-.agile__card.scheme-7 .agile__card__icons,
-.agile__card.scheme-7 .agile__card__summable {
-  color: @warning-accent-color;
-}
-
-/**
- * COMMON scheme 2 (docházka: kancelář)
- */
-
 .scheme-2 {
-  background: @common-2-bg;
-  border-color: @common-2-bg !important;
-  color: @common-2-color !important;
+    //background: @success-bg;
+    //border-color: @success-bg !important;
+    color: @success-color !important;
 }
 
 .scheme-2 a {
-  color: @common-2-color !important;
-  // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
-  background: rgba(0, 0, 0, 0);
-  border-color: rgba(0, 0, 0, 0) !important;
+    color: @success-color !important;
+    // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
+    background: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0) !important;
 }
 
 .scheme-2 td {
-  color: @common-2-color !important;
+    color: @success-color;
 }
 
 // Hover na řádek, checkboxem zvolený řádek
 table.list > tbody > tr.scheme-2.context-menu-selection,
 table.list > tbody > tr.scheme-2:hover {
-  background: @common-2-dark-bg !important;
+    background: @primary-dark-bg !important;
 }
 
 table.list > tbody .scheme-2 > td:first-child::before {
-  background: @common-2-line-bg !important;
+    background: @success-line-bg !important;
 }
 
 .agile__card.scheme-2 {
-  background-color: @common-2-bg !important;
+    background-color: @success-bg !important;
 }
 
 .agile__card.scheme-2 .agile__card__context-menu,
 .agile__card.scheme-2 .agile__card__icons,
 .agile__card.scheme-2 .agile__card__summable {
-  color: @common-2-accent-color;
+    color: @success-accent-color;
 }
 
 /**
- * COMMON scheme 4 (docházka: dovolená)
+ * Success theme 2
+ * scheme-3 - zelené s pozadím
  */
+.scheme-3 {
+    background: @success-bg;
+    border-color: @success-bg !important;
+    color: @success-color !important;
+}
 
- .scheme-4 {
-    background: @common-4-bg;
-    border-color: @common-4-bg !important;
-    color: @common-4-color !important;
-  }
-
-  .scheme-4 a {
-    color: @common-4-color !important;
+.scheme-3 a {
+    color: @success-color !important;
     // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
     background: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0) !important;
-  }
+}
 
-  .scheme-4 td {
-    color: @common-4-color !important;
-  }
+.scheme-3 td {
+    color: @success-color;
+}
 
-  // Hover na řádek, checkboxem zvolený řádek
-  table.list > tbody > tr.scheme-4.context-menu-selection,
-  table.list > tbody > tr.scheme-4:hover {
-    background: @common-4-dark-bg !important;
-  }
+// Hover na řádek, checkboxem zvolený řádek
+table.list > tbody > tr.scheme-3.context-menu-selection,
+table.list > tbody > tr.scheme-3:hover {
+    background: @success-dark-bg !important;
+}
 
-  table.list > tbody .scheme-4 > td:first-child::before {
-    background: @common-4-line-bg !important;
-  }
+table.list > tbody .scheme-3 > td:first-child::before {
+    background: @success-line-bg !important;
+}
 
-  .agile__card.scheme-4 {
-    background-color: @common-6-bg !important;
-  }
+.agile__card.scheme-3 {
+    background-color: @success-bg !important;
+}
 
-  .agile__card.scheme-4 .agile__card__context-menu,
-  .agile__card.scheme-4 .agile__card__icons,
-  .agile__card.scheme-4 .agile__card__summable {
-    color: @common-4-accent-color;
-  }
+.agile__card.scheme-3 .agile__card__context-menu,
+.agile__card.scheme-3 .agile__card__icons,
+.agile__card.scheme-3 .agile__card__summable {
+    color: @success-accent-color;
+}
 
 /**
- * COMMON scheme 6 (docházka: home office)
+ * Info theme 1
+ * scheme-4 - modré bez pozadí
  */
 
- .scheme-6 {
-    background: @common-6-bg;
-    border-color: @common-6-bg !important;
-    color: @common-6-color !important;
-  }
+/**
+ * Info theme 2
+ * scheme-5 - modré s pozadím
+ */
 
-  .scheme-6 a {
-    color: @common-6-color !important;
+/**
+ * Warning theme 1
+ * scheme-6 - oranžové bez pozadí
+ */
+.scheme-6 {
+    //background: @warning-bg;
+    //border-color: @warning-bg !important;
+    color: @warning-color !important;
+}
+
+.scheme-6 a {
+    color: @warning-color !important;
     // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
     background: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0) !important;
-  }
+}
 
-  .scheme-6 td {
-    color: @common-6-color !important;
-  }
+.scheme-6 td {
+    color: @warning-color;
+}
 
-  // Hover na řádek, checkboxem zvolený řádek
-  table.list > tbody > tr.scheme-6.context-menu-selection,
-  table.list > tbody > tr.scheme-6:hover {
-    background: @common-6-dark-bg !important;
-  }
+// Hover na řádek, checkboxem zvolený řádek
+table.list > tbody > tr.scheme-6.context-menu-selection,
+table.list > tbody > tr.scheme-6:hover {
+    background: @primary-dark-bg !important;
+}
 
-  table.list > tbody .scheme-6 > td:first-child::before {
-    background: @common-6-line-bg !important;
-  }
+table.list > tbody .scheme-6 > td:first-child::before {
+    background: @warning-line-bg !important;
+}
 
-  .agile__card.scheme-6 {
-    background-color: @common-6-bg !important;
-  }
+.agile__card.scheme-6 {
+    background-color: @warning-bg !important;
+}
 
-  .agile__card.scheme-6 .agile__card__context-menu,
-  .agile__card.scheme-6 .agile__card__icons,
-  .agile__card.scheme-6 .agile__card__summable {
-    color: @common-6-accent-color;
-  }
+.agile__card.scheme-6 .agile__card__context-menu,
+.agile__card.scheme-6 .agile__card__icons,
+.agile__card.scheme-6 .agile__card__summable {
+    color: @warning-accent-color;
+}
+
+/**
+ * Warning theme 2
+ * scheme-7 - oranžové s pozadím
+ */
+.scheme-7 {
+    background: @warning-bg;
+    border-color: @warning-bg !important;
+    color: @warning-color !important;
+}
+
+.scheme-7 a {
+    color: @warning-color !important;
+    // Zrušíme duplicitní vnořený highlight (řešíme jen opacity)
+    background: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.scheme-7 td {
+    color: @warning-color;
+}
+
+// Hover na řádek, checkboxem zvolený řádek
+table.list > tbody > tr.scheme-7.context-menu-selection,
+table.list > tbody > tr.scheme-7:hover {
+    background: @warning-dark-bg !important;
+}
+
+table.list > tbody .scheme-7 > td:first-child::before {
+    background: @warning-line-bg !important;
+}
+
+.agile__card.scheme-7 {
+    background-color: @warning-bg !important;
+}
+
+.agile__card.scheme-7 .agile__card__context-menu,
+.agile__card.scheme-7 .agile__card__icons,
+.agile__card.scheme-7 .agile__card__summable {
+    color: @warning-accent-color;
+}
