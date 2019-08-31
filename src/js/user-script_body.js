@@ -717,7 +717,7 @@ async function generateUtilization() {
 
     const weekDays = getWeekdaysOfCurrentMonth();
     const hours = getHoursFromSeconds(totalSeconds);
-    const daysWithoutVacations = weekDays.currentWeekday - absence;
+    const daysWithoutVacations = weekDays.currentWeekday; // - absence;
     const average = hours / daysWithoutVacations;
     const utilization = Math.floor((hours / (daysWithoutVacations * 8)) * 100);
 
