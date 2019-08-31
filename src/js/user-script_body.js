@@ -68,7 +68,7 @@ function fixEmptyEstimatedHours() {
                 $value.text("---");
             }
         });
-    }, 500);
+    }, 1000);
 }
 
 /**
