@@ -360,7 +360,6 @@ function getHoursFromSeconds(delta) {
  * Příprava html elementu, kam se bude zapisovat docházka a vykázaný čas
  */
 function prepareHeaderHtmlMarkup() {
-
     const attendanceHtml =
         '<div class="easy-calendar-upcoming__texts">' +
         '    <span style="display: flex;">' +
@@ -385,6 +384,14 @@ function prepareHeaderHtmlMarkup() {
 }
 
 /**
+ * Převede objekt parametrů na url search string
+ * @param {any} params
+ */
+function makeUrlSearchString(params) {
+    return params ? "?" + Object.keys(params).map(key => [key, params[key]].map(encodeURIComponent).join("=")).join("&") : "";
+}
+
+/**
  * Volání API EP a získání informací o docházce
  * easy_attendances > easy_attendance > arrival, departure
  * /easy_attendances/arrival?arrival_at=2019-03-17&back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
@@ -394,7 +401,8 @@ function getTodaysAttendance() {
     const params = {
         arrival: "today",
         set_filter: 1,
-        user_id: getUserInfo()
+        user_id: getUserInfo(),
+        _: new Date().getTime() // Cache busting
     };
 
     const $todaysAttendanceLink = $(".todays-attendance-link");
@@ -470,7 +478,8 @@ function getTodaysAttendance() {
 function getTodaysTimeEntries() {
     const params = {
         spent_on: "today",
-        set_filter: 1
+        set_filter: 1,
+        _: new Date().getTime() // Cache busting
     };
 
     // Stáhneme data
@@ -577,11 +586,7 @@ function getWeekdaysOfCurrentMonth() {
  * Načtení jedné stránky Time Entries
  */
 async function getTimeEntriesAsync(url, params) {
-
-    // Cache busting
-    const ts = new Date().getTime();
-    const urlWithParams = url + "?spent_on=" + params.spent_on + "&limit=" + params.limit + "&offset=" + params.offset + "&set_filter=1&_=" + ts;
-
+    const urlWithParams = url + makeUrlSearchString(params);
     const response = await fetch(urlWithParams);
     const data = await response.json();
 
@@ -592,12 +597,12 @@ async function getTimeEntriesAsync(url, params) {
  * Rekurzivní načtení všech stránek Time Entries dle parametru
  */
 async function getTimeEntriesRecursiveAsync(url, params) {
-
     const data = await getTimeEntriesAsync(url, params);
     var results = data.time_entries;
 
     // Kolik položek je na dalších stranách?
-    const toProcessOnNextPages = data.total_count - (data.offset + 1) * data.limit;
+    const toProcessOnNextPages =
+        data.total_count - (data.offset + 1) * data.limit;
 
     // Je více stránek k dotažení?
     if (toProcessOnNextPages > 0) {
@@ -618,11 +623,7 @@ async function getTimeEntriesRecursiveAsync(url, params) {
  * Načtení jedné stránky Attendances
  */
 async function getAttendancesAsync(url, params) {
-
-    // Cache busting
-    const ts = new Date().getTime();
-    const urlWithParams = url + "?arrival=" + params.arrival + "&limit=" + params.limit + "&offset=" + params.offset + "&user_id=" + params.user_id + "&set_filter=1&_=" + ts;
-
+    const urlWithParams = url + makeUrlSearchString(params);
     const response = await fetch(urlWithParams);
     const data = await response.json();
 
@@ -633,12 +634,12 @@ async function getAttendancesAsync(url, params) {
  * Rekurzivní načtení všech stránek Attendances dle parametru
  */
 async function getAttendancesRecursiveAsync(url, params) {
-
     const data = await getAttendancesAsync(url, params);
     var results = data.easy_attendances;
 
     // Kolik položek je na dalších stranách?
-    const toProcessOnNextPages = data.total_count - (data.offset + 1) * data.limit;
+    const toProcessOnNextPages =
+        data.total_count - (data.offset + 1) * data.limit;
 
     // Je více stránek k dotažení?
     if (toProcessOnNextPages > 0) {
@@ -660,7 +661,6 @@ async function getAttendancesRecursiveAsync(url, params) {
  * Počet pracovních dnů, vykázaná doba, ...
  */
 async function generateUtilization() {
-
     var totalSeconds = 0;
     // Nepřítomnost - dovolená/lékař/nemoc
     var absence = 0;
@@ -670,18 +670,26 @@ async function generateUtilization() {
         limit: 100, // max limit, EP API víc nepovolí
         offset: 0,
         set_filter: 1,
-        user_id: getUserInfo()
+        user_id: getUserInfo(),
+        _: new Date().getTime() // Cache busting
     };
 
     const timeEntriesParams = {
         spent_on: "current_month",
         limit: 100, // max limit, EP API víc nepovolí
         offset: 0,
-        set_filter: 1
+        set_filter: 1,
+        _: new Date().getTime() // Cache busting
     };
 
-    const attendances = await getAttendancesRecursiveAsync("/easy_attendances.json", attendanceParams);
-    const timeEntries = await getTimeEntriesRecursiveAsync("/time_entries.json", timeEntriesParams);
+    const attendances = await getAttendancesRecursiveAsync(
+        "/easy_attendances.json",
+        attendanceParams
+    );
+    const timeEntries = await getTimeEntriesRecursiveAsync(
+        "/time_entries.json",
+        timeEntriesParams
+    );
 
     // Enumerate easy_attendances
     $.each(attendances, function(index, attendance) {
@@ -689,7 +697,10 @@ async function generateUtilization() {
         // 5 - Lékař
         // 4 - Nemoc
         // 3 - Dovolená
-        if (attendance.easy_attendance_activity.id === 3 || attendance.easy_attendance_activity.id === 4) {
+        if (
+            attendance.easy_attendance_activity.id === 3 ||
+            attendance.easy_attendance_activity.id === 4
+        ) {
             absence++;
         }
     });
@@ -708,19 +719,32 @@ async function generateUtilization() {
     const hours = getHoursFromSeconds(totalSeconds);
     const daysWithoutVacations = weekDays.currentWeekday - absence;
     const average = hours / daysWithoutVacations;
-    const utilization = Math.floor(
-        (hours / (daysWithoutVacations * 8)) * 100
-    );
+    const utilization = Math.floor((hours / (daysWithoutVacations * 8)) * 100);
 
     // Fond pracovní doby počítá s 8 hodinami na den
     const workdaysInfo =
-        "Pracovní dny: " + weekDays.currentWeekday + "/" + weekDays.totalWeekdays + ", " +
-        "Nepřítomnost (dny): " + absence + ", " +
-        "Fond prac. doby (h): " + weekDays.currentWeekday * 8 + "/" + weekDays.totalWeekdays * 8;
+        "Pracovní dny: " +
+        weekDays.currentWeekday +
+        "/" +
+        weekDays.totalWeekdays +
+        ", " +
+        "Nepřítomnost (dny): " +
+        absence +
+        ", " +
+        "Fond prac. doby (h): " +
+        weekDays.currentWeekday * 8 +
+        "/" +
+        weekDays.totalWeekdays * 8;
 
     const workdaysDetailInfo =
-        "Vykázáno celkem: " + getHoursAndMinutesFromSeconds(totalSeconds) + ", " +
-        "tj. průměr/MD " + average.toFixed(2) + "h [" + utilization + "%]";
+        "Vykázáno celkem: " +
+        getHoursAndMinutesFromSeconds(totalSeconds) +
+        ", " +
+        "tj. průměr/MD " +
+        average.toFixed(2) +
+        "h [" +
+        utilization +
+        "%]";
 
     $(".js-workdays").html(workdaysInfo);
     $(".js-workdays-detail").html(workdaysDetailInfo);
@@ -751,13 +775,15 @@ function showTimeline() {
     // Parametry pro queries
     const timeEntriesParams = {
         spent_on: "today",
-        set_filter: 1
+        set_filter: 1,
+        _: new Date().getTime() // Cache busting
     };
 
     const todaysAttendanceParams = {
         arrival: "today",
         set_filter: 1,
-        user_id: getUserInfo()
+        user_id: getUserInfo(),
+        _: new Date().getTime() // Cache busting
     };
 
     // Natáhneme data
