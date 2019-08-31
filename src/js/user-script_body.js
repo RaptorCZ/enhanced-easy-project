@@ -715,6 +715,12 @@ async function generateUtilization() {
         totalSeconds += minutes * 60;
     });
 
+    // Očekává se vykázáno 7 hodin denně
+    const expectedSeconds = 7 * 60 * 60;
+    // Kolik zbývá do naplnění požadované doby?
+    const missingSeconds = Math.abs(Math.max(0, expectedSeconds - totalSeconds));
+    const missingHours = getHoursAndMinutesFromSeconds(missingSeconds);
+
     const weekDays = getWeekdaysOfCurrentMonth();
     const hours = getHoursFromSeconds(totalSeconds);
     const daysWithoutVacations = weekDays.currentWeekday; // - absence;
@@ -744,7 +750,8 @@ async function generateUtilization() {
         average.toFixed(2) +
         "h [" +
         utilization +
-        "%]";
+        "%], " +
+        "zbývá vykázat: " + missingHours;
 
     $(".js-workdays").html(workdaysInfo);
     $(".js-workdays-detail").html(workdaysDetailInfo);
