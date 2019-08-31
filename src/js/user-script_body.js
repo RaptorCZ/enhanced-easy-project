@@ -392,7 +392,9 @@ function prepareHeaderHtmlMarkup() {
  */
 function getTodaysAttendance() {
     const params = {
-        arrival: "today"
+        arrival: "today",
+        set_filter: 1,
+        user_id: getUserInfo()
     };
 
     const $todaysAttendanceLink = $(".todays-attendance-link");
@@ -467,7 +469,8 @@ function getTodaysAttendance() {
  */
 function getTodaysTimeEntries() {
     const params = {
-        spent_on: "today"
+        spent_on: "today",
+        set_filter: 1
     };
 
     // Stáhneme data
@@ -577,7 +580,7 @@ async function getTimeEntriesAsync(url, params) {
 
     // Cache busting
     const ts = new Date().getTime();
-    const urlWithParams = url + "?spent_on=" + params.spent_on + "&limit=" + params.limit + "&offset=" + params.offset + "&_=" + ts;
+    const urlWithParams = url + "?spent_on=" + params.spent_on + "&limit=" + params.limit + "&offset=" + params.offset + "&set_filter=1&_=" + ts;
 
     const response = await fetch(urlWithParams);
     const data = await response.json();
@@ -618,7 +621,7 @@ async function getAttendancesAsync(url, params) {
 
     // Cache busting
     const ts = new Date().getTime();
-    const urlWithParams = url + "?arrival=" + params.arrival + "&limit=" + params.limit + "&offset=" + params.offset + "&_=" + ts;
+    const urlWithParams = url + "?arrival=" + params.arrival + "&limit=" + params.limit + "&offset=" + params.offset + "&user_id=" + params.user_id + "&set_filter=1&_=" + ts;
 
     const response = await fetch(urlWithParams);
     const data = await response.json();
@@ -665,13 +668,16 @@ async function generateUtilization() {
     const attendanceParams = {
         arrival: "current_month",
         limit: 100, // max limit, EP API víc nepovolí
-        offset: 0
+        offset: 0,
+        set_filter: 1,
+        user_id: getUserInfo()
     };
 
     const timeEntriesParams = {
         spent_on: "current_month",
         limit: 100, // max limit, EP API víc nepovolí
-        offset: 0
+        offset: 0,
+        set_filter: 1
     };
 
     const attendances = await getAttendancesRecursiveAsync("/easy_attendances.json", attendanceParams);
@@ -744,11 +750,14 @@ function showTimeline() {
 
     // Parametry pro queries
     const timeEntriesParams = {
-        spent_on: "today"
+        spent_on: "today",
+        set_filter: 1
     };
 
     const todaysAttendanceParams = {
-        arrival: "today"
+        arrival: "today",
+        set_filter: 1,
+        user_id: getUserInfo()
     };
 
     // Natáhneme data
