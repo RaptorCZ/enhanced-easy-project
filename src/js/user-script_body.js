@@ -716,16 +716,22 @@ async function generateUtilization() {
     });
 
     // Očekává se vykázáno 7 hodin denně
-    const expectedSeconds = 7 * 60 * 60;
+    const expectedSecondsPerDay = 7 * 60 * 60;
+
+    // Kolikátý pracovní den dneska je a kolik je jich v měsíci
+    const weekDays = getWeekdaysOfCurrentMonth();
+
+    // Kolik se očekává vykázáno k dnešnímu dni (bere jen pracovní)
+    const expectedSeconds = expectedSecondsPerDay * weekDays.currentWeekday;
+
     // Kolik zbývá do naplnění požadované doby?
     const missingSeconds = Math.abs(Math.max(0, expectedSeconds - totalSeconds));
     const missingHours = getHoursAndMinutesFromSeconds(missingSeconds);
 
-    const weekDays = getWeekdaysOfCurrentMonth();
     const hours = getHoursFromSeconds(totalSeconds);
     const daysWithoutVacations = weekDays.currentWeekday; // - absence;
-    const average = hours / daysWithoutVacations;
-    const utilization = Math.floor((hours / (daysWithoutVacations * 8)) * 100);
+    const average = daysWithoutVacations > 0 ? (hours / daysWithoutVacations) : 0;
+    const utilization = daysWithoutVacations > 0 ? Math.floor((hours / (daysWithoutVacations * 8)) * 100) : 0;
 
     // Fond pracovní doby počítá s 8 hodinami na den
     const workdaysInfo =
@@ -734,10 +740,10 @@ async function generateUtilization() {
         "/" +
         weekDays.totalWeekdays +
         ", " +
-        "Nepřítomnost (dny): " +
+        "nepřítomnost (dny): " +
         absence +
         ", " +
-        "Fond prac. doby (h): " +
+        "fond prac. doby (h): " +
         weekDays.currentWeekday * 8 +
         "/" +
         weekDays.totalWeekdays * 8;
