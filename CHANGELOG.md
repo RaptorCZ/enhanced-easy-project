@@ -1,3 +1,26 @@
+# [1.10.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.9.0...v1.10.0) (2019-09-01)
+
+
+### Bug Fixes
+
+* barevné schéma pro docházku v gridu ([940347e](https://github.com/RaptorCZ/enhanced-easy-project/commit/940347e))
+* barva buttonu u filtrů ([f269afb](https://github.com/RaptorCZ/enhanced-easy-project/commit/f269afb))
+* rozšířený výběr pro fixEmptyEstimatedHours ([38dc286](https://github.com/RaptorCZ/enhanced-easy-project/commit/38dc286))
+* úpravy parametrů volání API EP ([6789522](https://github.com/RaptorCZ/enhanced-easy-project/commit/6789522))
+* vyhození absence z utilizace ([ec2c940](https://github.com/RaptorCZ/enhanced-easy-project/commit/ec2c940))
+* výpočet utilizace, pokud je prvním dnem víkend ([155adc4](https://github.com/RaptorCZ/enhanced-easy-project/commit/155adc4))
+* změna generování url parametrů ([a601268](https://github.com/RaptorCZ/enhanced-easy-project/commit/a601268))
+* zvýšen timeout pro fixEmptyEstimatedHours ([3111897](https://github.com/RaptorCZ/enhanced-easy-project/commit/3111897))
+
+
+### Features
+
+* srovnání všech dark schemes ([2ec6782](https://github.com/RaptorCZ/enhanced-easy-project/commit/2ec6782))
+* utilizace - zbývá vykázat ([98e0b11](https://github.com/RaptorCZ/enhanced-easy-project/commit/98e0b11))
+* výpočet a zobrazení utilizace (prototyp) ([5cb41ee](https://github.com/RaptorCZ/enhanced-easy-project/commit/5cb41ee))
+
+
+
 # [1.9.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.8.0...v1.9.0) (2019-07-07)
 
 

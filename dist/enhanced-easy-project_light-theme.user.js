@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.9.0
+// @version      1.10.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -77,12 +77,10 @@ table.list > tbody > tr > th {
   padding-bottom: 0;
 }
 table.list td.checkbox input[type="checkbox"] {
-  -webkit-transform: translateY(-2px);
-          transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 table.list td.easy-query-additional-beginning-buttons .beginning-buttons-wrapper {
-  -webkit-transform: none;
-          transform: none;
+  transform: none;
   position: static;
 }
 .icon__stack > [class*="icon"]:nth-child(n + 2) {
@@ -379,8 +377,13 @@ GM_addStyle(css);
     const userId = getUserInfo();
     setDefaultRoleAndActivity(userId);
 
-    // Docházka a výkazy
-    prepareTodayAttendance();
+    // Header EP pro docházku, výkazy atd.
+    prepareHeaderHtmlMarkup();
+
+    // Spustíme počítadla
+    getTodaysAttendance();
+    getTodaysTimeEntries();
+    generateUtilization();
 
     // Timeline v sekci "Moje výkazy"
     showTimeline();
@@ -405,7 +408,7 @@ function modGantt() {
 function fixEmptyEstimatedHours() {
     // Zpozdíme, počkáme na načtení dat
     setTimeout(function() {
-        const $elements = $("[data-name='issue[estimated_hours]'] > span");
+        const $elements = $("[data-name='issue[estimated_hours]'] > span, .total_estimated_hours > .easy-entity-list__item-attribute-content > span");
         if (!$elements) {
             return;
         }
@@ -416,7 +419,7 @@ function fixEmptyEstimatedHours() {
                 $value.text("---");
             }
         });
-    }, 500);
+    }, 1000);
 }
 
 /**
@@ -693,32 +696,50 @@ function getHoursAndMinutesFromSeconds(delta) {
     const seconds = delta % 60;
 
     // Naformátujeme výstup
-    return hours + "h " + minutes + "m";
+    return days * 24 + hours + "h " + minutes + "m";
+}
+
+/**
+ * Funkce, která převede sekundy na hodiny a vrátí des. číslo
+ */
+function getHoursFromSeconds(delta) {
+    const hours = delta / 3600;
+    return hours;
 }
 
 /**
  * Příprava html elementu, kam se bude zapisovat docházka a vykázaný čas
  */
-function prepareTodayAttendance() {
-    // https://creasoft.easyproject.cz/easy_attendances/arrival?arrival_at=2019-03-16&back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
+function prepareHeaderHtmlMarkup() {
+    const attendanceHtml =
+        '<div class="easy-calendar-upcoming__texts">' +
+        '    <span style="display: flex;">' +
+        '        <span class="icon icon-calendar todays-attendance"></span>' +
+        '        <a class="todays-attendance-link" style="margin-left: 1rem;" href="#"></a>' +
+        "    </span>" +
+        '    <span class="block"></span>' +
+        '    <span class="icon icon-timer todays-time"></span>' +
+        "</div>";
+
+    const utilizationHtml =
+        '<div class="easy-calendar-upcoming__texts">' +
+        '    <span class="js-workdays"></span>' +
+        '    <span class="block"></span>' +
+        '    <span class="js-workdays-detail"></span>' +
+        "</div>";
 
     // Připravíme html element pro data
-    $(".easy-calendar-upcoming").after(
-        '<div class="easy-calendar-upcoming">' +
-            '  <div class="easy-calendar-upcoming__texts">' +
-            '    <span style="display: flex;">' +
-            '      <span class="icon icon-calendar todays-attendance"></span>' +
-            '      <a class="todays-attendance-link" style="margin-left: 1rem;" href="#"></a>' +
-            "    </span>" +
-            '    <span class="block"></span>' +
-            '    <span class="icon icon-timer todays-time"></span>' +
-            "  </div>" +
-            "</div>"
-    );
+    $(".easy-calendar-upcoming")
+        .after(utilizationHtml)
+        .after(attendanceHtml);
+}
 
-    // Spustíme počítadla
-    getTodaysAttendance();
-    getTodaysTimeEntries();
+/**
+ * Převede objekt parametrů na url search string
+ * @param {any} params
+ */
+function makeUrlSearchString(params) {
+    return params ? "?" + Object.keys(params).map(key => [key, params[key]].map(encodeURIComponent).join("=")).join("&") : "";
 }
 
 /**
@@ -729,7 +750,10 @@ function prepareTodayAttendance() {
  */
 function getTodaysAttendance() {
     const params = {
-        arrival: "today"
+        arrival: "today",
+        set_filter: 1,
+        user_id: getUserInfo(),
+        _: new Date().getTime() // Cache busting
     };
 
     const $todaysAttendanceLink = $(".todays-attendance-link");
@@ -804,7 +828,9 @@ function getTodaysAttendance() {
  */
 function getTodaysTimeEntries() {
     const params = {
-        spent_on: "today"
+        spent_on: "today",
+        set_filter: 1,
+        _: new Date().getTime() // Cache busting
     };
 
     // Stáhneme data
@@ -833,12 +859,259 @@ function getTodaysTimeEntries() {
         });
 
         const result =
-            "Odpracovaný čas: " + getHoursAndMinutesFromSeconds(totalSeconds);
+            "Vykázáno: " + getHoursAndMinutesFromSeconds(totalSeconds);
         $(".todays-time").html(result);
 
         // Za minutu opakujeme
         setTimeout(getTodaysTimeEntries, 60 * 1000);
     }); // getJSON
+}
+
+/**
+ * Vrátí, kolikátý je dnes pracovní den v měsíci a kolik pracovních dnů měsíc má.
+ * Pokud je víkend, počítá se jako poslední den pátek.
+ * Vrací objekt { currentWeekday, totalWeekdays }
+ */
+function getWeekdaysOfCurrentMonth() {
+    // Svátky, které nejsou pracovním dnem.
+    // Chybí výpočet data pro Velikonoce - zatím fixně
+    // formát je [měsíc, den]
+    const holidays = [
+        [1, 1], // Nový rok
+        [4, 19], // Velký pátek
+        [4, 22], // Velikonoční pondělí - TODO
+        [5, 1], // Svátek práce
+        [5, 8], //  Den vítězství
+        [7, 5], // Den věrozvěstů Cyrila a Metoděje
+        [7, 6], // Den upálení mistra Jana Husa
+        [9, 28], // Den české státnosti
+        [10, 28], // Den vzniku Československa
+        [11, 17], // Den boje za svobodu a demokracii
+        [12, 24], // Štědrý den
+        [12, 25], // 1. svátek vánoční
+        [12, 26] // 2. svátek vánoční
+    ];
+
+    var currentDate = new Date();
+    var currentDay = currentDate.getDate();
+    var year = currentDate.getYear() + 1900;
+    var month = currentDate.getMonth();
+
+    var totalWeekdays = 0;
+    var currentWeekday = 0;
+
+    for (var day = 1; day <= 31; day++) {
+        var t = new Date(year, month, day);
+
+        // Měsíc má méně než 31 dní
+        if (t.getMonth() > month) {
+            break;
+        }
+
+        // Je to víkend (0 = neděle, 6 = sobota)
+        if (t.getDay() == 0 || t.getDay() == 6) {
+            continue;
+        }
+
+        // Svátek
+        if (holidays.some(h => h[0] - 1 === month && h[1] === day)) {
+            continue;
+        }
+
+        // Celkově pracovní dny v měsíci
+        totalWeekdays++;
+
+        // Uplynulé pracovní dny
+        if (t.getDate() <= currentDay) {
+            currentWeekday++;
+        }
+    }
+
+    return {
+        currentWeekday,
+        totalWeekdays
+    };
+}
+
+/**
+ * Načtení jedné stránky Time Entries
+ */
+async function getTimeEntriesAsync(url, params) {
+    const urlWithParams = url + makeUrlSearchString(params);
+    const response = await fetch(urlWithParams);
+    const data = await response.json();
+
+    return data;
+}
+
+/**
+ * Rekurzivní načtení všech stránek Time Entries dle parametru
+ */
+async function getTimeEntriesRecursiveAsync(url, params) {
+    const data = await getTimeEntriesAsync(url, params);
+    var results = data.time_entries;
+
+    // Kolik položek je na dalších stranách?
+    const toProcessOnNextPages =
+        data.total_count - (data.offset + 1) * data.limit;
+
+    // Je více stránek k dotažení?
+    if (toProcessOnNextPages > 0) {
+        // Posuneme offset o velikost stránky
+        params.offset = data.offset + data.limit;
+
+        // a načteme další data
+        const nextPageData = await getTimeEntriesAsync(url, params);
+        const nextPageResults = nextPageData.time_entries;
+
+        return results.concat(nextPageResults);
+    } else {
+        return results;
+    }
+}
+
+/**
+ * Načtení jedné stránky Attendances
+ */
+async function getAttendancesAsync(url, params) {
+    const urlWithParams = url + makeUrlSearchString(params);
+    const response = await fetch(urlWithParams);
+    const data = await response.json();
+
+    return data;
+}
+
+/**
+ * Rekurzivní načtení všech stránek Attendances dle parametru
+ */
+async function getAttendancesRecursiveAsync(url, params) {
+    const data = await getAttendancesAsync(url, params);
+    var results = data.easy_attendances;
+
+    // Kolik položek je na dalších stranách?
+    const toProcessOnNextPages =
+        data.total_count - (data.offset + 1) * data.limit;
+
+    // Je více stránek k dotažení?
+    if (toProcessOnNextPages > 0) {
+        // Posuneme offset o velikost stránky
+        params.offset = data.offset + data.limit;
+
+        // a načteme další data
+        const nextPageData = await getAttendancesAsync(url, params);
+        const nextPageResults = nextPageData.easy_attendances;
+
+        return results.concat(nextPageResults);
+    } else {
+        return results;
+    }
+}
+
+/**
+ * Vygeneruje utilizaci a vypíše detail o aktuálním měsíci.
+ * Počet pracovních dnů, vykázaná doba, ...
+ */
+async function generateUtilization() {
+    var totalSeconds = 0;
+    // Nepřítomnost - dovolená/lékař/nemoc
+    var absence = 0;
+
+    const attendanceParams = {
+        arrival: "current_month",
+        limit: 100, // max limit, EP API víc nepovolí
+        offset: 0,
+        set_filter: 1,
+        user_id: getUserInfo(),
+        _: new Date().getTime() // Cache busting
+    };
+
+    const timeEntriesParams = {
+        spent_on: "current_month",
+        limit: 100, // max limit, EP API víc nepovolí
+        offset: 0,
+        set_filter: 1,
+        _: new Date().getTime() // Cache busting
+    };
+
+    const attendances = await getAttendancesRecursiveAsync(
+        "/easy_attendances.json",
+        attendanceParams
+    );
+    const timeEntries = await getTimeEntriesRecursiveAsync(
+        "/time_entries.json",
+        timeEntriesParams
+    );
+
+    // Enumerate easy_attendances
+    $.each(attendances, function(index, attendance) {
+        // Hledáme nepřítomnost
+        // 5 - Lékař
+        // 4 - Nemoc
+        // 3 - Dovolená
+        if (
+            attendance.easy_attendance_activity.id === 3 ||
+            attendance.easy_attendance_activity.id === 4
+        ) {
+            absence++;
+        }
+    });
+
+    // Enumerate time_entries
+    $.each(timeEntries, function(index, timeEntry) {
+        // V datech jsou hodiny jako desetinné číslo
+        const hours = timeEntry.hours;
+
+        // Převedeme je na minuty
+        const minutes = 60 * Number(hours);
+        totalSeconds += minutes * 60;
+    });
+
+    // Očekává se vykázáno 7 hodin denně
+    const expectedSecondsPerDay = 7 * 60 * 60;
+
+    // Kolikátý pracovní den dneska je a kolik je jich v měsíci
+    const weekDays = getWeekdaysOfCurrentMonth();
+
+    // Kolik se očekává vykázáno k dnešnímu dni (bere jen pracovní)
+    const expectedSeconds = expectedSecondsPerDay * weekDays.currentWeekday;
+
+    // Kolik zbývá do naplnění požadované doby?
+    const missingSeconds = Math.abs(Math.max(0, expectedSeconds - totalSeconds));
+    const missingHours = getHoursAndMinutesFromSeconds(missingSeconds);
+
+    const hours = getHoursFromSeconds(totalSeconds);
+    const daysWithoutVacations = weekDays.currentWeekday; // - absence;
+    const average = daysWithoutVacations > 0 ? (hours / daysWithoutVacations) : 0;
+    const utilization = daysWithoutVacations > 0 ? Math.floor((hours / (daysWithoutVacations * 8)) * 100) : 0;
+
+    // Fond pracovní doby počítá s 8 hodinami na den
+    const workdaysInfo =
+        "Pracovní dny: " +
+        weekDays.currentWeekday +
+        "/" +
+        weekDays.totalWeekdays +
+        ", " +
+        "nepřítomnost (dny): " +
+        absence +
+        ", " +
+        "fond prac. doby (h): " +
+        weekDays.currentWeekday * 8 +
+        "/" +
+        weekDays.totalWeekdays * 8;
+
+    const workdaysDetailInfo =
+        "Vykázáno celkem: " +
+        getHoursAndMinutesFromSeconds(totalSeconds) +
+        ", " +
+        "tj. průměr/MD " +
+        average.toFixed(2) +
+        "h [" +
+        utilization +
+        "%], " +
+        "zbývá vykázat: " + missingHours;
+
+    $(".js-workdays").html(workdaysInfo);
+    $(".js-workdays-detail").html(workdaysDetailInfo);
 }
 
 /**
@@ -865,11 +1138,16 @@ function showTimeline() {
 
     // Parametry pro queries
     const timeEntriesParams = {
-        spent_on: "today"
+        spent_on: "today",
+        set_filter: 1,
+        _: new Date().getTime() // Cache busting
     };
 
     const todaysAttendanceParams = {
-        arrival: "today"
+        arrival: "today",
+        set_filter: 1,
+        user_id: getUserInfo(),
+        _: new Date().getTime() // Cache busting
     };
 
     // Natáhneme data
@@ -877,7 +1155,9 @@ function showTimeline() {
         $.getJSON("/easy_attendances.json", todaysAttendanceParams),
         $.getJSON("/time_entries.json", timeEntriesParams)
     ).done(function(todaysAttendance, timeEntries) {
-        var todaysAttendanceData = generateTodaysAttendanceVisData(todaysAttendance);
+        var todaysAttendanceData = generateTodaysAttendanceVisData(
+            todaysAttendance
+        );
         var timeEntriesData = generateTimeEntriesVisData(timeEntries);
 
         var visData = [];
@@ -899,9 +1179,9 @@ function showTimeline() {
         };
 
         var groups = new vis.DataSet([
-            {id: 1, content: 'Docházka'},
-            {id: 2, content: 'Výkazy'}
-          ]);
+            { id: 1, content: "Docházka" },
+            { id: 2, content: "Výkazy" }
+        ]);
 
         // Create a Timeline
         var timeline = new vis.Timeline(container, items, groups, options);
@@ -912,7 +1192,10 @@ function showTimeline() {
  * Transformuje Today Attendance na data pro zobrazení v grafu
  */
 function generateTodaysAttendanceVisData(data) {
-    var visData = $.map(data[0].easy_attendances, function(todayAttendance, index) {
+    var visData = $.map(data[0].easy_attendances, function(
+        todayAttendance,
+        index
+    ) {
         var item = {};
 
         // Pro každý interval spočteme sekundy
