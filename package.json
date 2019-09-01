@@ -22,11 +22,11 @@
         "postversion": "git push && git push --tags"
     },
     "devDependencies": {
-        "autoprefixer": "^9.4.9",
+        "autoprefixer": "^9.6.1",
         "conventional-changelog-angular": "^5.0.3",
-        "conventional-changelog-cli": "^2.0.12",
+        "conventional-changelog-cli": "^2.0.23",
         "fs": "0.0.1-security",
-        "gulp": "^4.0.0",
+        "gulp": "^4.0.2",
         "gulp-concat": "^2.6.1",
         "gulp-less": "^4.0.1",
         "gulp-postcss": "^8.0.0",
