@@ -1,3 +1,13 @@
+# [1.11.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.10.0...v1.11.0) (2019-10-10)
+
+
+### Features
+
+* dark theme v editaci stránek/widgetů ([9eaaf1f](https://github.com/RaptorCZ/enhanced-easy-project/commit/9eaaf1f))
+* keep sidebar collapsed ([2f34e71](https://github.com/RaptorCZ/enhanced-easy-project/commit/2f34e71))
+
+
+
 # [1.10.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.9.0...v1.10.0) (2019-09-01)
 
 

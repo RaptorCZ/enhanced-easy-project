@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.10.0
+// @version      1.11.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -1119,6 +1119,29 @@ table.list th.easy-additional-ending-buttons .ending-buttons-fixed .toggle-favor
   margin: 0;
 }
 /**
+ * Okna nastaveí v administraci obsahu (např. editace )
+ */
+.easy-entity-cards-container,
+.form-box,
+#filters,
+#filters_settings,
+#custom_formatting,
+#modal_selectorfilters,
+#modal_selectorcustom_formatting,
+#modal_selectorfilters_settings,
+.easy-query-type-settings-container > div,
+.easy-page-module-form,
+#new_dmsf_workflow,
+#edit_dmsf_workflow {
+  background-color: #10171e;
+}
+/**
+  * Projektový backlog - scrum/kanbal
+  */
+.sticky_agile_backlog_autocomplete_wrap {
+  background-color: #15202b;
+}
+/**
  * Danger theme 1
  * scheme-0 - červené bez pozadí
  */
@@ -1332,6 +1355,8 @@ GM_addStyle(css);
     // TODO
     //modGantt();
 
+    forceCollapsedSidebar();
+
     // Předepsaná doba
     fixEmptyEstimatedHours();
 
@@ -1362,6 +1387,11 @@ function modGantt() {
     setTimeout(function() {
         $(".gantt_grid .gantt_open").click();
     }, 500);
+}
+
+function forceCollapsedSidebar() {
+    $("body").addClass("top_menu--collapsed");
+    $("#top-menu").addClass("collapsed");
 }
 
 /**
