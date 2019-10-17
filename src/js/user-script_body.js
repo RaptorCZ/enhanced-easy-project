@@ -486,6 +486,7 @@ function getTodaysTimeEntries() {
     const params = {
         spent_on: "today",
         set_filter: 1,
+        user_id: getUserInfo(),
         _: new Date().getTime() // Cache busting
     };
 
@@ -686,6 +687,7 @@ async function generateUtilization() {
         limit: 100, // max limit, EP API víc nepovolí
         offset: 0,
         set_filter: 1,
+        user_id: getUserInfo(),
         _: new Date().getTime() // Cache busting
     };
 
@@ -796,6 +798,7 @@ function showTimeline() {
     const timeEntriesParams = {
         spent_on: "today",
         set_filter: 1,
+        user_id: getUserInfo(),
         _: new Date().getTime() // Cache busting
     };
 
