@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.11.0
+// @version      1.11.1
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -1822,6 +1822,7 @@ function getTodaysTimeEntries() {
     const params = {
         spent_on: "today",
         set_filter: 1,
+        user_id: getUserInfo(),
         _: new Date().getTime() // Cache busting
     };
 
@@ -2022,6 +2023,7 @@ async function generateUtilization() {
         limit: 100, // max limit, EP API víc nepovolí
         offset: 0,
         set_filter: 1,
+        user_id: getUserInfo(),
         _: new Date().getTime() // Cache busting
     };
 
@@ -2132,6 +2134,7 @@ function showTimeline() {
     const timeEntriesParams = {
         spent_on: "today",
         set_filter: 1,
+        user_id: getUserInfo(),
         _: new Date().getTime() // Cache busting
     };
 

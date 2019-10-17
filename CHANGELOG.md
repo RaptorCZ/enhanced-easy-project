@@ -1,3 +1,12 @@
+## [1.11.1](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.11.0...v1.11.1) (2019-10-17)
+
+
+### Bug Fixes
+
+* parametr user_id k TimeEntries ([df520e3](https://github.com/RaptorCZ/enhanced-easy-project/commit/df520e3))
+
+
+
 # [1.11.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.10.0...v1.11.0) (2019-10-10)
 
 
