@@ -332,15 +332,16 @@ table.list tr.group {
     background-color: @primary-dark-bg !important;
 }
 
-// Badge na zgrupovaném řádku. Jsou 2 za sebou, první obsahuje počet položek, druhý procenta
-table.list tr.group span.count {
-    color: @table-color;
+// Badge na zgrupovaném řádku.
+// Jsou 2 za sebou, první obsahuje počet položek, druhý procenta
+table.list .group .count, .badge {
+    color: @table-color !important;
     border-color: @table-color; // Orámování badge stejně jako text
 }
 
-// Schováme ty procenta (nově už nejsou pod spanem, ale je zde a/span/span)
-table.list tr.group td.group-name > :nth-child(3) {
-    display: none;
+// Schováme ty procenta (nově už má groupa vlastní class)
+.easy-entity-list__item-group-count > :nth-child(2) {
+    display: none !important;
 }
 
 /**
