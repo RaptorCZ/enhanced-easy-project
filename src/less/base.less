@@ -451,9 +451,23 @@ div.easy-attendance-calendar-item > a {
     overflow-x: scroll;
 }
 
+.agile__row {
+    padding-bottom: 0;
+}
+
 // Prostřední col nechceme scrollovat
-.agile__col:not(.agile__col--side) .agile__col:not(.agile__sticky-lane) {
-    overflow-x: unset !important;
+.easy-col+.agile__main-col {
+    min-width: unset;
+    max-width: unset;
+}
+
+// Výška itemu a titulku v itemu
+.agile__item {
+    height: 9rem !important;
+}
+
+.agile__card__title {
+    max-height: unset;
 }
 
 // Neumím předělat tento plugin, aby sticky columns fungovaly v overflow
