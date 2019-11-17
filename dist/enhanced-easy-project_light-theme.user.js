@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.11.1
+// @version      1.12.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -335,8 +335,18 @@ div.easy-attendance-calendar-item > a {
 .agile {
   overflow-x: scroll;
 }
-.agile__col:not(.agile__col--side) .agile__col:not(.agile__sticky-lane) {
-  overflow-x: unset !important;
+.agile__row {
+  padding-bottom: 0;
+}
+.easy-col + .agile__main-col {
+  min-width: unset;
+  max-width: unset;
+}
+.agile__item {
+  height: 9rem !important;
+}
+.agile__card__title {
+  max-height: unset;
 }
 .stickyClones {
   display: none;
@@ -352,6 +362,8 @@ div.easy-attendance-calendar-item > a {
 }
 
 `;
+
+var observer = new MutationObserver(mutationCallback);
 
 // Injectneme CSS
 GM_addStyle(css);
@@ -369,6 +381,8 @@ GM_addStyle(css);
 
     // TODO
     //modGantt();
+
+    startObserving();
 
     forceCollapsedSidebar();
 
@@ -390,6 +404,53 @@ GM_addStyle(css);
     // Timeline v sekci "Moje výkazy"
     showTimeline();
 })();
+
+/**
+ * Callback pro observer - detekci změn v DOM
+ */
+function mutationCallback(mutationsList) {
+    for (let mutation of mutationsList) {
+        if (mutation.type === 'childList')
+        {
+            observer.disconnect();
+
+            enhanceAgileCards();
+
+            startObserving();
+        }
+    }
+}
+
+/**
+ * Start sledování změn DOM
+ */
+function startObserving() {
+    observer.observe(document, {childList: true, subtree: true});
+}
+
+/**
+ * Rozšíření použitelnosti Scrum/Agile karet
+ */
+function enhanceAgileCards() {
+
+    const cards = document.querySelectorAll(".agile__item");
+
+    for (let i = 0; i < cards.length; i++) {
+
+        var card = cards[i];
+
+        $(card).off('mousedown.listItem');
+        //card.removeEventListener('mousedown.listItem');
+
+        // H3 element k modifikaci
+        let title = card.querySelector('h3.agile__card__title');
+
+        let itemId = card.classList[1].match('item_([0-9]+)')[1];
+        if (itemId) {
+            title.innerHTML = "<a href='https://creasoft.easyproject.cz/issues/" + itemId+ "'>" + title.innerText + "</a>";
+        }
+    }
+}
 
 /**
  * Úprava Gantt diagramu na stránce "Moje vytížení"

@@ -1,3 +1,19 @@
+# [1.12.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.11.1...v1.12.0) (2019-11-17)
+
+
+### Bug Fixes
+
+* groupy - barva badge a schování procent ([9a8edd2](https://github.com/RaptorCZ/enhanced-easy-project/commit/9a8edd2))
+* rework scrollingu scrum boardu ([f3751a3](https://github.com/RaptorCZ/enhanced-easy-project/commit/f3751a3))
+
+
+### Features
+
+* odstranění modal zobrazení pro scrum + linky ([d595be8](https://github.com/RaptorCZ/enhanced-easy-project/commit/d595be8))
+* scroll modal - base dark theme ([244e413](https://github.com/RaptorCZ/enhanced-easy-project/commit/244e413))
+
+
+
 ## [1.11.1](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.11.0...v1.11.1) (2019-10-17)
 
 
