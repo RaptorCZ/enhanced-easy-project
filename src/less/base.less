@@ -56,9 +56,15 @@ table:not(#projects_table) [class*="idnt-"] th.subject {
 /**
  * Toolbar pod modulem
  */
-// Zobrazuje "Zobrazit vše" - schovat
+
+ // Zobrazuje "Zobrazit vše" - schovat
 .module-content .toolbar {
     display: none;
+}
+
+// Ale na kalendáři je v toolbaru i posun data
+.timelog-calendar-container .toolbar {
+    display: block;
 }
 
 /**
