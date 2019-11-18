@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.12.0
+// @version      1.13.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -60,6 +60,9 @@ table:not(#projects_table) [class*="idnt-"] th.subject {
  */
 .module-content .toolbar {
   display: none;
+}
+.timelog-calendar-container .toolbar {
+  display: block;
 }
 /**
  * Gridy jako takové
@@ -737,10 +740,6 @@ hr {
 /**
  * Pole tlačítek - queries, filtry atd.
  */
-.entity-array > a,
-.entity-array > span {
-  color: #fff;
-}
 .entity-array > span {
   background-color: #1c2938;
   border-color: #38444d;
@@ -1172,6 +1171,24 @@ table.list th.easy-additional-ending-buttons .ending-buttons-fixed .toggle-favor
 .cf_buttonPanel {
   background: #1c2938 !important;
   border-bottom-color: #38444d;
+}
+/**
+ * Našeptávač (jmen) v editoru
+ */
+.cke_autocomplete_panel,
+#cke_autocomplete_panel {
+  border-color: #38444d !important;
+  background: #10171e !important;
+}
+.cke_autocomplete_panel > li,
+#cke_autocomplete_panel > li {
+  background: #10171e !important;
+}
+.cke_autocomplete_panel > li:hover,
+.cke_autocomplete_panel > li .cke_autocomplete_selected,
+#cke_autocomplete_panel > li:hover,
+#cke_autocomplete_panel > li .cke_autocomplete_selected {
+  background: #15202b !important;
 }
 /**
  * Danger theme 1

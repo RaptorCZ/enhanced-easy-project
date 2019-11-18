@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.12.0
+// @version      1.13.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -60,6 +60,9 @@ table:not(#projects_table) [class*="idnt-"] th.subject {
  */
 .module-content .toolbar {
   display: none;
+}
+.timelog-calendar-container .toolbar {
+  display: block;
 }
 /**
  * Gridy jako takové

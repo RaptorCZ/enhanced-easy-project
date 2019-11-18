@@ -1,3 +1,18 @@
+# [1.13.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.12.0...v1.13.0) (2019-11-18)
+
+
+### Bug Fixes
+
+* barva textu buttonů (kanban, úkoly, ...) ([97ab60d](https://github.com/RaptorCZ/enhanced-easy-project/commit/97ab60d))
+* zobrazit toolbar/ přepínač data na kalendáři ([930ec91](https://github.com/RaptorCZ/enhanced-easy-project/commit/930ec91))
+
+
+### Features
+
+* dark theme našeptávače v editoru ([2a05def](https://github.com/RaptorCZ/enhanced-easy-project/commit/2a05def))
+
+
+
 # [1.12.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.11.1...v1.12.0) (2019-11-17)
 
 
