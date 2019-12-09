@@ -22,13 +22,12 @@
     content: none;
 }
 
-// odstraňujeme všude, kromě výjimek
-// #projects_table = table na stránce projektů
-// TODO: table.my_projects = table s přehledem podprojektů na projektu
-table:not(#projects_table) [class*="idnt-"] td.name,
-table:not(#projects_table) [class*="idnt-"] td.subject,
-table:not(#projects_table) [class*="idnt-"] th.name,
-table:not(#projects_table) [class*="idnt-"] th.subject {
+// indent odstraníme z tabulek s entitami - tam bude jen flat grid
+// naopak třeba v detailu tasku budou ancestors odsazené
+table.entities [class*="idnt-"] td.name,
+table.entities [class*="idnt-"] td.subject,
+table.entities [class*="idnt-"] th.name,
+table.entities [class*="idnt-"] th.subject {
     padding-left: 0 !important;
 }
 
