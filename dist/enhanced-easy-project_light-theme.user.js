@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.13.0
+// @version      1.14.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -33,10 +33,10 @@ var css = `
 .idnt .subject::before {
   content: none;
 }
-table:not(#projects_table) [class*="idnt-"] td.name,
-table:not(#projects_table) [class*="idnt-"] td.subject,
-table:not(#projects_table) [class*="idnt-"] th.name,
-table:not(#projects_table) [class*="idnt-"] th.subject {
+table.entities [class*="idnt-"] td.name,
+table.entities [class*="idnt-"] td.subject,
+table.entities [class*="idnt-"] th.name,
+table.entities [class*="idnt-"] th.subject {
   padding-left: 0 !important;
 }
 /**

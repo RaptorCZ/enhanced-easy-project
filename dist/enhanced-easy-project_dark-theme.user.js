@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.13.0
+// @version      1.14.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -33,10 +33,10 @@ var css = `
 .idnt .subject::before {
   content: none;
 }
-table:not(#projects_table) [class*="idnt-"] td.name,
-table:not(#projects_table) [class*="idnt-"] td.subject,
-table:not(#projects_table) [class*="idnt-"] th.name,
-table:not(#projects_table) [class*="idnt-"] th.subject {
+table.entities [class*="idnt-"] td.name,
+table.entities [class*="idnt-"] td.subject,
+table.entities [class*="idnt-"] th.name,
+table.entities [class*="idnt-"] th.subject {
   padding-left: 0 !important;
 }
 /**
@@ -1189,6 +1189,41 @@ table.list th.easy-additional-ending-buttons .ending-buttons-fixed .toggle-favor
 #cke_autocomplete_panel > li:hover,
 #cke_autocomplete_panel > li .cke_autocomplete_selected {
   background: #15202b !important;
+}
+/**
+ * Popup kalendář a plánovač schůzek
+ */
+#top__tools .easy-calendar-upcoming__calendar-content {
+  background: #10171e;
+}
+#top__tools .easy-calendar-upcoming__calendar-trigger.w-toggleable__trigger--active:before {
+  background: #10171e;
+}
+#top__tools .easy-calendar-upcoming__calendar-trigger.w-toggleable__trigger--active:after {
+  background: #10171e;
+}
+#top__tools .easy-calendar-upcoming__calendar-content .fc-content {
+  background: #1c2938;
+}
+#top__tools .easy-calendar-upcoming__calendar-content.w-toggleable__content--active {
+  color: #fff;
+}
+.fc-state-highlight {
+  background: #1da1f2 !important;
+}
+div.easy-calendar-fc .fc-widget-header {
+  border-color: #38444d !important;
+}
+.fc-agenda-divider-inner {
+  background: #10171e !important;
+}
+div.easy-calendar-fc td,
+div.easy-calendar-fc th {
+  border-color: #38444d !important;
+}
+div.easy-calendar table tbody th,
+div.easy-calendar-fc table tbody th {
+  background: #1c2938;
 }
 /**
  * Danger theme 1

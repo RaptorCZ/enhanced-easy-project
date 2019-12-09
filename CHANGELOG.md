@@ -1,3 +1,13 @@
+# [1.14.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.13.0...v1.14.0) (2019-12-09)
+
+
+### Features
+
+* odsazení issues rušíme jen na hl. gridech ([879d557](https://github.com/RaptorCZ/enhanced-easy-project/commit/879d557))
+* popup plánovač dark theme ([dba2669](https://github.com/RaptorCZ/enhanced-easy-project/commit/dba2669))
+
+
+
 # [1.13.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.12.0...v1.13.0) (2019-11-18)
 
 
