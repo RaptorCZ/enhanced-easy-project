@@ -1,3 +1,12 @@
+# [1.15.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.14.0...v1.15.0) (2020-02-16)
+
+
+### Features
+
+* new activities in shortcuts ([1a7a235](https://github.com/RaptorCZ/enhanced-easy-project/commit/1a7a235))
+
+
+
 # [1.14.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.13.0...v1.14.0) (2019-12-09)
 
 
