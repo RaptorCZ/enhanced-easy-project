@@ -232,55 +232,11 @@ function getDefaultRoleForUser(userId) {
 function getDefaultActivity(roleId) {
     // Dostupné aktivity:
     // ------------------
-    // Analýza
-    // Administrace
-    // Dokumentace
-    // Meeting
-    // Nacenění
-    // Nasazení
-    // Projektové řízení
-    // Řešení chyby
-    // Testování
-    // Vývoj
-    // Vzdělávání
-    // Dovolená
+    // Maintenance
+    // Operativní vývoj
+    // Strategický vývoj
 
-    // 60 - Administrátor
-    if (roleId === 60) {
-        return "Administrace";
-    }
-
-    // 61 - Byznys analytik
-    if (roleId === 61) {
-        return "Analýza";
-    }
-
-    // 63 - Programátor
-    if (roleId === 63) {
-        return "Vývoj";
-    }
-
-    // 64 - Analytik
-    if (roleId === 64) {
-        return "Analýza";
-    }
-
-    // 65 - Produktový manažer
-    if (roleId === 65) {
-        return "Projektové řízení";
-    }
-
-    // 66 - Tester
-    if (roleId === 66) {
-        return "Testování";
-    }
-
-    // 69 - Delivery manažer
-    if (roleId === 69) {
-        return "Nasazení";
-    }
-
-    return null;
+    return "Maintenance";
 }
 
 /**
@@ -294,42 +250,33 @@ function generateQuickActivities() {
 
     // <select name="time_entry[custom_field_values][90]" class="list_cf" id="time_entry_custom_field_values_90_" >
     //     <option value="">--- Prosím vyberte ---</option>
-    //     <option value="Analýza">Analýza</option>
-    //     <option value="Administrace">Administrace</option>
-    //     <option value="Dokumentace">Dokumentace</option>
-    //     <option value="Meeting">Meeting</option>
-    //     <option value="Nacenění">Nacenění</option>
-    //     <option value="Nasazení">Nasazení</option>
-    //     <option value="Projektové řízení">Projektové řízení</option>
-    //     <option value="Řešení chyby">Řešení chyby</option>
-    //     <option value="Testování">Testování</option>
-    //     <option value="Vývoj">Vývoj</option>
-    //     <option value="Vzdělávání">Vzdělávání</option>
-    //     <option value="Dovolená">Dovolená</option>
+    //     <option value="Maintenance">Maintenance</option>
+    //     <option value="Operativní vývoj">Operativní vývoj</option>
+    //     <option value="Strategický vývoj">Strategický vývoj</option>
     // </select>;
 
-    // 3 - Řešení chyby
+    // 3 - Strategický vývoj
     $activityCombo.after(
-        '<button type="button" class="cf_90-set-reseni-chyby button-positive">Řešení chyby</button>'
+        '<button type="button" class="cf_90-set-strategicky-vyvoj button-positive">SV</button>'
     );
-    $(document).on("click", ".cf_90-set-reseni-chyby", function() {
-        $activityCombo.val("Řešení chyby");
+    $(document).on("click", ".cf_90-set-strategicky-vyvoj", function() {
+        $activityCombo.val("Strategický vývoj");
     });
 
-    // 2 - Vývoj
+    // 2 - Operativní vývoj
     $activityCombo.after(
-        '<button type="button" class="cf_90-set-vyvoj button-positive">Vývoj</button>'
+        '<button type="button" class="cf_90-set-operativni-vyvoj button-positive">OV</button>'
     );
-    $(document).on("click", ".cf_90-set-vyvoj", function() {
-        $activityCombo.val("Vývoj");
+    $(document).on("click", ".cf_90-set-operativni-vyvoj", function() {
+        $activityCombo.val("Operativní vývoj");
     });
 
-    // 1 - Analýza
+    // 1 - Maintenance
     $activityCombo.after(
-        '<button type="button" class="cf_90-set-analyza button-positive">Analýza</button>'
+        '<button type="button" class="cf_90-set-maintenance button-positive">M</button>'
     );
-    $(document).on("click", ".cf_90-set-analyza", function() {
-        $activityCombo.val("Analýza");
+    $(document).on("click", ".cf_90-set-maintenance", function() {
+        $activityCombo.val("Maintenance");
     });
 }
 
