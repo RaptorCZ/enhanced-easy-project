@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.15.0
+// @version      1.16.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -717,6 +717,10 @@ hr {
 .easy-entity-details-description {
   background: #10171e;
 }
+.easy-entity-details-description,
+.easy-entity-details-description * {
+  color: #fff !important;
+}
 .attribute > div.label,
 .attribute > div.value {
   color: #fff !important;
@@ -779,7 +783,7 @@ hr {
 input[type="submit"] {
   background: #1c2938;
   border-color: #38444d;
-  color: #8899a6;
+  color: #8899a6 !important;
 }
 /**
  * Menu/tlačítka (Další akce) - hover efekt

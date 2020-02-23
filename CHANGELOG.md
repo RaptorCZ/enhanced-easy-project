@@ -1,3 +1,13 @@
+# [1.16.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.15.0...v1.16.0) (2020-02-23)
+
+
+### Bug Fixes
+
+* button text color change ([77fa639](https://github.com/RaptorCZ/enhanced-easy-project/commit/77fa639))
+* single color override in task detail ([2d41bf9](https://github.com/RaptorCZ/enhanced-easy-project/commit/2d41bf9))
+
+
+
 # [1.15.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.14.0...v1.15.0) (2020-02-16)
 
 
