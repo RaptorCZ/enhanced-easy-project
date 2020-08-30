@@ -41,7 +41,7 @@ GM_addStyle(css);
     generateUtilization();
 
     // Timeline v sekci "Moje výkazy"
-    showTimeline();
+    showTimeline(userId);
 })();
 
 /**
@@ -774,7 +774,7 @@ async function generateUtilization() {
  * Zobrazení odpracovaného času v grafu
  * TODO: Využít data z getTodaysTimeEntries
  */
-function showTimeline() {
+function showTimeline(userId, forDateAsString) {
     // Budeme zobrazovat jen na stránce "Moje výkazy"
     var testUrl = window.location.href.search("[?&]t=6") != -1;
 
@@ -793,19 +793,44 @@ function showTimeline() {
     }
 
     // Parametry pro queries
-    const timeEntriesParams = {
-        spent_on: "today",
-        set_filter: 1,
-        user_id: getUserInfo(),
-        _: new Date().getTime() // Cache busting
-    };
+    var timeEntriesParams;
+    if (forDateAsString) {
+        timeEntriesParams = {
+            period_type: 2,
+            from: forDateAsString,
+            to: forDateAsString,
+            set_filter: 1,
+            user_id: userId,
+            _: new Date().getTime() // Cache busting
+        };
+    }
+    else
+    {
+        timeEntriesParams = {
+            spent_on: "today",
+            set_filter: 1,
+            user_id: userId,
+            _: new Date().getTime() // Cache busting
+        };
+    }
 
-    const todaysAttendanceParams = {
-        arrival: "today",
-        set_filter: 1,
-        user_id: getUserInfo(),
-        _: new Date().getTime() // Cache busting
-    };
+    var todaysAttendanceParams;
+    if (forDateAsString) {
+        todaysAttendanceParams = {
+            arrival: forDateAsString + "|" + forDateAsString,
+            set_filter: 1,
+            user_id: userId,
+            _: new Date().getTime() // Cache busting
+        };
+    }
+    else {
+        todaysAttendanceParams = {
+            arrival: "today",
+            set_filter: 1,
+            user_id: userId,
+            _: new Date().getTime() // Cache busting
+        };
+    }
 
     // Natáhneme data
     $.when(
