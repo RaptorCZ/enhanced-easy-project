@@ -1,3 +1,17 @@
+# [1.17.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.16.0...v1.17.0) (2020-08-30)
+
+
+### Bug Fixes
+
+* normalizovaná barva textu v detailu úkolu ([11f4878](https://github.com/RaptorCZ/enhanced-easy-project/commit/11f4878))
+
+
+### Features
+
+* parametrizace showTimeline na userId ([5c32ffc](https://github.com/RaptorCZ/enhanced-easy-project/commit/5c32ffc))
+
+
+
 # [1.16.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.15.0...v1.16.0) (2020-02-23)
 
 

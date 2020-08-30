@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.16.0
+// @version      1.17.0
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -714,12 +714,11 @@ hr {
   border: 1px solid #38444d;
   border-bottom: none;
 }
-.easy-entity-details-description {
-  background: #10171e;
-}
 .easy-entity-details-description,
-.easy-entity-details-description * {
+.easy-entity-details-description *,
+.journal-details-container .wiki * {
   color: #fff !important;
+  background-color: #10171e !important;
 }
 .attribute > div.label,
 .attribute > div.value {
@@ -1442,9 +1441,6 @@ GM_addStyle(css);
     var visjscss = GM_getResourceText("visjscss");
     GM_addStyle(visjscss);
 
-    // TODO
-    //modGantt();
-
     startObserving();
 
     forceCollapsedSidebar();
@@ -1465,7 +1461,7 @@ GM_addStyle(css);
     generateUtilization();
 
     // Timeline v sekci "Moje výkazy"
-    showTimeline();
+    showTimeline(userId);
 })();
 
 /**
@@ -1497,10 +1493,9 @@ function startObserving() {
 function enhanceAgileCards() {
 
     const cards = document.querySelectorAll(".agile__item");
-
     for (let i = 0; i < cards.length; i++) {
 
-        var card = cards[i];
+        let card = cards[i];
 
         $(card).off('mousedown.listItem');
         //card.removeEventListener('mousedown.listItem');
@@ -1513,19 +1508,6 @@ function enhanceAgileCards() {
             title.innerHTML = "<a href='https://creasoft.easyproject.cz/issues/" + itemId+ "'>" + title.innerText + "</a>";
         }
     }
-}
-
-/**
- * Úprava Gantt diagramu na stránce "Moje vytížení"
- */
-function modGantt() {
-    // Aktivace 'Zobrazit projekty' v Ganttu Osobní vytížení zdrojů
-    $("#button_resource_with_projects").click();
-
-    // Rozbalení všech projektů
-    setTimeout(function() {
-        $(".gantt_grid .gantt_open").click();
-    }, 500);
 }
 
 function forceCollapsedSidebar() {
@@ -1636,17 +1618,7 @@ function getDefaultRoleForUser(userId) {
     // 66 - Tester
     // 69 - Delivery manažer
 
-    // 103 - René
-    if (userId === 103) {
-        return 63;
-    }
-
-    // 105 - Martin
-    if (userId === 105) {
-        return 66;
-    }
-
-    return null;
+    return 63;
 }
 
 /**
@@ -2195,10 +2167,12 @@ async function generateUtilization() {
 }
 
 /**
- * Zobrazení odpracovaného času v grafu
+ * Zobrazení odpracovaného času v grafu pro uživatele a datum
  * TODO: Využít data z getTodaysTimeEntries
+ * @param {number} userId Id uživatele, pro kterého chceme zobrazit timeline
+ * @param {string} forDateAsString Datum, ve formátu "YYYY-MM-DD", pro které chceme zobrazit timeline
  */
-function showTimeline() {
+function showTimeline(userId, forDateAsString) {
     // Budeme zobrazovat jen na stránce "Moje výkazy"
     var testUrl = window.location.href.search("[?&]t=6") != -1;
 
@@ -2217,19 +2191,44 @@ function showTimeline() {
     }
 
     // Parametry pro queries
-    const timeEntriesParams = {
-        spent_on: "today",
-        set_filter: 1,
-        user_id: getUserInfo(),
-        _: new Date().getTime() // Cache busting
-    };
+    var timeEntriesParams;
+    if (forDateAsString) {
+        timeEntriesParams = {
+            period_type: 2,
+            from: forDateAsString,
+            to: forDateAsString,
+            set_filter: 1,
+            user_id: userId,
+            _: new Date().getTime() // Cache busting
+        };
+    }
+    else
+    {
+        timeEntriesParams = {
+            spent_on: "today",
+            set_filter: 1,
+            user_id: userId,
+            _: new Date().getTime() // Cache busting
+        };
+    }
 
-    const todaysAttendanceParams = {
-        arrival: "today",
-        set_filter: 1,
-        user_id: getUserInfo(),
-        _: new Date().getTime() // Cache busting
-    };
+    var todaysAttendanceParams;
+    if (forDateAsString) {
+        todaysAttendanceParams = {
+            arrival: forDateAsString + "|" + forDateAsString,
+            set_filter: 1,
+            user_id: userId,
+            _: new Date().getTime() // Cache busting
+        };
+    }
+    else {
+        todaysAttendanceParams = {
+            arrival: "today",
+            set_filter: 1,
+            user_id: userId,
+            _: new Date().getTime() // Cache busting
+        };
+    }
 
     // Natáhneme data
     $.when(
