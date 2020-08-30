@@ -73,10 +73,9 @@ function startObserving() {
 function enhanceAgileCards() {
 
     const cards = document.querySelectorAll(".agile__item");
-
     for (let i = 0; i < cards.length; i++) {
 
-        var card = cards[i];
+        let card = cards[i];
 
         $(card).off('mousedown.listItem');
         //card.removeEventListener('mousedown.listItem');
@@ -212,17 +211,7 @@ function getDefaultRoleForUser(userId) {
     // 66 - Tester
     // 69 - Delivery manažer
 
-    // 103 - René
-    if (userId === 103) {
-        return 63;
-    }
-
-    // 105 - Martin
-    if (userId === 105) {
-        return 66;
-    }
-
-    return null;
+    return 63;
 }
 
 /**
@@ -771,8 +760,10 @@ async function generateUtilization() {
 }
 
 /**
- * Zobrazení odpracovaného času v grafu
+ * Zobrazení odpracovaného času v grafu pro uživatele a datum
  * TODO: Využít data z getTodaysTimeEntries
+ * @param {number} userId Id uživatele, pro kterého chceme zobrazit timeline
+ * @param {string} forDateAsString Datum, ve formátu "YYYY-MM-DD", pro které chceme zobrazit timeline
  */
 function showTimeline(userId, forDateAsString) {
     // Budeme zobrazovat jen na stránce "Moje výkazy"

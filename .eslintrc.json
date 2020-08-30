@@ -1,12 +1,19 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "commonjs": true,
+        "es6": true,
+        "jquery": true
     },
     "extends": "eslint:recommended",
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "GM_addStyle": "readonly",
+        "GM_getResourceText": "readonly",
+        "EASY": "readonly",
+        "moment": "readonly",
+        "vis": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": 2018,
