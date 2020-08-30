@@ -18,9 +18,6 @@ GM_addStyle(css);
     var visjscss = GM_getResourceText("visjscss");
     GM_addStyle(visjscss);
 
-    // TODO
-    //modGantt();
-
     startObserving();
 
     forceCollapsedSidebar();
@@ -88,19 +85,6 @@ function enhanceAgileCards() {
             title.innerHTML = "<a href='https://creasoft.easyproject.cz/issues/" + itemId+ "'>" + title.innerText + "</a>";
         }
     }
-}
-
-/**
- * Úprava Gantt diagramu na stránce "Moje vytížení"
- */
-function modGantt() {
-    // Aktivace 'Zobrazit projekty' v Ganttu Osobní vytížení zdrojů
-    $("#button_resource_with_projects").click();
-
-    // Rozbalení všech projektů
-    setTimeout(function() {
-        $(".gantt_grid .gantt_open").click();
-    }, 500);
 }
 
 function forceCollapsedSidebar() {
