@@ -1,3 +1,12 @@
+## [1.17.1](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.17.0...v1.17.1) (2022-02-13)
+
+
+### Bug Fixes
+
+* attendance, absence ([ecf67b3](https://github.com/RaptorCZ/enhanced-easy-project/commit/ecf67b3))
+
+
+
 # [1.17.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.16.0...v1.17.0) (2020-08-30)
 
 

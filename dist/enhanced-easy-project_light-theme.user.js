@@ -3,7 +3,7 @@
 // @description  UI Mod for Easy Project
 // @author       Raptor
 // @namespace    eep
-// @version      1.17.0
+// @version      1.17.1
 // @downloadURL  https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @updateURL    https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js
 // @supportURL   https://github.com/RaptorCZ/enhanced-easy-project/issues
@@ -1005,8 +1005,6 @@ async function getAttendancesRecursiveAsync(url, params) {
  */
 async function generateUtilization() {
     var totalSeconds = 0;
-    // Nepřítomnost - dovolená/lékař/nemoc
-    var absence = 0;
 
     const attendanceParams = {
         arrival: "current_month",
@@ -1035,28 +1033,46 @@ async function generateUtilization() {
         timeEntriesParams
     );
 
+    // Nepřítomnost (k dnešnímu dni) - dovolená/lékař/nemoc
+    var absence = 0;
+
+    // Nepřítomnost (naplánovaná dále v měsíci)- dovolená/lékař/nemoc
+    var absenceFuture = 0;
+
+    const today = new moment();
+
     // Enumerate easy_attendances
     $.each(attendances, function(index, attendance) {
+
+        // Pouze do dnešního dne, EP vrací data za celý měsíc
+        const arrival = moment(attendance.arrival);
+
         // Hledáme nepřítomnost
         // 5 - Lékař
         // 4 - Nemoc
         // 3 - Dovolená
-        if (
-            attendance.easy_attendance_activity.id === 3 ||
-            attendance.easy_attendance_activity.id === 4
-        ) {
-            absence++;
+        if (attendance.easy_attendance_activity.id === 3 || attendance.easy_attendance_activity.id === 4) {
+            if (arrival.isSameOrBefore(today)) {
+                absence++;
+            } else {
+                absenceFuture++;
+            }
         }
+
     });
 
     // Enumerate time_entries
     $.each(timeEntries, function(index, timeEntry) {
-        // V datech jsou hodiny jako desetinné číslo
-        const hours = timeEntry.hours;
+        // Pouze do dnešního dne, EP vrací data za celý měsíc
+        const spentOn = moment(timeEntry.spent_on);
+        if (spentOn.isSameOrBefore(today)) {
+            // V datech jsou hodiny jako desetinné číslo
+            const hours = timeEntry.hours;
 
-        // Převedeme je na minuty
-        const minutes = 60 * Number(hours);
-        totalSeconds += minutes * 60;
+            // Převedeme je na minuty
+            const minutes = 60 * Number(hours);
+            totalSeconds += minutes * 60;
+        }
     });
 
     // Očekává se vykázáno 7 hodin denně
@@ -1079,28 +1095,12 @@ async function generateUtilization() {
 
     // Fond pracovní doby počítá s 8 hodinami na den
     const workdaysInfo =
-        "Pracovní dny: " +
-        weekDays.currentWeekday +
-        "/" +
-        weekDays.totalWeekdays +
-        ", " +
-        "nepřítomnost (dny): " +
-        absence +
-        ", " +
-        "fond prac. doby (h): " +
-        weekDays.currentWeekday * 8 +
-        "/" +
-        weekDays.totalWeekdays * 8;
+        "Pracovní dny: " + weekDays.currentWeekday + "/" + weekDays.totalWeekdays + ", " +
+        "nepřítomnost (dny): " + absence + "/" + absenceFuture + ", " +
+        "fond prac. doby (h): " +  weekDays.currentWeekday * 8 + "/" + weekDays.totalWeekdays * 8;
 
     const workdaysDetailInfo =
-        "Vykázáno celkem: " +
-        getHoursAndMinutesFromSeconds(totalSeconds) +
-        ", " +
-        "tj. průměr/MD " +
-        average.toFixed(2) +
-        "h [" +
-        utilization +
-        "%], " +
+        "Vykázáno celkem: " + getHoursAndMinutesFromSeconds(totalSeconds) + ", " + "tj. průměr/MD " + average.toFixed(2) + "h [" + utilization + "%], " +
         "zbývá vykázat: " + missingHours;
 
     $(".js-workdays").html(workdaysInfo);
