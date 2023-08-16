@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.17.1...v2.0.0) (2023-08-16)
+
+
+### Features
+
+* nové dark-compact theme, odstranění starých ([6ae6355](https://github.com/RaptorCZ/enhanced-easy-project/commit/6ae6355c58ddc45deb2d546f76a6c229a9c58eda))
+* vyhození práce s docházkou z JS ([965be3f](https://github.com/RaptorCZ/enhanced-easy-project/commit/965be3fe280de0f419217b8a908ac2207f2f7964))
+
+
+
 ## [1.17.1](https://github.com/RaptorCZ/enhanced-easy-project/compare/v1.17.0...v1.17.1) (2022-02-13)
 
 
