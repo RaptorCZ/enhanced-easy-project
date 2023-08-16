@@ -7,19 +7,13 @@ Vše je postavené na [UserScriptech](https://en.wikipedia.org/wiki/Userscript) 
 ## Instalace
 
 - Nainstalujte Tampermonkey ze stránky [https://tampermonkey.net/](https://tampermonkey.net/)
-- Zvolte jeden z user scriptů níže - proklikem se sám zaregistruje
+- Zvolte user script níže - proklikem se sám zaregistruje
 
-### Light Theme
+### Dark Compact Theme
 
-`Light Theme` obsahuje úpravy designu na úrovni velikostí komponent, opravy layoutu atd. Neobsahuje žádné grafické úpravy, či zásahy do tématu.
+`Dark Compact Theme` je určen pro použití s originálním `Dark Theme` v EP. EP nemá kombinované téma co je kompaktní a zároveň tmavé.
 
-[enhanced-easy-project_light-theme.user.js](https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_light-theme.user.js)
-
-### Dark Theme
-
-`Dark Theme` obsahuje vše co `Light Theme`, ale navíc se jedná o kompletně nové téma vyvedené do tmavých tónů - tzv. `Dark Theme`.
-
-[enhanced-easy-project_dark-theme.user.js](https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-theme.user.js)
+[enhanced-easy-project_dark-compact-theme.user.js](https://github.com/RaptorCZ/enhanced-easy-project/raw/master/dist/enhanced-easy-project_dark-compact-theme.user.js)
 
 ## License
 

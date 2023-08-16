@@ -1,0 +1,101 @@
+
+// Řádky tabulek
+table.list>tbody>tr>td,
+table.list>tbody>tr>th {
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+}
+
+.easy-entity-list__item-attribute-content {
+    margin: 0;
+    padding: 0.125rem;
+}
+
+// Řádky tabulek, kde je na hover vpravo editační popup .ending-buttons-fixed
+table.list td.easy-query-additional-ending-buttons .ending-buttons-fixed,
+table.list td.easy-additional-ending-buttons .ending-buttons-fixed,
+table.list th.easy-query-additional-ending-buttons .ending-buttons-fixed,
+table.list th.easy-additional-ending-buttons .ending-buttons-fixed {
+    padding: 0 !important;
+}
+
+/**
+ * Odstranění znaku stromového zobrazení v gridech a samotných odsazení
+ */
+#custom_menu_settings .nested-fields ~ .nested-fields:first-of-type.splitcontentleft label::before,
+.idnt .name::before,
+.idnt .subject::before {
+    content: none;
+}
+
+// indent odstraníme z tabulek s entitami - tam bude jen flat grid
+// naopak třeba v detailu tasku budou ancestors odsazené
+table.entities [class*="idnt-"] td.name,
+table.entities [class*="idnt-"] td.subject,
+table.entities [class*="idnt-"] th.name,
+table.entities [class*="idnt-"] th.subject {
+    padding-left: 0 !important;
+}
+
+/**
+ * Kanban/Scrum board (Agile)
+ */
+
+// Sloupce nastavíme širší - content má 2*side col a prostředek
+.agile__col--side,
+.agile__swimline .agile__col {
+    min-width: 18.75rem !important; // 300px
+}
+
+.agile__main-col {
+    min-width: auto;
+}
+
+// Trošku větší hack - připraveno pro 9 sloupců
+.agile {
+    overflow-x: scroll;
+}
+
+.agile__row {
+    padding-bottom: 0;
+}
+
+// Prostřední col nechceme scrollovat
+.easy-col+.agile__main-col {
+    min-width: unset;
+    max-width: unset;
+}
+
+// Výška itemu a titulku v itemu
+.agile__item {
+    height: 9rem !important;
+}
+
+.agile__card__title {
+    max-height: unset;
+}
+
+// Odstranění duplicitního řádku ve scrollovatelných sloupcích
+.agile__main-col .agile__list:before {
+    display: none;
+    content: none;
+}
+
+/**
+ * EasyTooltip
+ */
+.easy-tooltip {
+    .issue-card {
+        max-width: 400px; // původně 300px
+    }
+
+    .issue-card__label {
+        min-width: 130px;
+    }
+}
+
+// Logo usera vpravo nahoře
+#loggedas,
+#loggedas_controls {
+    margin-right: var(--easy__spacing--ms-0);
+}

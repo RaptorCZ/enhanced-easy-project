@@ -1,6 +1,6 @@
 {
     "name": "enhanced-easy-project",
-    "version": "1.17.1",
+    "version": "2.0.0",
     "description": "UserScripty pro vylepšení použitého produktu EasyProject pro konkrétní implementaci https://creasoft.easyproject.cz/.",
     "repository": {
         "type": "git",
@@ -16,6 +16,7 @@
     "homepage": "https://github.com/RaptorCZ/enhanced-easy-project",
     "private": true,
     "scripts": {
+        "dev": "gulp dev",
         "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
         "build": "gulp",
         "version": "npm run build && npm run changelog && git add -A",
