@@ -33,7 +33,6 @@ GM_addStyle(css);
     prepareHeaderHtmlMarkup();
 
     // Spustíme počítadla
-    getTodaysAttendance();
     getTodaysTimeEntries();
     generateUtilization();
 
@@ -87,6 +86,9 @@ function enhanceAgileCards() {
     }
 }
 
+/**
+ * Přepne levé menu na minimalizované
+ */
 function forceCollapsedSidebar() {
     $("body").addClass("top_menu--collapsed");
     $("#top-menu").addClass("collapsed");
@@ -340,11 +342,6 @@ function getHoursFromSeconds(delta) {
 function prepareHeaderHtmlMarkup() {
     const attendanceHtml =
         '<div class="easy-calendar-upcoming__texts">' +
-        '    <span style="display: flex;">' +
-        '        <span class="icon icon-calendar todays-attendance"></span>' +
-        '        <a class="todays-attendance-link" style="margin-left: 1rem;" href="#"></a>' +
-        "    </span>" +
-        '    <span class="block"></span>' +
         '    <span class="icon icon-timer todays-time"></span>' +
         "</div>";
 
@@ -367,86 +364,6 @@ function prepareHeaderHtmlMarkup() {
  */
 function makeUrlSearchString(params) {
     return params ? "?" + Object.keys(params).map(key => [key, params[key]].map(encodeURIComponent).join("=")).join("&") : "";
-}
-
-/**
- * Volání API EP a získání informací o docházce
- * easy_attendances > easy_attendance > arrival, departure
- * /easy_attendances/arrival?arrival_at=2019-03-17&back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
- * /easy_attendances/4962/departure?back_url=https%3A%2F%2Fcreasoft.easyproject.cz%2F%3Ft%3D5
- */
-function getTodaysAttendance() {
-    const params = {
-        arrival: "today",
-        set_filter: 1,
-        user_id: getUserInfo(),
-        _: new Date().getTime() // Cache busting
-    };
-
-    const $todaysAttendanceLink = $(".todays-attendance-link");
-    const returnUrl = encodeURIComponent(window.location.href);
-
-    // Pro jistotu
-    $todaysAttendanceLink.off("click");
-
-    // Link na zápis
-    $todaysAttendanceLink.click(function() {
-        setAttendance();
-    });
-
-    $todaysAttendanceLink.html("[Zapiš příchod do kanceláře]");
-
-    // Stáhneme data
-    $.getJSON("/easy_attendances.json", params, function(data) {
-        // Žádný záznam - konec
-        if (data.easy_attendances.length === 0) {
-            const noAttendance = "zapiš si příchod...";
-            $(".todays-attendance").html(noAttendance);
-
-            // Za minutu opakujeme
-            setTimeout(getTodaysAttendance, 60 * 1000);
-
-            return;
-        }
-
-        var totalSeconds = 0;
-        var displayDepartureLink = false;
-
-        // Enumerate easy_attendances
-        $.each(data.easy_attendances, function(index, easyAttendance) {
-            // Pro každý interval spočteme sekundy
-            const arrival = easyAttendance.arrival;
-            const departure = easyAttendance.departure;
-
-            totalSeconds += getSecondsFromDateInterval(arrival, departure);
-
-            // Pokud není hodnota "departure" nastavena, znamená to, že je tato plložka "in progress"
-            // a tedy si vezmeme její "id" a to použijeme do linku na konec
-            if (!easyAttendance.departure && !displayDepartureLink) {
-                // Pro jistotu
-                $todaysAttendanceLink.off("click");
-
-                const departureLink =
-                    "/easy_attendances/" +
-                    easyAttendance.id +
-                    "/departure?back_url=" +
-                    returnUrl;
-
-                $todaysAttendanceLink.attr("href", departureLink);
-                $todaysAttendanceLink.removeAttr("data-remote");
-                $todaysAttendanceLink.html("[Zapiš odchod]");
-
-                displayDepartureLink = true;
-            }
-        });
-
-        // Výsledek převedeme na hh:mm formát a zobrazíme
-        var result = "Docházka: " + getHoursAndMinutesFromSeconds(totalSeconds);
-        $(".todays-attendance").html(result);
-
-        // Za minutu opakujeme
-        setTimeout(getTodaysAttendance, 60 * 1000);
-    }); // getJSON
 }
 
 /**
@@ -504,10 +421,12 @@ function getWeekdaysOfCurrentMonth() {
     // Svátky, které nejsou pracovním dnem.
     // Chybí výpočet data pro Velikonoce - zatím fixně
     // formát je [měsíc, den]
+
+    // rok 2023
     const holidays = [
         [1, 1], // Nový rok
-        [4, 19], // Velký pátek
-        [4, 22], // Velikonoční pondělí - TODO
+        [4, 7], // Velký pátek - TODO (dynamicky)
+        [4, 10], // Velikonoční pondělí - TODO (dynamicky)
         [5, 1], // Svátek práce
         [5, 8], //  Den vítězství
         [7, 5], // Den věrozvěstů Cyrila a Metoděje
